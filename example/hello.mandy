@@ -1,0 +1,8 @@
+export funky greet(name: String) -> String {
+    String greeting = 'Hello, $name!';
+    trip greeting;
+}
+
+funky main() -> void {
+    out(greet('World'));
+}
