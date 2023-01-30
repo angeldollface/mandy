@@ -1,4 +1,4 @@
-export funky greet(name: String) -> String {
+funky greet(name: String) -> String {
     String greeting = 'Hello, ' + name + '!';
     trip greeting;
 }
