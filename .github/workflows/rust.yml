@@ -14,13 +14,7 @@ jobs:
         with:
           command: build
           args: --release
-      #- name: "Compile the example in release mode. (Short version.)"
-      #  uses: actions-rs/cargo@v1
-      #  with:
-      #    command: run
-      #    args: -- -i example/hello.mandy -o hello -r
-      #- name: "Compile the example in release mode. (Long version.)"
-      #  uses: actions-rs/cargo@v1
-      #  with:
-      #    command: run
-      #    args: -- --input example/hello.mandy --output hello --release
+      - name: "Run the executable."
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
