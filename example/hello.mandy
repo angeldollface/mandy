@@ -1,5 +1,5 @@
 export funky greet(name: String) -> String {
-    String greeting = 'Hello, $name!';
+    String greeting = 'Hello, ' + name + '!';
     trip greeting;
 }
 

@@ -10,7 +10,8 @@
 
 ## TO DO :test_tube:
 
-- [ ] Implement a lexer.
+- [x] Add token patterns.
+- [x] Implement a lexer.
 - [ ] Implement a parser. (AST)
 - [ ] Implement an IR parser.
 - [ ] Implement a transpiler with LLVM.
