@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY-C by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -10,7 +10,7 @@ use super::grammar::Grammar;
 use super::lexer::TokenStream;
 
 pub struct Tree {
-
+    
 }
 
 impl Tree {

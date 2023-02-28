@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY-C by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -14,7 +14,7 @@ pub fn patterns() -> HashMap<String, Regex> {
     result.insert(String::from("CLOSE_PAREN"), Regex::new(r"(\))").unwrap());
     result.insert(String::from("OPEN_CURLY"), Regex::new(r"(\{)").unwrap());
     result.insert(String::from("CLOSE_CURLY"), Regex::new(r"(\})").unwrap());
-    //result.insert(String::from("ENTITY"), Regex::new(r"(\w+)").unwrap());
+    result.insert(String::from("ENTITY"), Regex::new(r"(\w+)").unwrap());
     result.insert(String::from("TYPE_DECLARATION"), Regex::new(r"(:)").unwrap());
     result.insert(String::from("RETURN_TYPE"), Regex::new(r"(->)").unwrap());
     result.insert(String::from("ASSIGN_KEYWORD"), Regex::new(r"(=)").unwrap());
