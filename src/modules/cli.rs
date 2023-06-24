@@ -10,6 +10,12 @@ Licensed under the MIT license.
 /// CLI app.
 use cleasy::App;
 
+/// Importing the "dir_is"
+/// method from the "coutils"
+/// crate to check if a
+/// directory exists.
+use coutils::dir_is;
+
 /// Importing the trait
 /// to colorize strings.
 use colorize::AnsiColor;
@@ -95,7 +101,7 @@ pub fn cli() -> () {
                 let build_op: Result<(), MandyError> = compile_site(&mandy_site);
                 match build_op {
                     Ok(_x) => {
-                        let dist_path: &String = &format("{}/dist", dir);
+                        let dist_path: &String = &format!("{}/dist", mandy_site);
                         if dir_is(dist_path){
                             let msg: &String = &format!(
                                 "{} Your Mandy site has been compiled at \"{}\".",
@@ -132,7 +138,7 @@ pub fn cli() -> () {
                 let build_op: Result<(), MandyError> = compile_site(&mandy_site);
                 match build_op {
                     Ok(_x) => {
-                        let dist_path: &String = &format("{}/dist", dir);
+                        let dist_path: &String = &format!("{}/dist", mandy_site);
                         if dir_is(dist_path){
                             let msg: &String = &format!(
                                 "{} Your Mandy site has been compiled at \"{}\".",
