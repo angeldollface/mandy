@@ -1,0 +1,6 @@
+*.lock
+/target
+.DS_Store
+build
+.vscode
+/mandy_site/dist
