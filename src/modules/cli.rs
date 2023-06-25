@@ -104,18 +104,21 @@ pub fn cli() -> () {
                         let dist_path: &String = &format!("{}/dist", mandy_site);
                         if dir_is(dist_path){
                             let msg: &String = &format!(
-                                "{} Your Mandy site has been compiled at \"{}\".",
+                                "{} Your Mandy site at \"{}\" has been compiled into \"{}\".",
+                                &rocket_emoji,
+                                &mandy_site,
+                                &dist_path
+                            ).cyan().to_string();
+                            println!("{}", msg);
+                        }
+                        else {
+                            let msg: &String = &format!(
+                                "{} Your Mandy site could not be compiled into \"{}\".",
                                 &x_emoji,
                                 &dist_path
                             ).red().to_string();
                             println!("{}", msg);
                         }
-                        let msg: &String = &format!(
-                            "{} Your Mandy site at \"{}\" has been compiled into \"dist\".",
-                            &rocket_emoji,
-                            &mandy_site
-                        ).cyan().to_string();
-                        println!("{}", msg);
                     },
                     Err(e) => {
                         let err_msg: &String = &format!("{} {}", &x_emoji, &e).red().to_string();
@@ -139,20 +142,24 @@ pub fn cli() -> () {
                 match build_op {
                     Ok(_x) => {
                         let dist_path: &String = &format!("{}/dist", mandy_site);
+                        let dist_path: &String = &format!("{}/dist", mandy_site);
                         if dir_is(dist_path){
                             let msg: &String = &format!(
-                                "{} Your Mandy site has been compiled at \"{}\".",
+                                "{} Your Mandy site at \"{}\" has been compiled into \"{}\".",
+                                &rocket_emoji,
+                                &mandy_site,
+                                &dist_path
+                            ).cyan().to_string();
+                            println!("{}", msg);
+                        }
+                        else {
+                            let msg: &String = &format!(
+                                "{} Your Mandy site could not be compiled into \"{}\".",
                                 &x_emoji,
                                 &dist_path
                             ).red().to_string();
                             println!("{}", msg);
                         }
-                        let msg: &String = &format!(
-                            "{} Your Mandy site at \"{}\" has been compiled into \"dist\".",
-                            &rocket_emoji,
-                            &mandy_site
-                        ).cyan().to_string();
-                        println!("{}", msg);
                     },
                     Err(e) => {
                         let err_msg: &String = &format!("{} {}", &x_emoji, &e).red().to_string();
