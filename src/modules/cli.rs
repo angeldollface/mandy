@@ -151,6 +151,7 @@ pub fn cli() -> () {
                                 &dist_path
                             ).cyan().to_string();
                             println!("{}", msg);
+                            serve_project(&mandy_site);
                         }
                         else {
                             let msg: &String = &format!(
