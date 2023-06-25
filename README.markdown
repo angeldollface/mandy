@@ -56,6 +56,7 @@ cargo install --git https://github.com/angeldollface/mandy
 ## HELP AND COMMUNITY :people_hugging:
 
 - [Discord Server](https://discord.gg/VR7eZFrf)
+- [Default Mandy Site Template](https://github.com/angeldollface/mandy-template-site)
 - [GitHub Action](https://github.com/angeldollface/mandy-github-action)
 
 ## NOTE :scroll:
