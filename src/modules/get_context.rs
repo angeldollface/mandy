@@ -105,7 +105,10 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                         if config_data["hasLoopContent"] == String::from("true") {
                             if config_data.contains_key("loopContentDirs"){
                                 let dirs: &String = &config_data["loopContentDirs"];
-                                let mut loop_contexts = match get_loop_content(dirs,dir){
+                                let mut loop_contexts = match get_loop_content(
+                                    dirs,
+                                    dir
+                                ){
                                     Ok(loop_contexts) => loop_contexts,
                                     Err(e) => {
                                         return Err::<Vec<SiteContext>, MandyError>(

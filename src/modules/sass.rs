@@ -3,6 +3,8 @@ MANDY by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
+use std::process::Output;
+
 /// We import the "options"
 /// structure from the "grass"
 /// crate.
@@ -19,6 +21,7 @@ use coutils::dir_is;
 /// from the "coutils" crate.
 use coutils::Entity;
 
+use grass::OutputStyle;
 /// Importing the method
 /// to compile SASS files
 /// from the "grass" crate.
@@ -60,7 +63,7 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
         let sass_files: Vec<FileEntry> = find_sass_files(sass_dir);
         let mut sass_strings: Vec<String> = Vec::new();
         for sass_file in sass_files {
-            let mut compiled = match from_path(&sass_file.name, &Options::default()) {
+            let mut compiled = match from_path(&sass_file.name, &Options::default().style(OutputStyle::Compressed)) {
                 Ok(compiled) => compiled,
                 Err(e) => {
                     return Err::<(), MandyError>(
