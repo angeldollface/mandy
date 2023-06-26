@@ -96,3 +96,9 @@ pub use modules::get_context::*;
 /// that builds and renders
 /// a single data context.
 pub use modules::build_context::*;
+
+/// Re-exporting the module
+/// that retrieves the contexts
+/// for content the user would
+/// like to loop over.
+pub use modules::get_loop_content::*;

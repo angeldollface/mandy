@@ -34,7 +34,8 @@ pub struct SiteContext {
     pub page: HashMap<String, String>,
     pub file: String,
     pub dir: String,
-    pub data: Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>,
+    pub loop_content: Option<HashMap<String, Vec<HashMap<String, String>>>>,
+    pub data: Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>
 }
 
 /// Implementing generic methods
@@ -52,6 +53,7 @@ impl SiteContext {
         page: &HashMap<String, String>,
         file: &String,
         dir: &String,
+        loop_content: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
         data: &Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>,
     ) -> SiteContext {
         return SiteContext { 
@@ -61,6 +63,7 @@ impl SiteContext {
             page: page.to_owned(), 
             file: file.to_owned(), 
             dir: dir.to_owned(), 
+            loop_content: loop_content.to_owned(),
             data: data.to_owned(), 
         };
     }
