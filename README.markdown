@@ -46,8 +46,8 @@ cargo install --git https://github.com/angeldollface/mandy
 - [ ] Try to break `mandy`.
 - [ ] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
 - [ ] Get list of important arches by using `zoxide` or `deno` as inspiration.
-- [ ] Write documentation.
-- [ ] Make Mandy's website.
+- [x] Write documentation.
+- [x] Make Mandy's website.
 - [ ] Release for most important platforms.
 - [ ] Write a post on Hashnode about *Mandy*.
 - [ ] Make noise about *Mandy*.
@@ -58,6 +58,7 @@ cargo install --git https://github.com/angeldollface/mandy
 - [Discord Server](https://discord.gg/VR7eZFrf)
 - [Default Mandy Site Template](https://github.com/angeldollface/mandy-template-site)
 - [GitHub Action](https://github.com/angeldollface/mandy-github-action)
+- [Mandy's Website](https://angeldollface.art/mandys-house)
 
 ## NOTE :scroll:
 
