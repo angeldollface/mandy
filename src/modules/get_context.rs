@@ -70,7 +70,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
         };
         if config_data.contains_key(&String::from("prod_url")) &&
            config_data.contains_key(&String::from("dev_url")) &&
-           config_data.contains_key(&String::from("copyAssets")) {
+           config_data.contains_key(&String::from("copyAssets")){
 
             let mut baseurl: &String = &String::from("");
             let mut comp_env: Environment = match detect_env() {
@@ -113,6 +113,14 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     result.push(ctx);
                 }
             }
+        }
+        else {
+            let err_msg: &String = &format!("One or all of the following config flags not found:\n \"prod_url\", \"dev_url\", \"copyAssets\"!");
+            return Err::<Vec<SiteContext>, MandyError>(
+                MandyError::new(
+                    &err_msg.to_string()
+                )
+            );
         }
     }
     else {
