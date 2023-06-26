@@ -40,9 +40,9 @@ cargo install --git https://github.com/angeldollface/mandy
 - [x] Preliminary testing completed.
 - [x] Fixed the `assetsDir` bug.
 - [x] Changed some CLI-related things.
+- [x] Fix the `about.markdown` to `about/index.html` bug.
 - [ ] Clean up code further.
 - [ ] Comment important bits.
-- [ ] Fix the `about.markdown` to `about/index.html` bug.
 - [ ] Try to break `mandy`.
 - [ ] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
 - [ ] Get list of important arches by using `zoxide` or `deno` as inspiration.
