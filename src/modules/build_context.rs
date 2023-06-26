@@ -79,19 +79,24 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
             let liquid_string: &String = &read_file(&layout_path);
             let last_md_dir: &String = &get_last_dir(&ctx.file);
             let name_base: &String = &get_name_base(&ctx.file)[0];
-            let html_name: &String = &format!("{}.html", name_base);
+            let html_name: &String = &format!("index.html");
             let mut html_path: String = String::from("");
-
             if last_md_dir == dir {
                 html_path = format!("{}/{}", dist_path, html_name);
             }
             else {
                 let md_path: &String = &format!("{}/dist/{}", dir, last_md_dir);
-                html_path = format!("{}/{}/{}", dist_path, last_md_dir, html_name);
+                let page_path: &String = &format!("{}/{}", &md_path, &name_base);
+                html_path = format!("{}/{}", page_path, html_name);
                 if dir_is(md_path){
-                    // Skip making the directory again.
+                    if dir_is(page_path){}
+                    else {create_directory(page_path);}
                 }
-                else {create_directory(md_path);}
+                else {
+                    create_directory(md_path);
+                    if dir_is(page_path){}
+                    else {create_directory(page_path);}
+                }
             }
             let mut html_string = match render_template(&liquid_string, ctx) {
                 Ok(html_string) => html_string,
