@@ -10,9 +10,13 @@
 
 ## GETTING STARTED :books:
 
+### Showcase
+
 <p align="center">
  <img src="/assets/showcase/showcase.gif"/>
 </p>
+
+### Get up and running!
 
 ```bash
 # Check that Mandy is installed.
@@ -64,6 +68,7 @@ cargo install --git https://github.com/angeldollface/mandy
 - [x] Make Mandy's website.
 - [x] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
 - [ ] Re-write the file-copying architecture.
+- [ ] Rewrite the GitHub Action for CI testing.
 - [ ] Clean up code further.
 - [ ] Comment important bits further.
 - [ ] Try to break `mandy`.
