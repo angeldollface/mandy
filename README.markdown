@@ -1,5 +1,5 @@
 <p align="center">
- <img src="/banner/banner.png"/>
+ <img src="/assets/banner/banner.png"/>
 </p>
 
 # MANDY :rocket: :pill: :fire:
@@ -11,7 +11,7 @@
 ## GETTING STARTED :books:
 
 <p align="center">
- <img src="/showcase/showcase.gif"/>
+ <img src="/assets/showcase/showcase.gif"/>
 </p>
 
 ```bash
