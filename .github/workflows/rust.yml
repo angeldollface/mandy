@@ -17,3 +17,5 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: run
+      - name: "Build Mandy for multiple targets."
+        run: "cd scripts && bash build.sh"
