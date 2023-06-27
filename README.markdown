@@ -8,9 +8,28 @@
 
 ***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
 
-## ABOUT :books:
+## GETTING STARTED :books:
 
-Roughly one year ago, when I was just starting to learn Rust, I was re-building my main website and wondered which static-site generator to use for this re-building project. I had been using Jekyll up until that point but then heard rumours that Ruby (the language that Jekyll was written in) was declining very quickly in use and decided to write my own static-site generator in Rust. This project was called ***Acid***. I used ***Acid*** for some time but then got bored and deleted it because there were too many problems with ***Acid***. Recently, I got interested again in writing my own static-site generator after contributing a lot to the [Lume project](https://lume.land), a static-site generator based on the [Deno](https://deno.land) Javascript runtime. Since I now know much more about coding in Rust, I decided to revive ***Acid*** and make a new project based on ***Acid***, called ***Mandy***. This is that project. In case you do not know what a static-site generator is, here's a link that explains everything: [Read Me](https://www.cloudflare.com/en-gb/learning/performance/static-site-generator/). This repository contains the source code for ***Mandy***. I have big plans for her. :heart_on_fire:
+<p align="center">
+ <img src="/showcase/showcase.gif"/>
+</p>
+
+```bash
+# Check that Mandy is installed.
+mandy -v
+
+# Start a new Mandy-powered site in "mysite".
+mandy -i mysite -w angeldollface/mandy-template-site
+
+# Compile your Mandy site.
+mandy -c mysite
+
+# Clean your Mandy project.
+mandy -r mysite
+
+# Test your site on "localhost".
+mandy -s mysite
+```
 
 ## INSTALLATION :inbox_tray:
 
@@ -41,13 +60,14 @@ cargo install --git https://github.com/angeldollface/mandy
 - [x] Fixed the `assetsDir` bug.
 - [x] Changed some CLI-related things.
 - [x] Fix the `about.markdown` to `about/index.html` bug.
-- [ ] Clean up code further.
-- [ ] Comment important bits.
-- [ ] Try to break `mandy`.
-- [ ] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
-- [ ] Get list of important arches by using `zoxide` or `deno` as inspiration.
 - [x] Write documentation.
 - [x] Make Mandy's website.
+- [x] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
+- [ ] Re-write the file-copying architecture.
+- [ ] Clean up code further.
+- [ ] Comment important bits further.
+- [ ] Try to break `mandy`.
+- [ ] Get list of important arches by using `zoxide` or `deno` as inspiration.
 - [ ] Release for most important platforms.
 - [ ] Write a post on Hashnode about *Mandy*.
 - [ ] Make noise about *Mandy*.
@@ -59,6 +79,7 @@ cargo install --git https://github.com/angeldollface/mandy
 - [Default Mandy Site Template](https://github.com/angeldollface/mandy-template-site)
 - [GitHub Action](https://github.com/angeldollface/mandy-github-action)
 - [Mandy's Website](https://angeldollface.art/mandys-house)
+- [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
 
 ## NOTE :scroll:
 

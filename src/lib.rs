@@ -87,6 +87,12 @@ pub use modules::get_data::*;
 pub use modules::get_pages::*;
 
 /// Re-exporting the module
+/// that parses an arrow set
+/// string into a Rust data-
+/// structure.
+pub use modules::arrow_set::*;
+
+/// Re-exporting the module
 /// that handles retrieving
 /// the data context
 /// of a Mandy site.

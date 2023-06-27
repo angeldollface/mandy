@@ -83,6 +83,12 @@ pub mod get_data;
 pub mod get_pages;
 
 /// Exporting the module
+/// that parses an arrow set
+/// string into a Rust data-
+/// structure.
+pub mod arrow_set;
+
+/// Exporting the module
 /// that handles retrieving
 /// the data context
 /// of a Mandy site.
