@@ -27,7 +27,7 @@ name = "mandy"
 path = "src/main.rs"
 
 [dependencies]
-git2 = "0.17.2"
+git2 = {version="0.17.2", features = ["vendored-libgit2"]}
 regex = "1.8.4"
 emojis = "0.6.0"
 grass = "0.12.4"
