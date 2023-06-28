@@ -68,7 +68,7 @@ pub mod scaffold;
 /// that holds the main
 /// data context data
 /// structure.
-pub mod contexts;
+pub mod context;
 
 /// Exporting the module
 /// that handles retrieving

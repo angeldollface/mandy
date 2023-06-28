@@ -41,7 +41,7 @@ use super::compenv::Environment;
 /// Importing the data structure to
 /// represent a data context of a 
 /// Mandy site.
-use super::contexts::SiteContext;
+use super::context::SiteContext;
 
 /// Importing the data structure to
 /// represent all information about
@@ -53,13 +53,13 @@ use super::markdown::MandyMDDocument;
 /// of a Mandy site.
 use super::config::deserialize_config;
 
-/// Importing the method to retrieve the contexts
-/// for content the user would like to loop over.
-use super::get_loop_content::get_loop_content;
-
 /// Importing the method to retrieve the data
 /// contexts of Markdown documents in a Mandy site.
 use super::get_pages::get_page_contexts;
+
+/// Importing the method to retrieve the contexts
+/// for content the user would like to loop over.
+use super::get_loop_content::get_loop_content;
 
 /// Attempts to retrieve the site context for each ".markdown"
 /// file in a Mandy site.
@@ -74,8 +74,8 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
         };
         if config_data.contains_key(&String::from("prod_url")) &&
            config_data.contains_key(&String::from("dev_url")) &&
-           config_data.contains_key(&String::from("copyAssets")) &&
-           config_data.contains_key(&String::from("hasLoopContent")){
+           config_data.contains_key(&String::from("hasLoopContent")) &&
+           config_data.contains_key(&String::from("copyFiles")) {
 
             let mut baseurl: &String = &String::from("");
             let mut comp_env: Environment = match detect_env() {
@@ -96,47 +96,32 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
                 }
             };
-
             for page_context in page_contexts {
                 let mut config_clone: HashMap<String, String> = config_data.clone();
                 config_clone.insert(String::from("baseurl"), baseurl.to_owned());
-                if config_data["copyAssets"] == String::from("true"){
-                    if config_data.contains_key("assetsDir"){
-                        if config_data["hasLoopContent"] == String::from("true") {
-                            if config_data.contains_key("loopContentDirs"){
-                                let dirs: &String = &config_data["loopContentDirs"];
-                                let mut loop_contexts = match get_loop_content(
-                                    dirs,
-                                    dir
-                                ){
-                                    Ok(loop_contexts) => loop_contexts,
-                                    Err(e) => {
-                                        return Err::<Vec<SiteContext>, MandyError>(
-                                            MandyError::new(
-                                            &e.to_string()
-                                            )
-                                        );
-                                    }
-                                };
-                                let ctx: SiteContext = SiteContext::new(&baseurl, &Some(config_data["assetsDir"].clone()), &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
-                                result.push(ctx);
-                            }
-                            else {
-                                let err_msg: &String = &format!("\"hasLoopContent\" set to \"true\" but no directories specified.");
-                                return Err::<Vec<SiteContext>, MandyError>(
-                                    MandyError::new(
-                                    &err_msg.to_string()
-                                    )
-                                );
-                            }
+                if config_data["hasLoopContent"] == String::from("true") {
+
+
+                    if config_data.contains_key("loopContentDirs"){
+                        let dirs: &String = &config_data["loopContentDirs"];
+                        let mut loop_contexts = match get_loop_content(
+                            dirs,
+                            dir
+                        ){
+                        Ok(loop_contexts) => loop_contexts,
+                        Err(e) => {
+                            return Err::<Vec<SiteContext>, MandyError>(
+                                MandyError::new(
+                                    &e.to_string()
+                                )
+                            );
                         }
-                        else {
-                            let ctx: SiteContext = SiteContext::new(&baseurl, &Some(config_data["assetsDir"].clone()), &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
-                            result.push(ctx);
-                        }
+                        };
+                        let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
+                        result.push(ctx);
                     }
                     else {
-                        let err_msg: &String = &format!("\"copyAssets\" set to \"true\" but no assets directory specified.");
+                        let err_msg: &String = &format!("\"hasLoopContent\" set to \"true\" but no directories specified.");
                         return Err::<Vec<SiteContext>, MandyError>(
                             MandyError::new(
                                 &err_msg.to_string()
@@ -145,35 +130,8 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     }
                 }
                 else {
-                    if config_data["hasLoopContent"] == String::from("true") {
-                        if config_data.contains_key("loopContentDirs"){
-                            let dirs: &String = &config_data["loopContentDirs"];
-                            let mut loop_contexts = match get_loop_content(dirs,dir){
-                                Ok(loop_contexts) => loop_contexts,
-                                Err(e) => {
-                                    return Err::<Vec<SiteContext>, MandyError>(
-                                        MandyError::new(
-                                        &e.to_string()
-                                        )
-                                    );
-                                }
-                            };
-                            let ctx: SiteContext = SiteContext::new(&baseurl, &None, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
-                            result.push(ctx);
-                        }
-                        else {
-                            let err_msg: &String = &format!("\"hasLoopContent\" set to \"true\" but no directories specified.");
-                            return Err::<Vec<SiteContext>, MandyError>(
-                                MandyError::new(
-                                &err_msg.to_string()
-                                )
-                            );
-                        }
-                    }
-                    else {
-                        let ctx: SiteContext = SiteContext::new(&baseurl, &None, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
-                        result.push(ctx);
-                    }
+                    let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
+                    result.push(ctx);
                 }
             }
         }

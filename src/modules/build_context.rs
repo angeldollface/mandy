@@ -15,6 +15,17 @@ use coutils::dir_is;
 /// file exists.
 use coutils::file_is;
 
+/// Rust's file metadata
+/// API from the "fs"
+/// module.
+use std::fs::metadata;
+
+/// Importing the method from
+/// the "coutils" crate to copy
+/// a file from source to
+/// destination.
+use coutils::file_copy;
+
 /// Importing the method from
 /// the "coutils" crate to read a text
 /// file into a string.
@@ -44,6 +55,12 @@ use coutils::create_directory;
 /// struct.
 use super::errors::MandyError;
 
+/// Importing a data structure
+/// to describe and handle files
+/// to copy to the compiled Mandy
+/// project.
+use super::arrow_set::ArrowSet;
+
 /// Importing the method to get
 /// the last dir in a file path.
 use super::utils::get_last_dir;
@@ -55,12 +72,17 @@ use super::utils::get_name_base;
 
 /// Importing the structure representing
 /// a Mandy site's context.
-use super::contexts::SiteContext;
+use super::context::SiteContext;
 
 /// Importing the method to apply a data
 /// context to a Liquid template and
 /// render this into an HTML string.
 use super::liquid::render_template;
+
+/// Importing the function to parse
+/// an arrow set string into the "ArrowSet"
+/// data structure.
+use super::arrow_set::parse_arrow_set;
 
 
 /// Creates a file and renders it from a single
@@ -108,22 +130,51 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
                     );
                 }
             };
-            match &ctx.assets_dir {
-                Some(assets_path) => {
-                    let src_dir: &String = &format!("{}/{}", dir, &assets_path);
-                    let copied_assets_path: &String = &format!("{}/{}", dist_path, assets_path);
-                    if dir_is(src_dir){
-                        if dir_is(copied_assets_path){}
+            let mut arrow_set: ArrowSet = match parse_arrow_set(&ctx.copy_files){
+                Ok(arrow_set) => arrow_set,
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            if arrow_set.flag == String::from("true"){
+                let files_to_copy: Vec<String> = arrow_set.set.clone();
+                for file in files_to_copy {
+                    let file_path: &String = &format!("{}/{}", dir, file);
+                    let copied_assets_path: &String = &format!("{}/{}", dist_path, file);
+                    let meta = match metadata(file_path){
+                        Ok(meta) => meta,
+                        Err(e) => {
+                            let msg: &String = &format!("File \"{}\" caused the error:\n{}", file_path, e);
+                            return Err::<(), MandyError>(
+                                MandyError::new(
+                                    &msg.to_string()
+                                )
+                            );
+                        }
+                    };
+                    if dir_is(file_path) || file_is(file_path) {
+                        if dir_is(copied_assets_path) || file_is(copied_assets_path) {}
                         else {
-                            folder_copy(src_dir, dist_path);
+                            if meta.is_dir() {
+                                folder_copy(file_path, dist_path);                        
+                            }
+                            else if meta.is_file() {
+                                file_copy(file_path, copied_assets_path);                                                                        
+                            }
                         }
                     }
                     else {
-                        let err_msg: String = format!("Path \"{}\" not found.", src_dir);
+                        let err_msg: String = format!("Path \"{}\" not found.", file_path);
                         return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
                     }
-                },
-                None => {}
+                }
+            }
+            else {
+                // Do nothing.
             }
             create_file(&html_path);
             write_to_file(&html_path, &html_string);

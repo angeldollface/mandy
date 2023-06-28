@@ -15,7 +15,7 @@ use super::errors::MandyError;
 
 /// Importing the structure representing
 /// a Mandy site's context.
-use super::contexts::SiteContext;
+use super::context::SiteContext;
 
 /// Importing the method to compile
 /// SASS files into a CSS file from

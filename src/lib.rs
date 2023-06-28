@@ -72,7 +72,7 @@ pub use modules::scaffold::*;
 /// that holds the main
 /// data context data
 /// structure.
-pub use modules::contexts::*;
+pub use modules::context::*;
 
 /// Re-exporting the module
 /// that handles retrieving

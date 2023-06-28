@@ -28,8 +28,8 @@ use std::collections::HashMap;
 /// a Mandy site.
 #[derive(ObjectView, ValueView, Debug)]
 pub struct SiteContext {
+    pub copy_files: String,
     pub baseurl: String,
-    pub assets_dir: Option<String>,
     pub site: HashMap<String, String>,
     pub page: HashMap<String, String>,
     pub file: String,
@@ -47,8 +47,8 @@ impl SiteContext {
     /// of the "SiteContext" data
     /// structure.
     pub fn new(
+        copy_files: &String,
         baseurl: &String,
-        assets_dir: &Option<String>,
         site: &HashMap<String, String>,
         page: &HashMap<String, String>,
         file: &String,
@@ -57,8 +57,8 @@ impl SiteContext {
         data: &Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>,
     ) -> SiteContext {
         return SiteContext { 
+            copy_files: copy_files.to_owned(),
             baseurl: baseurl.to_owned(), 
-            assets_dir: assets_dir.to_owned(),
             site: site.to_owned(), 
             page: page.to_owned(), 
             file: file.to_owned(), 

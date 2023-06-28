@@ -8,14 +8,58 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          
       - name: "Build Mandy."
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: --release
-      - name: "Run Mandy."
+
+      - name: "Scaffold a new Mandy site. (short version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-      - name: "Get arch."
-        run: uname -m
+          args: -- -i mysite -w angeldollface/mandy-template-site
+      - name: "Compile a Mandy site. (short version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- -c mysite
+      - name: "Reset a Mandy site. (short version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- -r mysite
+      
+      - name: "Scaffold a new Mandy site. (long version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- --init mysite --wtmpl angeldollface/mandy-template-site
+      - name: "Compile a Mandy site. (long version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- --comps mysite
+      - name: "Reset a Mandy site. (long version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- --reset mysite
+
+
+      - name: "Scaffold a new Mandy site. (naked version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- init mysite wtmpl angeldollface/mandy-template-site
+      - name: "Compile a Mandy site. (naked version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- comps mysite
+      - name: "Reset a Mandy site. (naked version)"
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: -- reset mysite

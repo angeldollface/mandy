@@ -81,16 +81,14 @@ curl -s https://raw.githubusercontent.com/angeldollface/mandy/main/installers/ni
 - [x] Write documentation.
 - [x] Make Mandy's website.
 - [x] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
-- [ ] Re-write the file-copying architecture.
-- [ ] Rewrite the GitHub Action for CI testing.
+- [x] Re-write the file-copying architecture.
+- [x] Write installers for all important platforms.
+- [x] Rewrite the GitHub Action for CI testing.
 - [ ] Clean up code further.
 - [ ] Comment important bits further.
 - [ ] Try to break `mandy`.
-- [ ] Get list of important arches by using `zoxide` or `deno` as inspiration.
-- [ ] Release for most important platforms.
 - [ ] Write a post on Hashnode about *Mandy*.
 - [ ] Make noise about *Mandy*.
-- [ ] Investigate packaging options.
 
 ## HELP AND COMMUNITY :people_hugging:
 
