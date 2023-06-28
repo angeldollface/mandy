@@ -1,0 +1,34 @@
+on: [push]
+name: Mandy Release CI
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: "Install Open SSL packages."
+        run: sudo apt-get install openssl openssl-dev
+      - name: "Get Arch info."
+        run: "uname -a"
+      - name: "Add neccessary targets."
+        run: |
+            rustup target add x86_64-unknown-linux-musl
+            rustup target add i686-unknown-linux-musl
+            rustup target add aarch64-unknown-linux-musl
+      - name: "Build binary for x86_64-unknown-linux-musl"
+        uses: actions-rs/cargo@v1
+        with:
+            command: build
+            args: --release --target x86_64-unknown-linux-musl
+      - name: "Build binary for i686-unknown-linux-musl"
+        uses: actions-rs/cargo@v1
+        with:
+            command: build
+            args: --release --target i686-unknown-linux-musl
+      - name: "Build binary for aarch64-unknown-linux-musl"
+        uses: actions-rs/cargo@v1
+        with:
+            command: build
+            args: --release --target aarch64-unknown-linux-musl
