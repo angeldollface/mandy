@@ -42,13 +42,13 @@ Installing ***Mandy*** is simple! Run one of the commands below for your platfor
 - Run this command if you are running on Windows 32-bit:
 
 ```Powershell
-. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_32.ps1 } | iex; install
+. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_32.ps1 } | iex; ./win_32.ps1
 ```
 
 - Run this command if you are running on Windows 64-bit:
 
 ```Powershell
-. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_64.ps1 } | iex; install
+. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_64.ps1 } | iex; ./win_64.ps1
 ```
 
 For non-Windows platforms, run this command:
