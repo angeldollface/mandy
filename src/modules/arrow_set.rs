@@ -3,21 +3,6 @@ MANDY by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-/// Importing Rust's
-/// standard "Debug"
-/// trait.
-use std::fmt::Debug;
-
-/// Importing Liquid's
-/// standard "ValueView"
-/// trait.
-use liquid::ValueView;
-
-/// Importing Liquid's
-/// standard "ObjectView"
-/// trait.
-use liquid::ObjectView;
-
 /// Importing the method
 /// to split strings into
 /// vector of strings from
@@ -30,7 +15,6 @@ use super::errors::MandyError;
 
 /// A structure to represent
 /// the fields of an arrow set.
-#[derive(ObjectView, ValueView, Debug)]
 pub struct ArrowSet{
     pub flag: String,
     pub set: Vec<String>
