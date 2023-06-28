@@ -35,8 +35,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: "Install Open SSL packages."
-        run: sudo apt-get install openssl=1.1 libssl-dev build-essential
       - name: Get version
         id: get_version
         uses: SebRollen/toml-action@v1.0.2
@@ -65,6 +63,8 @@ jobs:
         uses: actions-rs/install@v0.1
         with:
           crate: cargo-deb
+      - name: "Install Open SSL packages."
+        run: sudo apt-get install openssl=1.1 libssl-dev build-essential
       - name: Build deb
         if: ${{ matrix.deb == true }}
         uses: actions-rs/cargo@v1
@@ -74,17 +74,15 @@ jobs:
       - name: Package (*nix)
         if: runner.os != 'Windows'
         run: |
-          tar -cv CHANGELOG.md LICENSE README.md man/ \
-            -C contrib/ completions/ -C ../ \
-            -C target/${{ matrix.target }}/release/ zoxide |
+          tar -cv 
+            -C target/${{ matrix.target }}/release/ mandy |
             gzip --best > \
-            zoxide-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.tar.gz
+            mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.tar.gz
       - name: Package (Windows)
         if: runner.os == 'Windows'
         run: |
-          7z a zoxide-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip `
-            CHANGELOG.md LICENSE README.md ./man/ ./contrib/completions/ `
-            ./target/${{ matrix.target }}/release/zoxide.exe
+          7z a mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip `
+            ./target/${{ matrix.target }}/release/mandy.exe
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -95,7 +93,7 @@ jobs:
             *.zip
       - name: Create release
         if: |
-          ${{ github.ref == 'refs/heads/main' && startsWith(github.event.head_commit.message, 'chore(release)') }}
+          ${{ github.ref == 'refs/heads/main' && startsWith(github.event.head_commit.message, 'v.') }}
         uses: softprops/action-gh-release@v1
         with:
           draft: true
