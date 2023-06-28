@@ -136,7 +136,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
             }
         }
         else {
-            let err_msg: &String = &format!("One or all of the following config flags not found:\n \"prod_url\", \"dev_url\", \"copyAssets\", \"hasLoopContent\"!");
+            let err_msg: &String = &format!("One or all of the following config flags not found:\n \"prod_url\", \"dev_url\", \"copyFiles\", \"hasLoopContent\"!");
             return Err::<Vec<SiteContext>, MandyError>(
                 MandyError::new(
                     &err_msg.to_string()
