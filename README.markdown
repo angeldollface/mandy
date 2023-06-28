@@ -6,8 +6,6 @@
 
 ![Mandy CI](https://github.com/angeldollface/mandy/actions/workflows/rust.yml/badge.svg)
 
-![Mandy Release CI](https://github.com/angeldollface/mandy/actions/workflows/release.yml/badge.svg)
-
 ***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
 
 ## GETTING STARTED :books:
