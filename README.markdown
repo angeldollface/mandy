@@ -39,22 +39,22 @@ mandy -s mysite
 
 Installing ***Mandy*** is simple! Run one of the commands below for your platform to download a script that will install ***Mandy***.
 
-- Run this command if you are running on Windows 32-bit:
+- Run this command in a Powershell session with administrator privileges if you are running on Windows 32-bit:
 
 ```Powershell
-. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_32.ps1 } | iex; ./win_32.ps1
+. { iwr -useb https://angeldollface.art/mandys-house/installers/win_32.ps1 } | iex; ./win_32.ps1
 ```
 
-- Run this command if you are running on Windows 64-bit:
+- Run this command in a Powershell session with administrator privileges if you are running on Windows 64-bit:
 
 ```Powershell
-. { iwr -useb https://raw.githubusercontent.com/angeldollface/mandy/main/installers/win_64.ps1 } | iex; ./win_64.ps1
+. { iwr -useb https://angeldollface.art/mandys-house/installers/win_64.ps1 } | iex; ./win_64.ps1
 ```
 
-For non-Windows platforms, run this command:
+For non-Windows platforms, run this command. You may have to put `sudo` in front of this command:
 
 ```bash
-curl -s https://raw.githubusercontent.com/angeldollface/mandy/main/installers/nix.sh | bash -s
+curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 ```
 
 ## TO DO :black_nib:
