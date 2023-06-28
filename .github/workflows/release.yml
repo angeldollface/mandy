@@ -14,21 +14,21 @@ jobs:
         run: "uname -a"
       - name: "Add neccessary targets."
         run: |
-            rustup target add x86_64-unknown-linux-musl
-            rustup target add i686-unknown-linux-musl
-            rustup target add aarch64-unknown-linux-musl
-      - name: "Build binary for x86_64-unknown-linux-musl"
+            rustup target add x86_64-unknown-linux-gnu
+            rustup target add i686-unknown-linux-gnu
+            rustup target add aarch64-unknown-linux-gnu
+      - name: "Build binary for x86_64-unknown-linux-gnu"
         uses: actions-rs/cargo@v1
         with:
             command: build
-            args: --release --target x86_64-unknown-linux-musl
-      - name: "Build binary for i686-unknown-linux-musl"
+            args: --release --target x86_64-unknown-linux-gnu
+      - name: "Build binary for i686-unknown-linux-gnu"
         uses: actions-rs/cargo@v1
         with:
             command: build
-            args: --release --target i686-unknown-linux-musl
-      - name: "Build binary for aarch64-unknown-linux-musl"
+            args: --release --target i686-unknown-linux-gnu
+      - name: "Build binary for aarch64-unknown-linux-gnu"
         uses: actions-rs/cargo@v1
         with:
             command: build
-            args: --release --target aarch64-unknown-linux-musl
+            args: --release --target aarch64-unknown-linux-gnu
