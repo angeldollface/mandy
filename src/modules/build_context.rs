@@ -143,33 +143,39 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
             if arrow_set.flag == String::from("true"){
                 let files_to_copy: Vec<String> = arrow_set.set.clone();
                 for file in files_to_copy {
-                    let file_path: &String = &format!("{}/{}", dir, file);
-                    let copied_assets_path: &String = &format!("{}/{}", dist_path, file);
-                    let meta = match metadata(file_path){
-                        Ok(meta) => meta,
-                        Err(e) => {
-                            let msg: &String = &format!("File \"{}\" caused the error:\n{}", file_path, e);
-                            return Err::<(), MandyError>(
-                                MandyError::new(
-                                    &msg.to_string()
-                                )
-                            );
-                        }
-                    };
-                    if dir_is(file_path) || file_is(file_path) {
-                        if dir_is(copied_assets_path) || file_is(copied_assets_path) {}
-                        else {
-                            if meta.is_dir() {
-                                folder_copy(file_path, dist_path);                        
-                            }
-                            else if meta.is_file() {
-                                file_copy(file_path, copied_assets_path);                                                                        
-                            }
-                        }
+                    if file == String::from(""){
+                        let msg: &String = &format!("Invalid character sequence found in the \"copyFiles\" flag!");
+                        return Err::<(), MandyError>(MandyError::new(&msg.to_string()));
                     }
                     else {
-                        let err_msg: String = format!("Path \"{}\" not found.", file_path);
-                        return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
+                        let file_path: &String = &format!("{}/{}", dir, file);
+                        let copied_assets_path: &String = &format!("{}/{}", dist_path, file);
+                        let meta = match metadata(file_path){
+                            Ok(meta) => meta,
+                            Err(e) => {
+                                let msg: &String = &format!("File \"{}\" caused the error:\n{}", file_path, e);
+                                return Err::<(), MandyError>(
+                                    MandyError::new(
+                                        &msg.to_string()
+                                    )
+                                );
+                            }
+                        };
+                        if dir_is(file_path) || file_is(file_path) {
+                            if dir_is(copied_assets_path) || file_is(copied_assets_path) {}
+                            else {
+                                if meta.is_dir() {
+                                    folder_copy(file_path, dist_path);                        
+                                }
+                                else if meta.is_file() {
+                                    file_copy(file_path, copied_assets_path);                                                                        
+                                }
+                            }
+                        }
+                        else {
+                            let err_msg: String = format!("Path \"{}\" not found.", file_path);
+                            return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
+                        }
                     }
                 }
             }
