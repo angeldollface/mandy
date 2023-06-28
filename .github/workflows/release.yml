@@ -9,7 +9,7 @@ jobs:
         with:
           toolchain: stable
       - name: "Install Open SSL packages."
-        run: sudo apt-get install openssl openssl-dev
+        run: sudo apt-get install openssl libssl-dev build-essential
       - name: "Get Arch info."
         run: "uname -a"
       - name: "Add neccessary targets."
