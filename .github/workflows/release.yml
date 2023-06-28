@@ -65,6 +65,8 @@ jobs:
           crate: cargo-deb
       - name: "Install Open SSL packages."
         run: sudo apt-get install openssl=1.1 libssl-dev pkg-config build-essential
+      - name: "Find OPENSSL DIR"
+        run: "openssl version -d"
       - name: Build deb
         if: ${{ matrix.deb == true }}
         uses: actions-rs/cargo@v1
