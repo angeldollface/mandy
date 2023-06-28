@@ -27,7 +27,6 @@ name = "mandy"
 path = "src/main.rs"
 
 [dependencies]
-git2 = {version="0.17.2", features = ["vendored-libgit2"]}
 regex = "1.8.4"
 emojis = "0.6.0"
 grass = "0.12.4"
@@ -38,6 +37,7 @@ markdown = "0.3.0"
 serde_json = "1.0.79"
 serde_derive = "1.0.164"
 yaml-front-matter = "0.1.0"
+git2 = {version="0.17.2", features = ["vendored-libgit2"]}
 cleasy = { git = "https://github.com/angeldollface/cleasy", version = "1.5.0" }
 coutils = { git = "https://github.com/angeldollface/coutils", version = "1.2.0" }
 
