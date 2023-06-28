@@ -37,10 +37,16 @@ mandy -s mysite
 
 ## INSTALLATION :inbox_tray:
 
-I'm still testing ***Mandy*** and completing the other items on the to-do list, so I haven't figured out the conventional ways of packaging yet. To install ***Mandy*** for now, make sure you have [Git](https://git-scm.org) and [Rust](https://rust-lang.org) installed. Once you have both installed, run this command:
+I'm still testing ***Mandy*** and completing the other items on the to-do list, so I haven't figured out the conventional ways of packaging yet. To install ***Mandy*** for now, make sure you have [Git](https://git-scm.org) and [Rust](https://rust-lang.org) installed. Once you have both installed, run this command for any platform that isn't Windows:
+
+```Powershell
+. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install
+```
+
+For non-Windows platforms, run this command:
 
 ```bash
-cargo install --git https://github.com/angeldollface/mandy
+curl -s http://server/path/script.sh | bash -s
 ```
 
 ## TO DO :black_nib:
