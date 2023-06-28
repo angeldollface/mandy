@@ -3,8 +3,6 @@ MANDY by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-use std::process::Output;
-
 /// We import the "options"
 /// structure from the "grass"
 /// crate.
