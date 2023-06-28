@@ -33,6 +33,8 @@ jobs:
           command: run
           args: -- -r mysite
       
+      - name: "Cleanup for next run."
+        run: rm -rf mysite
       - name: "Scaffold a new Mandy site. (long version)"
         uses: actions-rs/cargo@v1
         with:
@@ -49,7 +51,8 @@ jobs:
           command: run
           args: -- --reset mysite
 
-
+      - name: "Cleanup for next run."
+        run: rm -rf mysite
       - name: "Scaffold a new Mandy site. (naked version)"
         uses: actions-rs/cargo@v1
         with:
