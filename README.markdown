@@ -116,6 +116,10 @@ Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Page
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
 
+## TRIVIAL FACTLLET :thinking:
+
+As of the time of writing, Mandy is 1995 lines of Rust code.
+
 ## NOTE :scroll:
 
 - *Mandy :rocket: :pill: :fire:* by Alexander Abraham :black_heart: a.k.a. *"Angel Dollface" :dolls: :ribbon:*
