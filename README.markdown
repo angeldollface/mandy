@@ -22,6 +22,12 @@
 # Check that Mandy is installed.
 mandy -v
 
+# Set the $MANDY_ENV environment variable. (For *Nix systems.)
+export MANDY_ENV="development"
+
+# Set the $MANDY_ENV environment variable. (For Windows systems.)
+set MANDY_ENV="development"
+
 # Start a new Mandy-powered site in "mysite".
 mandy -i mysite -w angeldollface/mandy-template-site
 
@@ -90,11 +96,19 @@ curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 - [ ] Write a post on Hashnode about *Mandy*.
 - [ ] Make noise about *Mandy*.
 
+## MANDY TEMPLATE SITES :art:
+
+- [Mandy's Default Site Template](https://github.com/angeldollface/mandy-template-site): The default template site for creating new Mandy-powered sites. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-template-site`.
+- [Mandy's main website](https://github.com/angeldollface/mandys-house): The Mandy site for the project page of the Mandy project. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandys-house`.
+- [Mandy's fancy template site with in-browser 3D graphics](https://github.com/angeldollface/mandy-threejs-site): A single-page site template using three.js for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-threejs-site`.
+
+## DEPLOYING A MANDY SITE ON GITHUB ACTIONS :rocket:
+
+Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action).
+
 ## HELP AND COMMUNITY :people_hugging:
 
 - [Discord Server](https://discord.gg/VR7eZFrf)
-- [Default Mandy Site Template](https://github.com/angeldollface/mandy-template-site)
-- [GitHub Action](https://github.com/angeldollface/mandy-github-action)
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
 
