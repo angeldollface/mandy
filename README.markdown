@@ -102,7 +102,7 @@ curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 - [Mandy's main website](https://github.com/angeldollface/mandys-house): The Mandy site for the project page of the Mandy project. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandys-house`.
 - [Mandy's fancy template site with in-browser 3D graphics](https://github.com/angeldollface/mandy-threejs-site): A single-page site template using three.js for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-threejs-site`.
 
-## DEPLOYING A MANDY SITE ON GITHUB ACTIONS :rocket:
+## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
 
 Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action).
 
