@@ -90,6 +90,10 @@ curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 - [x] Re-write the file-copying architecture.
 - [x] Write installers for all important platforms.
 - [x] Rewrite the GitHub Action for CI testing.
+- [ ] Edit the documentation on Mandy's website.
+- [ ] Re-order the "DEPLOYMENT" and "ENVIRONMENT VARIABLES" section in the documentation.
+- [ ] Buy domain name AFTER first release.
+- [ ] Check EVERYTHING before release.
 - [ ] Clean up code further.
 - [ ] Comment important bits further.
 - [ ] Try to break `mandy`.
