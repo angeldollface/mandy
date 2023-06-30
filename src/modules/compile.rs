@@ -33,21 +33,19 @@ use super::get_context::get_site_contexts;
 /// Creates files and renders them from all
 /// "SiteContext" instances.
 pub fn compile_site(dir: &String) -> Result<(), MandyError> {
-    if dir_is(dir) {
-        let mut site_contexts: Vec<SiteContext> = match get_site_contexts(dir) {
-            Ok(site_contexts) => site_contexts,
-            Err(e) => {
-                return Err::<(), MandyError>(
-                    MandyError::new(
-                        &e.to_string()
-                    )
-                );
-            }
-        };
-        for ctx in site_contexts {
-            let build_op: Result<(), MandyError> = build_context(&ctx, dir);
-            match build_op {
-                Ok(_x) => {},
+    let dist_path: &String = &format!("{}/dist", dir);
+    if dir_is(dist_path){
+        let msg: String = format!("\"{}\" already exists!", dist_path);
+        return Err::<(), MandyError>(
+            MandyError::new(
+                &msg.to_string()
+            )
+        );
+    }
+    else {
+        if dir_is(dir) {
+            let mut site_contexts: Vec<SiteContext> = match get_site_contexts(dir) {
+                Ok(site_contexts) => site_contexts,
                 Err(e) => {
                     return Err::<(), MandyError>(
                         MandyError::new(
@@ -56,25 +54,38 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             };
-        }
-        match compile_sass_files(dir) {
-            Ok(_x) => {},
-            Err(e) => {
-                return Err::<(), MandyError>(
-                    MandyError::new(
-                        &e.to_string()
-                    )
-                );
+            for ctx in site_contexts {
+                let build_op: Result<(), MandyError> = build_context(&ctx, dir);
+                match build_op {
+                    Ok(_x) => {},
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(
+                                &e.to_string()
+                            )
+                        );
+                    }
+                };
+            }
+            match compile_sass_files(dir) {
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
             }
         }
-    }
-    else {
-        let err_msg: String = format!("\"{}\" not found.", dir);
-        return Err::<(), MandyError>(
-            MandyError::new(
-                &err_msg.to_string()
-            )
-        );
+        else {
+            let err_msg: String = format!("\"{}\" not found.", dir);
+            return Err::<(), MandyError>(
+                MandyError::new(
+                    &err_msg.to_string()
+                )
+            );
+        }
     }
     return Ok(());
 }

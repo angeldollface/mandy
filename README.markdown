@@ -8,6 +8,11 @@
 
 ***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
 
+## ABOUT :books:
+
+***Mandy is fast, easy to use, easy to deploy, and very flexible! Get her today!***
+***[Visit Mandy's website!](https://angeldollface.art/mandys-house)***
+
 ## GETTING STARTED :books:
 
 ### Showcase
@@ -45,13 +50,13 @@ mandy -s mysite
 
 Installing ***Mandy*** is simple! Run one of the commands below for your platform to download a script that will install ***Mandy***.
 
-- Run this command in a Powershell session with administrator privileges if you are running on Windows 32-bit:
+- Run this command in a Powershell session with administrator privileges if you are running on a Windows 32-bit system:
 
 ```Powershell
 . { iwr -useb https://angeldollface.art/mandys-house/installers/win_32.ps1 } | iex; ./win_32.ps1
 ```
 
-- Run this command in a Powershell session with administrator privileges if you are running on Windows 64-bit:
+- Run this command in a Powershell session with administrator privileges if you are running on a Windows 64-bit system:
 
 ```Powershell
 . { iwr -useb https://angeldollface.art/mandys-house/installers/win_64.ps1 } | iex; ./win_64.ps1
@@ -62,43 +67,6 @@ For non-Windows platforms, run this command. You may have to put `sudo` in front
 ```bash
 curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 ```
-
-## TO DO :black_nib:
-
-- [x] Comment the code.
-- [x] Add a `config` flag for copying an assets directory.
-- [x] Add an environment variable detector.
-- [x] Fix navigation issue.
-- [x] Fix iterative content issue.
-- [x] Make a Discord server.
-- [x] Publish GitHub action for *Mandy*.
-- [x] Make banner, logo, and icon.
-- [x] Implement support for SASS.
-- [x] Implement project scaffolding.
-- [x] Finish the compilation module.
-- [x] Fix config flag bugs.
-- [x] Clean up the code.
-- [x] Added colored output messages.
-- [x] Added emojis.
-- [x] Preliminary testing completed.
-- [x] Fixed the `assetsDir` bug.
-- [x] Changed some CLI-related things.
-- [x] Fix the `about.markdown` to `about/index.html` bug.
-- [x] Write documentation.
-- [x] Make Mandy's website.
-- [x] Cleanup this `README` by using `zoxide` or `deno` as inspiration.
-- [x] Re-write the file-copying architecture.
-- [x] Write installers for all important platforms.
-- [x] Rewrite the GitHub Action for CI testing.
-- [ ] Edit the documentation on Mandy's website.
-- [ ] Re-order the "DEPLOYMENT" and "ENVIRONMENT VARIABLES" section in the documentation.
-- [ ] Buy domain name AFTER first release.
-- [ ] Check EVERYTHING before release.
-- [ ] Clean up code further.
-- [ ] Comment important bits further.
-- [ ] Try to break `mandy`.
-- [ ] Write a post on Hashnode about *Mandy*.
-- [ ] Make noise about *Mandy*.
 
 ## MANDY TEMPLATE SITES :art:
 
@@ -115,10 +83,6 @@ Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Page
 - [Discord Server](https://discord.gg/VR7eZFrf)
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
-
-## TRIVIAL FACTLLET :thinking:
-
-As of the time of writing, Mandy is 1995 lines of Rust code.
 
 ## NOTE :scroll:
 

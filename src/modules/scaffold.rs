@@ -24,7 +24,7 @@ use coutils::create_directory;
 use super::errors::MandyError;
 
 /// Scaffolds a new Mandy site by attempting to clone a
-/// GitHub repository with a sample Mandy project inside it.
+/// GitHub repository with a Mandy project inside it.
 pub fn scaffold_site(dir: &String, short_url_format: &String) -> Result<(), MandyError> {
     if dir_is(dir){
         let err_msg: &String = &format!("The directory \"{}\" already exists!", dir);

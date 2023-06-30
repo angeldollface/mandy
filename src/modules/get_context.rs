@@ -70,7 +70,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
         let mut config_data = match deserialize_config(
             &read_file(&config_path)) {
             Ok(config_data) => config_data,
-            Err(e) => {return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));}
+            Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
         };
         if config_data.contains_key(&String::from("prod_url")) &&
            config_data.contains_key(&String::from("dev_url")) &&

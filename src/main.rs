@@ -10,5 +10,5 @@ use mandy::cli;
 /// The main point of entry
 /// for the Rust compiler.
 fn main(){
-    cli();    
+    cli();
 }

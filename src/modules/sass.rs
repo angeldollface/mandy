@@ -3,7 +3,7 @@ MANDY by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-/// We import the "options"
+/// We import the "Options"
 /// structure from the "grass"
 /// crate.
 use grass::Options;
@@ -19,7 +19,11 @@ use coutils::dir_is;
 /// from the "coutils" crate.
 use coutils::Entity;
 
+/// Importing the enum to set
+/// the output style of the compiled
+/// SASS.
 use grass::OutputStyle;
+
 /// Importing the method
 /// to compile SASS files
 /// from the "grass" crate.
@@ -59,40 +63,54 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
     let sass_dir: &String = &format!("{}/sass", dir);
     if dir_is(sass_dir) {
         let sass_files: Vec<FileEntry> = find_sass_files(sass_dir);
-        let mut sass_strings: Vec<String> = Vec::new();
-        for sass_file in sass_files {
-            let mut compiled = match from_path(&sass_file.name, &Options::default().style(OutputStyle::Compressed)) {
-                Ok(compiled) => compiled,
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(&e.to_string())
-                    );
-                }
-            };
-            sass_strings.push(compiled);
-        }
-        let css_string: &String = &sass_strings.join("");
-        let dist_path: &String = &format!("{}/dist/css", dir);
-        let css_file: &String = &format!("{}/index.css", dist_path);
-        if dir_is(dist_path){
-            let err_msg: &String = &String::from("\"dist\" directory exists! Aborting SASS compilation.");
+        if sass_files.is_empty(){
+            let err_msg: &String = &format!("\"{}/sass\" empty! Aborting SASS compilation.", dir);
             return Err::<(), MandyError>(
                 MandyError::new(&&err_msg.to_string())
             );
         }
         else {
-            create_directory(dist_path);
-            create_file(css_file);
-            write_to_file(css_file, &css_string);
+            let mut sass_strings: Vec<String> = Vec::new();
+            for sass_file in sass_files {
+                let mut compiled = match from_path(&sass_file.name, &Options::default().style(OutputStyle::Compressed)) {
+                    Ok(compiled) => compiled,
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(&e.to_string())
+                        );
+                    }
+                };
+                sass_strings.push(compiled);
+            }
+            let css_string: &String = &sass_strings.join("");
+            let dist_path: &String = &format!("{}/dist/css", dir);
+            let css_file: &String = &format!("{}/index.css", dist_path);
+            if dir_is(dist_path){
+                let err_msg: &String = &String::from("\"dist\" directory exists! Aborting SASS compilation.");
+                return Err::<(), MandyError>(
+                    MandyError::new(&&err_msg.to_string())
+                );
+            }
+            else {
+                create_directory(dist_path);
+                create_file(css_file);
+                write_to_file(css_file, &css_string);
+            }
         }      
     }
-    else {}
+    else {
+        let err_msg: &String = &format!("\"{}/sass\" does not exist! Aborting SASS compilation.", dir);
+        return Err::<(), MandyError>(
+            MandyError::new(&&err_msg.to_string())
+        );
+    }
     return Ok(());
 }
 
 /// Attempts to return a list of all detected files in the "SASS"
 /// directory of a Mandy site. 
 pub fn find_sass_files(path: &String) -> Vec<FileEntry> {
+    let file_ending: String = String::from("");
     let mut result: Vec<FileEntry> = Vec::new();
     if dir_is(path){
         let dir_contents: Vec<FileEntry> = list_dir_contents(path);
@@ -104,13 +122,19 @@ pub fn find_sass_files(path: &String) -> Vec<FileEntry> {
                         // Do nothing.
                     }
                     else {
-                        result.push(sub_dir_content);
+                        if sub_dir_content.name.contains(".scss"){
+                            result.push(sub_dir_content);
+                        }
+                        else {}
                     }
                 }
 
             }
             else {
-                result.push(content);
+                if content.name.contains(".scss"){
+                    result.push(content);
+                }
+                else {}
             }
         }
     }

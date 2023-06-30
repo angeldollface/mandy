@@ -5,7 +5,7 @@ Licensed under the MIT license.
 
 /// Importing the method
 /// to split strings into
-/// vector of strings from
+/// a vector of strings from
 /// the "coutils" crate.
 use coutils::clean_split;
 
@@ -48,7 +48,7 @@ pub fn parse_arrow_set(subject: &String) -> Result<ArrowSet, MandyError> {
         subject,
         &String::from("=>")
     );
-    if arrow_components.is_empty() {
+    if arrow_components.len() == 1 || arrow_components.is_empty(){
         let msg: String = String::from("Arrow not found in expression.");
         return Err::<ArrowSet, MandyError>(
             MandyError::new(&msg.to_string())

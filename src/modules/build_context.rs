@@ -62,7 +62,7 @@ use super::errors::MandyError;
 use super::arrow_set::ArrowSet;
 
 /// Importing the method to get
-/// the last dir in a file path.
+/// the last directory in a file path.
 use super::utils::get_last_dir;
 
 /// Importing the method to get
@@ -83,7 +83,6 @@ use super::liquid::render_template;
 /// an arrow set string into the "ArrowSet"
 /// data structure.
 use super::arrow_set::parse_arrow_set;
-
 
 /// Creates a file and renders it from a single
 /// "SiteContext" instance.
@@ -186,7 +185,7 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
             write_to_file(&html_path, &html_string);
         }
         else {
-            let err_msg: String = format!("Layout for \"{}\" supllied but not found.", ctx.file);
+            let err_msg: String = format!("Layout for \"{}\" supplied but not found.\n({})", ctx.file, ctx.page["layout"]);
             return Err::<(), MandyError>(
                 MandyError::new(
                     &err_msg.to_string()

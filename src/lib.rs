@@ -3,7 +3,7 @@ MANDY by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-/// Declaring the modules
+/// Declaring the "modules"
 /// directory as a module.
 pub mod modules;
 
@@ -12,7 +12,7 @@ pub mod modules;
 pub use modules::cli::*;
 
 /// Re-exporting the module to handle
-/// data.
+/// site data.
 pub use modules::data::*;
 
 /// Re-exporting the module 
@@ -25,7 +25,7 @@ pub use modules::sass::*;
 pub use modules::utils::*;
 
 /// Re-exporting Mandy's error-handling
-/// structure.
+/// module.
 pub use modules::errors::*;
 
 /// Re-exporting the module

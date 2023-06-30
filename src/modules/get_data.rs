@@ -5,7 +5,7 @@ Licensed under the MIT license.
 
 /// Importing the method from
 /// the "coutils" crate to check
-/// whether a file exists.
+/// whether a directory exists.
 use coutils::dir_is;
 
 /// Importing Rust's standard
@@ -35,17 +35,25 @@ pub fn get_data(
     let data_dir_path: String = format!("{}/data", dir);
     if dir_is(&data_dir_path) {
         let data_strings: Vec<HashMap<String, String>> = find_data_files(&data_dir_path);
-        let mut data = match deserialize_data(data_strings) {
-            Ok(data) => data,
-            Err(e) => {
-                return Err::<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>, MandyError>(
-                    MandyError::new(
-                        &e.to_string()
-                    )
-                );
-            }
-        };
-        return Ok(Some(data));
+        if data_strings.is_empty(){
+            let err_msg: &String = &format!("\"{}/data\" is empty!", dir);
+            return Err::<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>, MandyError>(
+                MandyError::new(&&err_msg.to_string())
+            );
+        }
+        else {
+            let mut data = match deserialize_data(data_strings) {
+                Ok(data) => data,
+                Err(e) => {
+                    return Err::<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            return Ok(Some(data));
+        }
     }
     else {return Ok(None);}
 }

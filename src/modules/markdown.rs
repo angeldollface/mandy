@@ -59,7 +59,7 @@ impl MarkdownDocument {
     }
 }
 
-/// Deseriliazes Markdown into a "MarkdownDocument" entity
+/// Deserializes Markdown into a "MarkdownDocument" entity
 /// or returns an error.
 pub fn deserialize_md(
     md_string: &String
@@ -88,7 +88,7 @@ pub fn deserialize_md(
 /// A structure to represent a single
 /// Markdown document in a Mandy site.
 /// This structure also contains information
-/// on the file's path and child directory.
+/// on the file's path and parent directory.
 pub struct MandyMDDocument {
     pub file: String,
     pub dir: String,

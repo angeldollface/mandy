@@ -46,7 +46,7 @@ pub fn find_md_files(project_dir: &String) -> Vec<MDFile> {
     let mut result: Vec<MDFile> = Vec::new();
     let entries: Vec<FileEntry> = list_dir_contents(project_dir);
     for entry in entries {
-        if entry.name.contains(&".markdown") {
+        if entry.name.contains("markdown") {
             result.push(
                 MDFile::new(&project_dir,&entry.name)
             );
@@ -54,11 +54,14 @@ pub fn find_md_files(project_dir: &String) -> Vec<MDFile> {
         else if entry.file_type == Entity::Dir {
             let dir_entries: Vec<FileEntry> = list_dir_contents(&entry.name);
             for sl_entry in dir_entries {
-                if sl_entry.name.contains(&".markdown") 
+                if sl_entry.name.contains(".markdown") 
                    && sl_entry.file_type == Entity::File {
                     let parent_dir: &String = &entry.name;
                     let md_file: MDFile = MDFile::new(parent_dir, &sl_entry.name);
-                    result.push(md_file);
+                    if md_file.file.contains(".markdown") {
+                        result.push(md_file);
+                    }
+                    else {}
                 }
                 else {}
             }

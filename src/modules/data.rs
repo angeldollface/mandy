@@ -61,7 +61,8 @@ MandyError
                     file_hash_map.insert(file_name.to_owned(), map);
                 },
                 Err(e) => {
-                    return Err::<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(MandyError::new(&e.to_string()));
+                    let msg: String = format!("Error in file \"{}.json\":\n{}", file_name, e);
+                    return Err::<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(MandyError::new(&msg.to_string()));
                 }
             }
         }
@@ -79,8 +80,8 @@ pub fn find_data_files(
     let mut result: Vec<HashMap<String, String>> = Vec::new();
     let dir_items: Vec<FileEntry> = list_dir_contents(dir);
     for item in dir_items {
-        if &item.file_type == &Entity::File 
-            && &item.name.contains(".json")  == &true{
+        if &item.file_type == &Entity::File
+            && item.name.contains(".json") {
             let mut map: HashMap<String, String> = HashMap::new();
             let file_contents: &String = &read_file(&item.name);
             let path_list: &Vec<String> = 
@@ -97,6 +98,7 @@ pub fn find_data_files(
             map.insert(template_key.to_owned(), file_contents.to_owned());
             result.push(map);
         }
+        else {}
     }
     return result;
 }

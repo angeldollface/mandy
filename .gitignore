@@ -1,6 +1,5 @@
 *.lock
 /target
 .DS_Store
-build
+dist
 .vscode
-/mandy_site/dist

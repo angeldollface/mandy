@@ -15,12 +15,12 @@ use liquid::object;
 use std::fmt::Debug;
 
 /// Importing Liquid's
-/// standard "Debug"
+/// standard "ValueView"
 /// trait.
 use liquid::ValueView;
 
 /// Importing Liquid's
-/// standard "Debug"
+/// standard "ObjectView"
 /// trait.
 use liquid::ObjectView;
 

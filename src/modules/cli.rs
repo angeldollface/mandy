@@ -25,7 +25,7 @@ use colorize::AnsiColor;
 /// from the "cleasy" crate.
 use cleasy::CleasyError;
 
-/// Importing the method
+/// Importing the method to
 /// look up emojis by shortcode.
 use emojis::get_by_shortcode;
 
@@ -141,7 +141,6 @@ pub fn cli() -> () {
                 let build_op: Result<(), MandyError> = compile_site(&mandy_site);
                 match build_op {
                     Ok(_x) => {
-                        let dist_path: &String = &format!("{}/dist", mandy_site);
                         let dist_path: &String = &format!("{}/dist", mandy_site);
                         if dir_is(dist_path){
                             let msg: &String = &format!(

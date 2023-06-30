@@ -8,7 +8,7 @@ Licensed under the MIT license.
 pub mod cli;
 
 /// Exporting the module to handle
-/// data.
+/// site data.
 pub mod data;
 
 /// Exporting the module 
@@ -21,7 +21,7 @@ pub mod sass;
 pub mod utils;
 
 /// Exporting Mandy's error-handling
-/// structure.
+/// module.
 pub mod errors;
 
 /// Exporting the module

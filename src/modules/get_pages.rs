@@ -33,7 +33,7 @@ use super::markdown::deserialize_md;
 /// a Markdown document in a Mandy site.
 use super::markdown::MandyMDDocument;
 
-/// Attempts to retrieve the all information about all
+/// Attempts to retrieve all the information about all
 /// Markdown documents in a Mandy site. Only goes two levels
 /// deep into a Mandy project. Anything beyond that will be
 /// ignored.
@@ -42,28 +42,38 @@ pub fn get_page_contexts(
 ) ->  Result<Vec<MandyMDDocument>, MandyError> {
     let mut md_documents: Vec<MandyMDDocument> = Vec::new();
     let md_files: Vec<MDFile> = find_md_files(&dir);
-    for md_file in md_files {
-        let md_file_path: String = md_file.file;
-        let mut md_document = match deserialize_md(&read_file(&md_file_path)){
-            Ok(md_document) => md_document,
-            Err(e) => {
-                let err: String = format!(
-                    "Error found in file \"{}\"\n{}", md_file_path, e
-                );
-                return Err::<Vec<MandyMDDocument>, MandyError>(
-                    MandyError::new(
-                        &err.to_string()
-                    )
-                );
-            }
-        };
-        md_documents.push(
-            MandyMDDocument::new(
-                &md_file_path,
-                &md_file.dir,
-                &md_document.to_map()
+    if md_files.is_empty(){
+        let err_msg: String = format!("\"{}\" is empty.", dir);
+        return Err::<Vec<MandyMDDocument>, MandyError>(
+            MandyError::new(
+                &err_msg.to_string()
             )
         );
+    }
+    else {
+        for md_file in md_files {
+            let md_file_path: String = md_file.file;
+            let mut md_document = match deserialize_md(&read_file(&md_file_path)){
+                Ok(md_document) => md_document,
+                Err(e) => {
+                    let err: String = format!(
+                        "Error found in file \"{}\"\n{}", md_file_path, e
+                    );
+                    return Err::<Vec<MandyMDDocument>, MandyError>(
+                        MandyError::new(
+                            &err.to_string()
+                        )
+                    );
+                }
+            };
+            md_documents.push(
+                MandyMDDocument::new(
+                    &md_file_path,
+                    &md_file.dir,
+                    &md_document.to_map()
+                )
+            );
+        }
     }
     return Ok(md_documents);
 }
