@@ -17,6 +17,11 @@ use super::errors::MandyError;
 /// a Mandy site's context.
 use super::context::SiteContext;
 
+/// Importing the method to get
+/// the base name of a file in a
+/// file path.
+use super::utils::get_name_base;
+
 /// Importing the method to compile
 /// SASS files into a CSS file from
 /// "./sass.rs".
@@ -68,10 +73,16 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 tl_domain = ctx.clone().site["tlDomain"].clone();
                 freq = ctx.clone().site["updateFreq"].clone();
                 baseurl = ctx.clone().baseurl;
-                let mut url: String = ctx.clone().file;
-                url = url.replace(dir, &"");
-                url = url.replace(&".markdown", &"");
-                urls.push(url);
+                let file_url: &String = &ctx.file;
+                let mut dir_url: String = ctx.clone().dir;
+                let fname: String = get_name_base(file_url)[0].clone();
+                dir_url = dir_url.replace(dir, &"");
+                let mut final_url: String = format!("{}/{}", &dir_url, fname);
+                if &dir_url == &String::from(""){
+                    final_url = String::from("/");
+                }
+                else {}
+                urls.push(final_url.clone());
                 let build_op: Result<(), MandyError> = build_context(&ctx, dir);
                 match build_op {
                     Ok(_x) => {},
