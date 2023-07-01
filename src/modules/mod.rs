@@ -25,6 +25,12 @@ pub mod utils;
 pub mod errors;
 
 /// Exporting the module
+/// to create the string 
+/// for the "robots.txt" 
+/// file.
+pub mod robots;
+
+/// Exporting the module
 /// to handle configuration
 /// reading and serializing.
 pub mod config;
@@ -55,6 +61,12 @@ pub mod compenv;
 pub mod compile;
 
 /// Exporting the module
+/// to create all needed files
+/// for search-engine crawling
+/// bots for Mandy sites and SEO.
+pub mod crawlers;
+
+/// Exporting the module
 /// that handles deserializing
 /// Markdown data.
 pub mod markdown;
@@ -75,6 +87,12 @@ pub mod context;
 /// the data in JSON format
 /// of a Mandy site.
 pub mod get_data;
+
+/// Exporting the module
+/// to create the string 
+/// for the "sitemap.xml" 
+/// file.
+pub mod site_map;
 
 /// Exporting the module
 /// that handles retrieving

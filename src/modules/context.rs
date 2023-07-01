@@ -26,7 +26,7 @@ use std::collections::HashMap;
 /// to hold different
 /// types of data for
 /// a Mandy site.
-#[derive(ObjectView, ValueView, Debug)]
+#[derive(ObjectView, ValueView, Debug, Clone)]
 pub struct SiteContext {
     pub copy_files: String,
     pub baseurl: String,
@@ -35,7 +35,7 @@ pub struct SiteContext {
     pub file: String,
     pub dir: String,
     pub loop_content: Option<HashMap<String, Vec<HashMap<String, String>>>>,
-    pub data: Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>
+    pub data: Option<HashMap<String, Vec<HashMap<String, String>>>>
 }
 
 /// Implementing generic methods
@@ -54,7 +54,7 @@ impl SiteContext {
         file: &String,
         dir: &String,
         loop_content: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
-        data: &Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>,
+        data: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
     ) -> SiteContext {
         return SiteContext { 
             copy_files: copy_files.to_owned(),

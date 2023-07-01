@@ -75,7 +75,9 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
         if config_data.contains_key(&String::from("prod_url")) &&
            config_data.contains_key(&String::from("dev_url")) &&
            config_data.contains_key(&String::from("hasLoopContent")) &&
-           config_data.contains_key(&String::from("copyFiles")) {
+           config_data.contains_key(&String::from("copyFiles")) &&
+           config_data.contains_key(&String::from("tlDomain")) &&
+           config_data.contains_key(&String::from("updateFreq")){
 
             let mut baseurl: &String = &String::from("");
             let mut comp_env: Environment = match detect_env() {
@@ -136,7 +138,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
             }
         }
         else {
-            let err_msg: &String = &format!("One or all of the following config flags not found:\n \"prod_url\", \"dev_url\", \"copyFiles\", \"hasLoopContent\"!");
+            let err_msg: &String = &format!("One or all of the following config flags not found:\n\"prod_url\", \"dev_url\", \"copyFiles\", \"hasLoopContent\", \"tlDomain\"!");
             return Err::<Vec<SiteContext>, MandyError>(
                 MandyError::new(
                     &err_msg.to_string()

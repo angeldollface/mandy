@@ -31,13 +31,13 @@ use super::data::deserialize_data;
 /// Mandy site if they exist.
 pub fn get_data(
     dir: &String
-) -> Result<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>,MandyError> {
+) -> Result<Option<HashMap<String, Vec<HashMap<String, String>>>>,MandyError> {
     let data_dir_path: String = format!("{}/data", dir);
     if dir_is(&data_dir_path) {
         let data_strings: Vec<HashMap<String, String>> = find_data_files(&data_dir_path);
         if data_strings.is_empty(){
             let err_msg: &String = &format!("\"{}/data\" is empty!", dir);
-            return Err::<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>, MandyError>(
+            return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
                 MandyError::new(&&err_msg.to_string())
             );
         }
@@ -45,7 +45,7 @@ pub fn get_data(
             let mut data = match deserialize_data(data_strings) {
                 Ok(data) => data,
                 Err(e) => {
-                    return Err::<Option<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>>, MandyError>(
+                    return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
                         MandyError::new(
                             &e.to_string()
                         )

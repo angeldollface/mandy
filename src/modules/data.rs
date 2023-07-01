@@ -47,27 +47,25 @@ use coutils::list_dir_contents;
 pub fn deserialize_data(
     data_strings: Vec<HashMap<String, String>>
 ) -> Result<
-HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>, 
+HashMap<String, Vec<HashMap<String, String>>>, 
 MandyError
 > {
-    let mut result: HashMap<String, HashMap<String, Vec<HashMap<String, String>>>> = HashMap::new();
-    let mut file_hash_map: HashMap<String, Vec<HashMap<String, String>>> = HashMap::new();
+    let mut result: HashMap<String, Vec<HashMap<String, String>>> = HashMap::new();
     for item in data_strings.into_iter() {
         for (k,v) in item.into_iter() {
             let file_name: &String = &k;
             let json_op: Result<Vec<HashMap<String, String>>, serde_json::Error> = from_str(&v);
             match json_op {
                 Ok(map) => {
-                    file_hash_map.insert(file_name.to_owned(), map);
+                    result.insert(file_name.to_owned(), map);
                 },
                 Err(e) => {
                     let msg: String = format!("Error in file \"{}.json\":\n{}", file_name, e);
-                    return Err::<HashMap<String, HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(MandyError::new(&msg.to_string()));
+                    return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(MandyError::new(&msg.to_string()));
                 }
             }
         }
     }
-    result.insert(String::from("data"), file_hash_map);
     return Ok(result);
 }
 

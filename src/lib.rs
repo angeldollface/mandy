@@ -29,6 +29,12 @@ pub use modules::utils::*;
 pub use modules::errors::*;
 
 /// Re-exporting the module
+/// to create the string 
+/// for the "robots.txt" 
+/// file.
+pub use modules::robots::*;
+
+/// Re-exporting the module
 /// to handle configuration
 /// reading and serializing.
 pub use modules::config::*;
@@ -59,6 +65,12 @@ pub use modules::compenv::*;
 pub use modules::compile::*;
 
 /// Re-exporting the module
+/// to create all needed files
+/// for search-engine crawling
+/// bots for Mandy sites and SEO.
+pub use modules::crawlers::*;
+
+/// Re-exporting the module
 /// that handles deserializing
 /// Markdown data.
 pub use modules::markdown::*;
@@ -79,6 +91,12 @@ pub use modules::context::*;
 /// the data in JSON format
 /// of a Mandy site.
 pub use modules::get_data::*;
+
+/// Exporting the module
+/// to create the string 
+/// for the "sitemap.xml" 
+/// file.
+pub use modules::site_map::*;
 
 /// Re-exporting the module
 /// that handles retrieving
