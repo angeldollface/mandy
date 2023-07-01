@@ -68,7 +68,10 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 tl_domain = ctx.clone().site["tlDomain"].clone();
                 freq = ctx.clone().site["updateFreq"].clone();
                 baseurl = ctx.clone().baseurl;
-                urls.push(ctx.clone().file);
+                let mut url: String = ctx.clone().file;
+                url = url.replace(dir, &"");
+                url = url.replace(&".markdown", &"");
+                urls.push(url);
                 let build_op: Result<(), MandyError> = build_context(&ctx, dir);
                 match build_op {
                     Ok(_x) => {},
