@@ -22,6 +22,8 @@ use super::context::SiteContext;
 /// "./sass.rs".
 use super::sass::compile_sass_files;
 
+use super::utils::clean_url;
+
 /// Importing the function to build a single
 /// site context from "./build_context.rs".
 use super::build_context::build_context;
@@ -29,6 +31,8 @@ use super::build_context::build_context;
 /// A function to retrieve site contexts from
 /// a Mandy site project.
 use super::get_context::get_site_contexts;
+
+use super::crawlers::create_crawler_files;
 
 /// Creates files and renders them from all
 /// "SiteContext" instances.
@@ -54,7 +58,15 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             };
+            let mut urls: Vec<String> = Vec::new();
+            let mut tl_domain: String = String::from("");
+            let mut baseurl: String = String::from("");
+            let mut freq: String = String::from("");
             for ctx in site_contexts {
+                urls.push(clean_url(&ctx.clone().file, dir, &ctx.clone().dir));
+                tl_domain = ctx.clone().site["tlDomain"].clone();
+                baseurl = ctx.clone().site["baseurl"].clone();
+                freq = ctx.clone().site["updateFreq"].clone();
                 let build_op: Result<(), MandyError> = build_context(&ctx, dir);
                 match build_op {
                     Ok(_x) => {},
@@ -68,6 +80,16 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 };
             }
             match compile_sass_files(dir) {
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            match create_crawler_files(&urls, &freq, &baseurl, &tl_domain, dir) {
                 Ok(_x) => {},
                 Err(e) => {
                     return Err::<(), MandyError>(

@@ -53,6 +53,7 @@ pub fn get_last_dir(path_name: &String) -> String {
     return dir_name.to_owned();
 }
 
+/// Cleans the "dist" directory in a Mandy project.
 pub fn clean_project(dir: &String) -> Result<(), MandyError> {
     let dir_to_be_cleaned: &String = &format!("{}/dist", dir);
     if dir_is(dir_to_be_cleaned){
@@ -65,3 +66,28 @@ pub fn clean_project(dir: &String) -> Result<(), MandyError> {
     return Ok(());
 }
 
+/// Cleans a file path and returns it as an url.
+pub fn clean_url(file_path: &String, dir: &String, file_dir: &String) -> String {
+    let file_name: String = get_name_base(&file_path)[0].clone();
+    let mut url: String = file_dir.clone();
+
+    url = url.replace(dir, &"");
+    let mut final_url = format!("{}/{}", url, file_name );
+    if url == String::from("") {
+        final_url = String::from("");
+    }
+    else {}
+    return final_url;
+}
+
+pub fn generate_api_url(file_path: &String, dir: &String, file_dir: &String) -> String {
+    let mut result: String = String::from("");
+    let file_name: String = get_name_base(&file_path)[0].clone();
+    let json_file_name: String = format!("{}.json", &file_name);
+    result = format!(
+        "{}/{}",
+        clean_url(file_path, dir, file_dir),
+        json_file_name
+    );
+    return result;
+}
