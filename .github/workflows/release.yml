@@ -23,6 +23,7 @@ jobs:
               - os: macos-latest
                 target: aarch64-apple-darwin
         steps:
+
             - uses: actions/checkout@v2
             - uses: actions-rs/toolchain@v1
               with:
@@ -33,3 +34,12 @@ jobs:
               with:
                 command: build
                 args: --release
+            - name: "Make platformspecific directory."
+              run: mkdir ${{ matrix.os }}${{ matrix.target }}
+            - name: "Move platformspecific files."
+              run: mv target/release ${{ matrix.os }}${{ matrix.target }}
+            - name: "Deploy"
+              uses: JamesIves/github-pages-deploy-action@v4.2.5
+              with:
+                branch: v.0.1.0
+                folder: ${{ matrix.os }}${{ matrix.target }}
