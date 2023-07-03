@@ -41,5 +41,5 @@ jobs:
             - name: "Deploy"
               uses: JamesIves/github-pages-deploy-action@v4.2.5
               with:
-                branch: v.0.1.0
+                branch: release-0.1.0
                 folder: ${{ matrix.os }}${{ matrix.target }}
