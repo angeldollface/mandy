@@ -52,16 +52,7 @@ pub fn render_template<T: ObjectView + ValueView + Debug>(
     context: &T,
     partials: &Option<HashMap<String, String>>
 ) -> Result<String, MandyError> {
-    let mut liquid_parser = match ParserBuilder::with_stdlib().build() {
-        Ok(liquid_parser) => liquid_parser,
-        Err(e) => {
-            return Err::<String, MandyError>(
-                MandyError::new(
-                    &e.to_string()
-                )
-            );
-        }
-    };
+    let mut result: String = String::from("");
     match partials {
         Some(map) => {
             println!("{:?}", &map);
@@ -73,6 +64,7 @@ pub fn render_template<T: ObjectView + ValueView + Debug>(
             let mut liquid_parser = match ParserBuilder::with_stdlib().partials(partial_source).build() {
                 Ok(liquid_parser) => liquid_parser,
                 Err(e) => {
+                    println!("With partials.");
                     return Err::<String, MandyError>(
                         MandyError::new(
                             &e.to_string()
@@ -80,30 +72,66 @@ pub fn render_template<T: ObjectView + ValueView + Debug>(
                     );
                 }
             };
+            let mut liquid_template = match liquid_parser.parse(&liquid_string){
+                Ok(liquid_template) => liquid_template,
+                Err(e) => {
+                    println!("Ha!");
+                    return Err::<String, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            let globals = object!(context);
+            let mut output: String = match liquid_template.render(&globals){
+                Ok(output) => output,
+                Err(render_error) => {
+                    return Err::<String, MandyError>(
+                        MandyError::new(
+                            &render_error.to_string()
+                        )
+                    );
+                }
+            };
+            result = output;
         },
-        None => {}
-    };
-    let mut liquid_template = match liquid_parser.parse(&liquid_string){
-        Ok(liquid_template) => liquid_template,
-        Err(e) => {
-            return Err::<String, MandyError>(
-                MandyError::new(
-                    &e.to_string()
-                )
-            );
+        None => {
+            let mut liquid_parser = match ParserBuilder::with_stdlib().build() {
+                Ok(liquid_parser) => liquid_parser,
+                Err(e) => {
+                    println!("Without partials.");
+                    return Err::<String, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            let mut liquid_template = match liquid_parser.parse(&liquid_string){
+                Ok(liquid_template) => liquid_template,
+                Err(e) => {
+                    println!("Ha!");
+                    return Err::<String, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            let globals = object!(context);
+            let mut output: String = match liquid_template.render(&globals){
+                Ok(output) => output,
+                Err(render_error) => {
+                    return Err::<String, MandyError>(
+                        MandyError::new(
+                            &render_error.to_string()
+                        )
+                    );
+                }
+            };
+            result = output;
         }
     };
-    let globals = object!(context);
-    let mut output: String = match liquid_template.render(&globals){
-        Ok(y) => {
-            return Ok(y);
-        },
-        Err(render_error) => {
-            return Err::<String, MandyError>(
-                MandyError::new(
-                    &render_error.to_string()
-                )
-            );
-        }
-    };
+    return Ok(result);
 }
