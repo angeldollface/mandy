@@ -29,6 +29,7 @@ use std::collections::HashMap;
 #[derive(ObjectView, ValueView, Debug, Clone)]
 pub struct SiteContext {
     pub copy_files: String,
+    pub partial_templates: Option<HashMap<String, String>>,
     pub baseurl: String,
     pub site: HashMap<String, String>,
     pub page: HashMap<String, String>,
@@ -48,6 +49,7 @@ impl SiteContext {
     /// structure.
     pub fn new(
         copy_files: &String,
+        partial_templates: &Option<HashMap<String, String>>,
         baseurl: &String,
         site: &HashMap<String, String>,
         page: &HashMap<String, String>,
@@ -58,6 +60,7 @@ impl SiteContext {
     ) -> SiteContext {
         return SiteContext { 
             copy_files: copy_files.to_owned(),
+            partial_templates: partial_templates.to_owned(),
             baseurl: baseurl.to_owned(), 
             site: site.to_owned(), 
             page: page.to_owned(), 

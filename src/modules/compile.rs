@@ -9,6 +9,8 @@ Licensed under the MIT license.
 /// directory exists.
 use coutils::dir_is;
 
+use super::utils::clean_url;
+
 /// Importing Mandy's error
 /// struct.
 use super::errors::MandyError;
@@ -22,7 +24,9 @@ use super::context::SiteContext;
 /// "./sass.rs".
 use super::sass::compile_sass_files;
 
-use super::utils::clean_url;
+/// Importing the method to generate the
+/// build meta data file.
+use super::build_meta::generate_meta;
 
 /// Importing the function to build a single
 /// site context from "./build_context.rs".
@@ -99,6 +103,16 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             }
+            match generate_meta(dir){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
         }
         else {
             let err_msg: String = format!("\"{}\" not found.", dir);

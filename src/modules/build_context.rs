@@ -99,7 +99,7 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
         if file_is(&layout_path) {
             let liquid_string: &String = &read_file(&layout_path);
             let last_md_dir: &String = &get_last_dir(&ctx.file);
-            let name_base: &String = &get_name_base(&ctx.file)[0];
+            let name_base: &String = &get_name_base(&ctx.file, &String::from(".markdown"))[0];
             let html_name: &String = &format!("index.html");
             let mut html_path: String = String::from("");
             if last_md_dir == dir {
@@ -119,7 +119,7 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
                     else {create_directory(page_path);}
                 }
             }
-            let mut html_string = match render_template(&liquid_string, ctx) {
+            let mut html_string = match render_template(&liquid_string, ctx, &ctx.partial_templates) {
                 Ok(html_string) => html_string,
                 Err(e) => {
                     return Err::<(), MandyError>(

@@ -48,6 +48,11 @@ use super::context::SiteContext;
 /// a Markdown document in a Mandy site.
 use super::markdown::MandyMDDocument;
 
+/// Importing the method to get information
+/// on Liquid partial templates to parse and render
+/// Liquid templates in a Mandy site.
+use super::get_partials::get_partials;
+
 /// Importing the method to deserialize and
 /// read the configuration file 
 /// of a Mandy site.
@@ -98,6 +103,12 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
                 }
             };
+            let mut partials: Option<HashMap<String, String>> = match get_partials(dir) {
+                Ok(partials) => partials,
+                Err(e) => {
+                    return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+                }
+            };
             for page_context in page_contexts {
                 let mut config_clone: HashMap<String, String> = config_data.clone();
                 config_clone.insert(String::from("baseurl"), baseurl.to_owned());
@@ -119,7 +130,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                             );
                         }
                         };
-                        let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
+                        let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
                         result.push(ctx);
                     }
                     else {
@@ -132,7 +143,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     }
                 }
                 else {
-                    let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
+                    let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
                     result.push(ctx);
                 }
             }

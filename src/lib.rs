@@ -11,6 +11,11 @@ pub mod modules;
 /// module.
 pub use modules::cli::*;
 
+/// Re-exporting the 
+/// module for getting
+/// vars about Mandy herself.
+pub use modules::vars::*;
+
 /// Re-exporting the module to handle
 /// site data.
 pub use modules::data::*;
@@ -92,7 +97,7 @@ pub use modules::context::*;
 /// of a Mandy site.
 pub use modules::get_data::*;
 
-/// Exporting the module
+/// Re-exporting the module
 /// to create the string 
 /// for the "sitemap.xml" 
 /// file.
@@ -111,10 +116,21 @@ pub use modules::get_pages::*;
 pub use modules::arrow_set::*;
 
 /// Re-exporting the module
+/// that generates a meta data
+/// file on a build of a Mandy
+/// site.
+pub use modules::build_meta::*;
+
+/// Re-exporting the module
 /// that handles retrieving
 /// the data context
 /// of a Mandy site.
 pub use modules::get_context::*;
+
+/// Re-exporting the module
+/// to retrieve partial
+/// Liquid templates.
+pub use modules::get_partials::*;
 
 /// Re-exporting the module
 /// that builds and renders

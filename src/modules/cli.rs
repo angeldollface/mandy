@@ -25,6 +25,11 @@ use colorize::AnsiColor;
 /// from the "cleasy" crate.
 use cleasy::CleasyError;
 
+/// Getting the function to
+/// retrieve variables about
+/// Mandy herself.
+use super::vars::mandy_vars;
+
 /// Importing the method to
 /// look up emojis by shortcode.
 use emojis::get_by_shortcode;

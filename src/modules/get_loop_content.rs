@@ -73,7 +73,7 @@ pub fn get_loop_content(dirs: &String, project_dir: &String) -> Result<HashMap<S
                 }
                 else {
                     for md_doc in md_files {
-                        let md_file_url: &String = &format!("{}/{}", dir, get_name_base(&md_doc.file)[0]);
+                        let md_file_url: &String = &format!("{}/{}", dir, get_name_base(&md_doc.file, &String::from(".markdown"))[0]);
                         let mut ctx_clone: HashMap<String, String> = md_doc.ctx.clone();
                         ctx_clone.insert(String::from("url"), md_file_url.to_owned());
                         res_vec.push(ctx_clone);

@@ -20,13 +20,19 @@ use coutils::del_dir;
 /// the "coutils" crate.
 use coutils::clean_split;
 
+/// Using the "Local"
+/// structure from the "chrono"
+/// crate to retrieve the current 
+/// time.
+use chrono::offset::Local;
+
 /// Importing Mandy's error
 /// struct.
 use super::errors::MandyError;
 
 /// Gets the file name of a file in a path string plus the
 /// file name's base.
-pub fn get_name_base(path_name: &String) -> Vec<String> {
+pub fn get_name_base(path_name: &String, ending: &String) -> Vec<String> {
     let path_list: Vec<String> = clean_split(
         &path_name,
         &String::from("/")
@@ -34,7 +40,7 @@ pub fn get_name_base(path_name: &String) -> Vec<String> {
     let file_name: &String = &path_list[path_list.len()-1];
     let name_components: Vec<String> = clean_split(
         &file_name,
-        &String::from(".markdown")
+        ending
     );
     let name_base: String = name_components[0].clone();
     let mut file_vec: Vec<String> = Vec::new();
@@ -68,7 +74,7 @@ pub fn clean_project(dir: &String) -> Result<(), MandyError> {
 
 /// Cleans a file path and returns it as an url.
 pub fn clean_url(file_path: &String, dir: &String, file_dir: &String) -> String {
-    let file_name: String = get_name_base(&file_path)[0].clone();
+    let file_name: String = get_name_base(&file_path, &String::from(".markdown"))[0].clone();
     let mut url: String = file_dir.clone();
 
     url = url.replace(dir, &"");
@@ -80,14 +86,16 @@ pub fn clean_url(file_path: &String, dir: &String, file_dir: &String) -> String 
     return final_url;
 }
 
-pub fn generate_api_url(file_path: &String, dir: &String, file_dir: &String) -> String {
-    let mut result: String = String::from("");
-    let file_name: String = get_name_base(&file_path)[0].clone();
-    let json_file_name: String = format!("{}.json", &file_name);
-    result = format!(
-        "{}/{}",
-        clean_url(file_path, dir, file_dir),
-        json_file_name
+/// Gets the current time 
+/// in the format "YYYY-MM-DD-HH:MM:SS".
+pub fn get_time() -> String {
+    let time = Local::now();
+    let date = time.date_naive();
+    let curr_time = time.time();
+    let formatted: String = format!(
+        "{}-{}",
+        date.format("%Y-%m-%d"),
+        curr_time.format("%H:%M:%S")
     );
-    return result;
+    return formatted;
 }

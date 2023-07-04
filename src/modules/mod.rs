@@ -7,6 +7,11 @@ Licensed under the MIT license.
 /// module.
 pub mod cli;
 
+/// Exporting the 
+/// module for getting
+/// vars about Mandy herself.
+pub mod vars;
+
 /// Exporting the module to handle
 /// site data.
 pub mod data;
@@ -107,10 +112,21 @@ pub mod get_pages;
 pub mod arrow_set;
 
 /// Exporting the module
+/// that generates a meta data
+/// file on a build of a Mandy
+/// site.
+pub mod build_meta;
+
+/// Exporting the module
 /// that handles retrieving
 /// the data context
 /// of a Mandy site.
 pub mod get_context;
+
+/// Exporting the module
+/// to retrieve partial
+/// Liquid templates.
+pub mod get_partials;
 
 /// Exporting the module
 /// that builds and renders
