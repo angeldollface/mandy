@@ -44,6 +44,6 @@ coutils = { git = "https://github.com/angeldollface/coutils", version = "1.3.0" 
 
 [profile.release]
 strip = true
-opt-level = "s"
+opt-level = "z"
 lto = true
 codegen-units = 1
