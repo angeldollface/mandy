@@ -25,6 +25,11 @@ pub use modules::data::*;
 /// files.
 pub use modules::sass::*;
 
+/// Re-exporting the module
+/// to generate files
+/// for Deno Deploy.
+pub use modules::deno::*;
+
 /// Re-exporting the module that
 /// contains some utility functions.
 pub use modules::utils::*;

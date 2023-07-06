@@ -15,5 +15,7 @@ pub fn mandy_vars() -> HashMap<String, String> {
     result.insert(String::from("author"), String::from("Angel Dollface"));
     result.insert(String::from("dist_folder"), String::from("dist"));
     result.insert(String::from("partials_dir"), String::from("partials"));
+    result.insert(String::from("server_file"), String::from("server.ts"));
+    result.insert(String::from("server_mod_url"), String::from("https://angeldollface.art/mandys-house/helpers/server.ts"));
     return result;
 }

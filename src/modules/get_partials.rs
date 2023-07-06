@@ -12,6 +12,11 @@ use coutils::dir_is;
 /// Importing the "FileEntry"
 /// struct to work with files easier.
 use coutils::FileEntry;
+
+/// Importing the method
+/// from the "coutils"
+/// crate to read files
+/// into strings.
 use coutils::read_file;
 
 /// Getting the function to

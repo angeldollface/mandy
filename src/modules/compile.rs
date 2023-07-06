@@ -9,6 +9,10 @@ Licensed under the MIT license.
 /// directory exists.
 use coutils::dir_is;
 
+/// Importing the method from
+/// the "utils" module to clean
+/// any file URLs. We need this
+/// for sitemap generation.
 use super::utils::clean_url;
 
 /// Importing Mandy's error
@@ -18,6 +22,10 @@ use super::errors::MandyError;
 /// Importing the structure representing
 /// a Mandy site's context.
 use super::context::SiteContext;
+
+/// Importing the function to generate
+/// a server file for Deno Deploy.
+use super::deno::generate_server;
 
 /// Importing the method to compile
 /// SASS files into a CSS file from
@@ -36,6 +44,8 @@ use super::build_context::build_context;
 /// a Mandy site project.
 use super::get_context::get_site_contexts;
 
+/// Importing the method to create files for
+/// SEO and search engine crawlers.
 use super::crawlers::create_crawler_files;
 
 /// Creates files and renders them from all
@@ -113,6 +123,16 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             };
+            match generate_server(dir){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            }
         }
         else {
             let err_msg: String = format!("\"{}\" not found.", dir);

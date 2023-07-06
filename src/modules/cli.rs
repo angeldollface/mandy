@@ -60,9 +60,9 @@ use super::scaffold::scaffold_site;
 /// Mandy's CLI.
 pub fn cli() -> () {
     let mut mandy: App = App::new(
-        &"Mandy",
-        &"0.1.0",
-        &"Angel Dollface"
+        &mandy_vars()["name"],
+        &&mandy_vars()["version"],
+        &&mandy_vars()["author"]
     );
     mandy.add_arg(
         &"comps",

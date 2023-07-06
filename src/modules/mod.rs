@@ -21,6 +21,11 @@ pub mod data;
 /// files.
 pub mod sass;
 
+/// Exporting the module
+/// to generate files
+/// for Deno Deploy.
+pub mod deno;
+
 /// Exporting the module that
 /// contains some utility functions.
 pub mod utils;
