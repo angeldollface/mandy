@@ -50,8 +50,26 @@ pub fn generate_server(dir: &String) -> Result<(), MandyError> {
             );
         }
         else {
-            create_file(server_path);
-            write_to_file(server_path, code);
+            match create_file(server_path){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            match write_to_file(server_path, code){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
         }
     }
     else {

@@ -88,16 +88,20 @@ use super::arrow_set::parse_arrow_set;
 /// "SiteContext" instance.
 pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> {
     let dist_path: &String = &format!("{}/dist", dir);
-    if dir_is(dist_path){
-        // Don't create $dir/dist again.
-    }
+    if dir_is(dist_path){}
     else {
-        create_directory(dist_path);
+        match create_directory(dist_path){
+            Ok(_x) => {},
+            Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+        };
     }
     if ctx.page.contains_key("layout") {
         let layout_path: &String = &format!("{}/{}", dir, ctx.page["layout"]);
         if file_is(&layout_path) {
-            let liquid_string: &String = &read_file(&layout_path);
+            let mut liquid_string: &String = &match read_file(&layout_path) {
+                Ok(liquid_string) => liquid_string,
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
             let last_md_dir: &String = &get_last_dir(&ctx.file);
             let name_base: &String = &get_name_base(&ctx.file, &String::from(".markdown"))[0];
             let html_name: &String = &format!("index.html");
@@ -111,33 +115,24 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
                 html_path = format!("{}/{}", page_path, html_name);
                 if dir_is(md_path){
                     if dir_is(page_path){}
-                    else {create_directory(page_path);}
+                    else {match create_directory(page_path){Ok(_x) => {}, Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}};}
                 }
                 else {
-                    create_directory(md_path);
+                    match create_directory(md_path){
+                        Ok(_x) => {},
+                        Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+                    };
                     if dir_is(page_path){}
-                    else {create_directory(page_path);}
+                    else {match create_directory(page_path){Ok(_x) => {}, Err(e) => {return Err::<(), MandyError>(MandyError::new( &e.to_string()));}};}
                 }
             }
             let mut html_string = match render_template(&liquid_string, ctx, &ctx.partial_templates) {
                 Ok(html_string) => html_string,
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(
-                            &e.to_string()
-                        )
-                    );
-                }
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
             };
             let mut arrow_set: ArrowSet = match parse_arrow_set(&ctx.copy_files){
                 Ok(arrow_set) => arrow_set,
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(
-                            &e.to_string()
-                        )
-                    );
-                }
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
             };
             if arrow_set.flag == String::from("true"){
                 let files_to_copy: Vec<String> = arrow_set.set.clone();
@@ -164,10 +159,16 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
                             if dir_is(copied_assets_path) || file_is(copied_assets_path) {}
                             else {
                                 if meta.is_dir() {
-                                    folder_copy(file_path, dist_path);                        
+                                    match folder_copy(file_path, dist_path){
+                                        Ok(_x) => {},
+                                        Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+                                    };                
                                 }
                                 else if meta.is_file() {
-                                    file_copy(file_path, copied_assets_path);                                                                        
+                                    match file_copy(file_path, copied_assets_path){
+                                        Ok(_x) => {},
+                                        Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+                                    };                                                                       
                                 }
                             }
                         }
@@ -178,28 +179,24 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
                     }
                 }
             }
-            else {
-                // Do nothing.
-            }
-            create_file(&html_path);
-            write_to_file(&html_path, &html_string);
+            else {}
+            match create_file(&html_path){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
+            match write_to_file(&html_path, &html_string){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
         }
         else {
             let err_msg: String = format!("Layout for \"{}\" supplied but not found.\n({})", ctx.file, ctx.page["layout"]);
-            return Err::<(), MandyError>(
-                MandyError::new(
-                    &err_msg.to_string()
-                )
-            );
+            return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
         }
     }
     else {
         let err_msg: String = format!("No layout supplied for \"{}\"!", ctx.file);
-        return Err::<(), MandyError>(
-            MandyError::new(
-                &err_msg.to_string()
-            )
-        );
+        return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
     }
     return Ok(());
 }

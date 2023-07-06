@@ -72,8 +72,14 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
     let mut result: Vec<SiteContext> = Vec::new();
     let config_path: &String = &format!("{}/config.json", &dir);
     if file_is(config_path){
+        let mut config_string: String = match read_file(&config_path){
+            Ok(config_string) => config_string,
+            Err(e) => {
+                return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+            }
+        };
         let mut config_data = match deserialize_config(
-            &read_file(&config_path)) {
+            &config_string) {
             Ok(config_data) => config_data,
             Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
         };

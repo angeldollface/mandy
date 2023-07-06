@@ -13,6 +13,10 @@ use coutils::Entity;
 /// struct to work with files easier.
 use coutils::FileEntry;
 
+/// Importing Mandy's error
+/// struct.
+use super::errors::MandyError;
+
 /// Importing the method store
 /// information about a directory's
 /// contents.
@@ -42,9 +46,18 @@ impl MDFile {
 }
 
 /// Finds all ".markdown" files in a given directory.
-pub fn find_md_files(project_dir: &String) -> Vec<MDFile> {
+pub fn find_md_files(project_dir: &String) -> Result<Vec<MDFile>, MandyError> {
     let mut result: Vec<MDFile> = Vec::new();
-    let entries: Vec<FileEntry> = list_dir_contents(project_dir);
+    let mut entries: Vec<FileEntry> = match list_dir_contents(project_dir){
+        Ok(entries) => entries,
+        Err(e) => {
+            return Err::<Vec<MDFile>, MandyError>(
+                MandyError::new(
+                    &e.to_string()
+                )
+            );
+        }
+    };
     for entry in entries {
         if entry.name.contains("markdown") {
             result.push(
@@ -52,7 +65,16 @@ pub fn find_md_files(project_dir: &String) -> Vec<MDFile> {
             );
         }
         else if entry.file_type == Entity::Dir {
-            let dir_entries: Vec<FileEntry> = list_dir_contents(&entry.name);
+            let mut dir_entries: Vec<FileEntry> = match list_dir_contents(&entry.name){
+                Ok(dir_entries) => dir_entries,
+                Err(e) => {
+                    return Err::<Vec<MDFile>, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
             for sl_entry in dir_entries {
                 if sl_entry.name.contains(".markdown") 
                    && sl_entry.file_type == Entity::File {
@@ -67,5 +89,5 @@ pub fn find_md_files(project_dir: &String) -> Vec<MDFile> {
             }
         }
     }
-    return result;
+    return Ok(result);
 }

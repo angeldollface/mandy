@@ -49,11 +49,29 @@ pub fn get_partials(dir: &String) -> Result<Option<HashMap<String, String>>, Man
     let partials_dir: &String = &mandy_vars()["partials_dir"];
     let includes_dir: &String = &format!("{}/{}", dir, partials_dir);
     if dir_is(includes_dir){
-        let file_list: Vec<FileEntry> = list_dir_contents(&includes_dir);
+        let mut file_list: Vec<FileEntry> = match list_dir_contents(&includes_dir){
+            Ok(file_list) => file_list,
+            Err(e) => {
+                return Err::<Option<HashMap<String, String>>, MandyError>(
+                    MandyError::new(
+                        &e.to_string()
+                    )
+                );
+            }
+        };
         for file in file_list {
             if file.name.contains(&".liquid"){
                 let key: String = get_name_base(&file.name, &String::from(".liquid"))[0].clone();
-                let value: String = read_file(&file.name);
+                let mut value: String = match read_file(&file.name){
+                    Ok(value) => value,
+                    Err(e) => {
+                        return Err::<Option<HashMap<String, String>>, MandyError>(
+                            MandyError::new(
+                                &e.to_string()
+                            )
+                        );
+                    }
+                };
                 result.insert(key, value);
             }
             else {}

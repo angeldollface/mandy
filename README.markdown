@@ -78,6 +78,10 @@ curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
 
 Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action).
 
+## CHANGELOG :black_nib:
+
+There is a detailed log of current features, past ones, and future ones [here](https://angeldollface.art/mandys-house/content/releases/).
+
 ## HELP AND COMMUNITY :people_hugging:
 
 - [Discord Server](https://discord.gg/VR7eZFrf)

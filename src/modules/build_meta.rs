@@ -56,11 +56,9 @@ pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
     let mut build_meta_data: HashMap<String, String> = HashMap::new();
     build_meta_data.insert(String::from("toolchain"), version);
     build_meta_data.insert(String::from("compiled_at"), get_time());
-    let json_string: String = match to_string_pretty(&build_meta_data){
+    let mut json_string: String = match to_string_pretty(&build_meta_data){
         Ok(json_string) => json_string,
-        Err(e) => {
-            return Err::<(), MandyError>(MandyError::new(&e.to_string()));
-        }
+        Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
     };
     if dir_is(dist_dir){
         if file_is(build_info_file){
@@ -68,8 +66,14 @@ pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
             return Err::<(), MandyError>(MandyError::new(&e.to_string()));
         }
         else {
-            create_file(&build_info_file);
-            write_to_file(build_info_file, &json_string);
+            match create_file(&build_info_file){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
+            match write_to_file(build_info_file, &json_string){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
         }
     }
     else {

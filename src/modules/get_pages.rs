@@ -41,7 +41,16 @@ pub fn get_page_contexts(
     dir: &String
 ) ->  Result<Vec<MandyMDDocument>, MandyError> {
     let mut md_documents: Vec<MandyMDDocument> = Vec::new();
-    let md_files: Vec<MDFile> = find_md_files(&dir);
+    let mut md_files: Vec<MDFile> = match find_md_files(&dir){
+        Ok(md_files) => md_files,
+        Err(e) => {
+            return Err::<Vec<MandyMDDocument>, MandyError>(
+                MandyError::new(
+                    &e.to_string()
+                )
+            );
+        }
+    };
     if md_files.is_empty(){
         let err_msg: String = format!("No Markdown files found in \"{}\"!", dir);
         return Err::<Vec<MandyMDDocument>, MandyError>(
@@ -53,7 +62,17 @@ pub fn get_page_contexts(
     else {
         for md_file in md_files {
             let md_file_path: String = md_file.file;
-            let mut md_document = match deserialize_md(&read_file(&md_file_path)){
+            let mut md_string = match read_file(&md_file_path){
+                Ok(md_string) => md_string,
+                Err(e) => {
+                    return Err::<Vec<MandyMDDocument>, MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            let mut md_document = match deserialize_md(&md_string){
                 Ok(md_document) => md_document,
                 Err(e) => {
                     let err: String = format!(

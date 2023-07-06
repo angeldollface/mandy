@@ -62,7 +62,14 @@ use coutils::list_dir_contents;
 pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
     let sass_dir: &String = &format!("{}/sass", dir);
     if dir_is(sass_dir) {
-        let sass_files: Vec<FileEntry> = find_sass_files(sass_dir);
+        let mut sass_files: Vec<FileEntry> = match find_sass_files(sass_dir){
+            Ok(sass_files) => sass_files,
+            Err(e) => {
+                return Err::<(), MandyError>(
+                    MandyError::new(&e.to_string())
+                );
+            }
+        };
         if sass_files.is_empty(){
             let err_msg: &String = &format!("\"{}/sass\" empty! Aborting SASS compilation.", dir);
             return Err::<(), MandyError>(
@@ -86,15 +93,36 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
             let dist_path: &String = &format!("{}/dist/css", dir);
             let css_file: &String = &format!("{}/index.css", dist_path);
             if dir_is(dist_path){
-                let err_msg: &String = &String::from("\"dist\" directory exists! Aborting SASS compilation.");
+                let err_msg: String = String::from("\"dist\" directory exists! Aborting SASS compilation.");
                 return Err::<(), MandyError>(
-                    MandyError::new(&&err_msg.to_string())
+                    MandyError::new(&err_msg.to_string())
                 );
             }
             else {
-                create_directory(dist_path);
-                create_file(css_file);
-                write_to_file(css_file, &css_string);
+                match create_directory(dist_path){
+                    Ok(_x) => {},
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(&e.to_string())
+                        );
+                    }
+                };
+                match create_file(css_file){
+                    Ok(_x) => {},
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(&e.to_string())
+                        );
+                    }
+                };
+                match write_to_file(css_file, &css_string){
+                    Ok(_x) => {},
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(&e.to_string())
+                        );
+                    }
+                };
             }
         }      
     }
@@ -109,14 +137,28 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
 
 /// Attempts to return a list of all detected files in the "SASS"
 /// directory of a Mandy site. 
-pub fn find_sass_files(path: &String) -> Vec<FileEntry> {
+pub fn find_sass_files(path: &String) -> Result<Vec<FileEntry>, MandyError> {
     let file_ending: String = String::from("");
     let mut result: Vec<FileEntry> = Vec::new();
     if dir_is(path){
-        let dir_contents: Vec<FileEntry> = list_dir_contents(path);
+        let mut dir_contents: Vec<FileEntry> = match list_dir_contents(path){
+            Ok(dir_contents) => dir_contents,
+            Err(e) => {
+                return Err::<Vec<FileEntry>, MandyError>(
+                    MandyError::new(&e.to_string())
+                );
+            }
+        };
         for content in dir_contents {
             if content.file_type == Entity::Dir {
-                let sub_dir_contents: Vec<FileEntry> = list_dir_contents(&content.name);
+                let mut sub_dir_contents: Vec<FileEntry> = match list_dir_contents(&content.name){
+                    Ok(sub_dir_contents) => sub_dir_contents,
+                    Err(e) => {
+                        return Err::<Vec<FileEntry>, MandyError>(
+                            MandyError::new(&e.to_string())
+                        );
+                    }
+                };
                 for sub_dir_content in sub_dir_contents {
                     if sub_dir_content.file_type == Entity::Dir {
                         // Do nothing.
@@ -139,5 +181,5 @@ pub fn find_sass_files(path: &String) -> Vec<FileEntry> {
         }
     }
     else {}
-    return result;
+    return Ok(result);
 }

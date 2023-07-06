@@ -36,7 +36,7 @@ use super::site_map::create_site_map;
 /// string for "robots.txt".
 use super::robots::create_robots_txt;
 
-/// Creates the files "$project/dist/stemap.xml"
+/// Creates the files "$project/dist/sitemap.xml"
 /// and "$project/dist/robots.txt".
 pub fn create_crawler_files(
     urls: &Vec<String>,
@@ -53,13 +53,25 @@ pub fn create_crawler_files(
     if dir_is(dist_dir){
         if file_is(robots_txt_contents){}
         else {
-            create_file(robots_txt_file_path);
-            write_to_file(robots_txt_file_path, robots_txt_contents);
+            match create_file(robots_txt_file_path){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
+            match write_to_file(robots_txt_file_path, robots_txt_contents){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            };
         }
         if file_is(site_map_xml_file_path){}
         else {
-            create_file(site_map_xml_file_path);
-            write_to_file(site_map_xml_file_path, site_map_xml_contents);
+            match create_file(site_map_xml_file_path){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            }
+            match write_to_file(site_map_xml_file_path, site_map_xml_contents){
+                Ok(_x) => {},
+                Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+            }
         }
     }
     else {
