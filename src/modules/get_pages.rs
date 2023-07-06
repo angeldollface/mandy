@@ -43,7 +43,7 @@ pub fn get_page_contexts(
     let mut md_documents: Vec<MandyMDDocument> = Vec::new();
     let md_files: Vec<MDFile> = find_md_files(&dir);
     if md_files.is_empty(){
-        let err_msg: String = format!("\"{}\" is empty.", dir);
+        let err_msg: String = format!("No Markdown files found in \"{}\"!", dir);
         return Err::<Vec<MandyMDDocument>, MandyError>(
             MandyError::new(
                 &err_msg.to_string()
