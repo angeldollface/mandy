@@ -53,13 +53,13 @@ Installing ***Mandy*** is simple! Run one of the commands below for your platfor
 - Run this command in a Powershell session with administrator privileges if you are running on a Windows 32-bit system:
 
 ```Powershell
-. { iwr -useb https://angeldollface.art/mandys-house/installers/win_32.ps1 } | iex; ./win_32.ps1
+iex ((New-Object System.Net.WebClient).DownloadString('https://angeldollface.art/mandys-house/installers/win_32.ps1'))
 ```
 
 - Run this command in a Powershell session with administrator privileges if you are running on a Windows 64-bit system:
 
 ```Powershell
-. { iwr -useb https://angeldollface.art/mandys-house/installers/win_64.ps1 } | iex; ./win_64.ps1
+iex ((New-Object System.Net.WebClient).DownloadString('https://angeldollface.art/mandys-house/installers/win_64.ps1'))
 ```
 
 For non-Windows platforms, run this command. You may have to put `sudo` in front of this command:
