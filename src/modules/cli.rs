@@ -8,7 +8,7 @@ Licensed under the MIT license.
 /// from the "cleasy"
 /// crate to make a new
 /// CLI app.
-use cleasy::App;
+use cliply::App;
 
 /// Importing the "dir_is"
 /// method from the "coutils"
@@ -23,7 +23,7 @@ use colorize::AnsiColor;
 /// Importing the error
 /// structure for "cleasy"
 /// from the "cleasy" crate.
-use cleasy::CleasyError;
+use cliply::CliplyError;
 
 /// Getting the function to
 /// retrieve variables about
@@ -98,7 +98,7 @@ pub fn cli() -> () {
         println!("{}", mandy.help_info().green().to_string());
     }
     else if mandy.arg_was_used(&"comps") {
-        let project_dir: Result<String, CleasyError> = mandy.get_arg_data(
+        let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"comps"
         );
         match project_dir {
@@ -138,7 +138,7 @@ pub fn cli() -> () {
         };
     }
     else if mandy.arg_was_used(&"servs") {
-        let project_dir: Result<String, CleasyError> = mandy.get_arg_data(
+        let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"servs"
         );
         match project_dir {
@@ -212,7 +212,7 @@ pub fn cli() -> () {
             };
     }
     else if mandy.arg_was_used(&"reset") {
-        let project_dir: Result<String, CleasyError> = mandy.get_arg_data(
+        let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"reset"
         );
         match project_dir {
