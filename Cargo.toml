@@ -1,13 +1,13 @@
 [workspace]
 members = [
-  "utils",
-  "extras",
-  "merrors",
-  "compiler",
-  "get_data",
-  "variables",
   "mandy-bin",
-  "processors",
+  "components/utils",
+  "components/extras",
+  "components/merrors",
+  "components/compiler",
+  "components/get_data",
+  "components/variables",
+  "components/processors",
 ]
 
 [profile.release.mandy-bin]

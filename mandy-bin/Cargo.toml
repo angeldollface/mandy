@@ -15,7 +15,7 @@ emojis = "0.6.0"
 cliply =  "0.1.0"
 colorize = "0.1.0"
 coutils =  "1.4.0"
-utils = { path = "../utils" }
-merrors = { path = "../merrors" }
-compiler = { path = "../compiler" }
-variables = { path = "../variables" }
+utils = { path = "../components/utils" }
+merrors = { path = "../components/merrors" }
+compiler = { path = "../components/compiler" }
+variables = { path = "../components/variables" }
