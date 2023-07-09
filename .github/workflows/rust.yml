@@ -15,23 +15,25 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release
+          args: -p mandy-bin --release
 
       - name: "Scaffold a new Mandy site. (short version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- -i mysite -w angeldollface/mandy-template-site
+          args: -p mandy-bin -- -i mysite -w angeldollface/mandy-template-site
+          
       - name: "Compile a Mandy site. (short version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- -c mysite
+          args: -p mandy-bin -- -c mysite
+
       - name: "Reset a Mandy site. (short version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- -r mysite
+          args: -p mandy-bin -- -r mysite
       
       - name: "Cleanup for next run."
         run: rm -rf mysite
@@ -39,17 +41,19 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- --inits mysite --wtmpl angeldollface/mandy-template-site
+          args: -p mandy-bin -- --inits mysite --wtmpl angeldollface/mandy-template-site
+
       - name: "Compile a Mandy site. (long version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- --comps mysite
+          args: -p mandy-bin -- --comps mysite
+
       - name: "Reset a Mandy site. (long version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- --reset mysite
+          args: -p mandy-bin -- --reset mysite
 
       - name: "Cleanup for next run."
         run: rm -rf mysite
@@ -57,14 +61,16 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- inits mysite wtmpl angeldollface/mandy-template-site
+          args: -p mandy-bin -- inits mysite wtmpl angeldollface/mandy-template-site
+
       - name: "Compile a Mandy site. (naked version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- comps mysite
+          args: -p mandy-bin -- comps mysite
+        
       - name: "Reset a Mandy site. (naked version)"
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: -- reset mysite
+          args: -p mandy-bin -- reset mysite
