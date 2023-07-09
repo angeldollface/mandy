@@ -56,7 +56,7 @@ pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
     let mut build_meta_data: HashMap<String, String> = HashMap::new();
     build_meta_data.insert(String::from("toolchain"), version);
     build_meta_data.insert(String::from("compiled_at"), get_time());
-    let mut json_string: String = match to_string_pretty(&build_meta_data){
+    let json_string: String = match to_string_pretty(&build_meta_data){
         Ok(json_string) => json_string,
         Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
     };

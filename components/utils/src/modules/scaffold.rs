@@ -31,10 +31,13 @@ pub fn scaffold_site(dir: &String, short_url_format: &String) -> Result<(), Mand
         return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
     }
     else {
-        create_directory(dir);
+        match create_directory(dir){
+            Ok(_x) => {},
+            Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+        }
         let repo_url: &String = &format!("https://github.com/{}", short_url_format);
-        let mut repo = match Repository::clone(repo_url, dir) {
-            Ok(repo) => repo,
+        let _repo = match Repository::clone(repo_url, dir) {
+            Ok(_repo) => _repo,
             Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
         };
         return Ok(());

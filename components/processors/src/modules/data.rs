@@ -76,7 +76,7 @@ pub fn find_data_files(
     dir: &String
 ) -> Result<Vec<HashMap<String, String>>, MandyError> {
     let mut result: Vec<HashMap<String, String>> = Vec::new();
-    let mut dir_items: Vec<FileEntry> = match list_dir_contents(dir){
+    let dir_items: Vec<FileEntry> = match list_dir_contents(dir){
         Ok(dir_items) => dir_items,
         Err(e) => {
             return Err::<Vec<HashMap<String, String>>, MandyError>(MandyError::new(&e.to_string()));
@@ -86,7 +86,7 @@ pub fn find_data_files(
         if &item.file_type == &Entity::File
             && item.name.contains(".json") {
             let mut map: HashMap<String, String> = HashMap::new();
-            let mut file_contents: &String = &match read_file(&item.name){
+            let file_contents: &String = &match read_file(&item.name){
                 Ok(file_contents) => file_contents,
                 Err(e) => {
                     return Err::<Vec<HashMap<String, String>>, MandyError>(MandyError::new(&e.to_string()));

@@ -48,7 +48,7 @@ impl MDFile {
 /// Finds all ".markdown" files in a given directory.
 pub fn find_md_files(project_dir: &String) -> Result<Vec<MDFile>, MandyError> {
     let mut result: Vec<MDFile> = Vec::new();
-    let mut entries: Vec<FileEntry> = match list_dir_contents(project_dir){
+    let entries: Vec<FileEntry> = match list_dir_contents(project_dir){
         Ok(entries) => entries,
         Err(e) => {
             return Err::<Vec<MDFile>, MandyError>(
@@ -65,7 +65,7 @@ pub fn find_md_files(project_dir: &String) -> Result<Vec<MDFile>, MandyError> {
             );
         }
         else if entry.file_type == Entity::Dir {
-            let mut dir_entries: Vec<FileEntry> = match list_dir_contents(&entry.name){
+            let dir_entries: Vec<FileEntry> = match list_dir_contents(&entry.name){
                 Ok(dir_entries) => dir_entries,
                 Err(e) => {
                     return Err::<Vec<MDFile>, MandyError>(

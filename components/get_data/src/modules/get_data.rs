@@ -34,7 +34,7 @@ pub fn get_data(
 ) -> Result<Option<HashMap<String, Vec<HashMap<String, String>>>>,MandyError> {
     let data_dir_path: String = format!("{}/data", dir);
     if dir_is(&data_dir_path) {
-        let mut data_strings: Vec<HashMap<String, String>> = match find_data_files(&data_dir_path){
+        let data_strings: Vec<HashMap<String, String>> = match find_data_files(&data_dir_path){
             Ok(data_strings) => data_strings,
             Err(e) => {
                 return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
@@ -49,7 +49,7 @@ pub fn get_data(
             );
         }
         else {
-            let mut data = match deserialize_data(data_strings) {
+            let data = match deserialize_data(data_strings) {
                 Ok(data) => data,
                 Err(e) => {
                     return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(

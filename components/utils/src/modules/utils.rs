@@ -63,7 +63,10 @@ pub fn get_last_dir(path_name: &String) -> String {
 pub fn clean_project(dir: &String) -> Result<(), MandyError> {
     let dir_to_be_cleaned: &String = &format!("{}/dist", dir);
     if dir_is(dir_to_be_cleaned){
-        del_dir(&dir_to_be_cleaned);
+        match del_dir(&dir_to_be_cleaned){
+            Ok(_x) => {},
+            Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+        };
     }
     else {
         let err_msg: &String = &format!("Built site \"{}\" not found.", dir_to_be_cleaned);

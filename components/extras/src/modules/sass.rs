@@ -62,7 +62,7 @@ use coutils::list_dir_contents;
 pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
     let sass_dir: &String = &format!("{}/sass", dir);
     if dir_is(sass_dir) {
-        let mut sass_files: Vec<FileEntry> = match find_sass_files(sass_dir){
+        let sass_files: Vec<FileEntry> = match find_sass_files(sass_dir){
             Ok(sass_files) => sass_files,
             Err(e) => {
                 return Err::<(), MandyError>(
@@ -79,7 +79,7 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
         else {
             let mut sass_strings: Vec<String> = Vec::new();
             for sass_file in sass_files {
-                let mut compiled = match from_path(&sass_file.name, &Options::default().style(OutputStyle::Compressed)) {
+                let compiled = match from_path(&sass_file.name, &Options::default().style(OutputStyle::Compressed)) {
                     Ok(compiled) => compiled,
                     Err(e) => {
                         return Err::<(), MandyError>(
@@ -138,10 +138,9 @@ pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {
 /// Attempts to return a list of all detected files in the "SASS"
 /// directory of a Mandy site. 
 pub fn find_sass_files(path: &String) -> Result<Vec<FileEntry>, MandyError> {
-    let file_ending: String = String::from("");
     let mut result: Vec<FileEntry> = Vec::new();
     if dir_is(path){
-        let mut dir_contents: Vec<FileEntry> = match list_dir_contents(path){
+        let dir_contents: Vec<FileEntry> = match list_dir_contents(path){
             Ok(dir_contents) => dir_contents,
             Err(e) => {
                 return Err::<Vec<FileEntry>, MandyError>(
@@ -151,7 +150,7 @@ pub fn find_sass_files(path: &String) -> Result<Vec<FileEntry>, MandyError> {
         };
         for content in dir_contents {
             if content.file_type == Entity::Dir {
-                let mut sub_dir_contents: Vec<FileEntry> = match list_dir_contents(&content.name){
+                let sub_dir_contents: Vec<FileEntry> = match list_dir_contents(&content.name){
                     Ok(sub_dir_contents) => sub_dir_contents,
                     Err(e) => {
                         return Err::<Vec<FileEntry>, MandyError>(

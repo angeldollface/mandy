@@ -62,7 +62,7 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
     }
     else {
         if dir_is(dir) {
-            let mut site_contexts: Vec<SiteContext> = match get_site_contexts(dir) {
+            let site_contexts: Vec<SiteContext> = match get_site_contexts(dir) {
                 Ok(site_contexts) => site_contexts,
                 Err(e) => {
                     return Err::<(), MandyError>(

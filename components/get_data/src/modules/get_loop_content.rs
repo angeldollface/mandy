@@ -53,7 +53,7 @@ pub fn get_loop_content(dirs: &String, project_dir: &String) -> Result<HashMap<S
             let dir_path: &String = &format!("{}/{}", project_dir, dir);
             if dir_is(&dir_path) || dir_path == &String::from("") {
                 let mut res_vec: Vec<HashMap<String, String>> = Vec::new();
-                let mut md_files: Vec<MandyMDDocument> = match get_page_contexts(&dir_path) {
+                let md_files: Vec<MandyMDDocument> = match get_page_contexts(&dir_path) {
                     Ok(md_files) => md_files,
                     Err(e) => {
                         return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(

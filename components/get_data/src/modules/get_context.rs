@@ -72,13 +72,13 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
     let mut result: Vec<SiteContext> = Vec::new();
     let config_path: &String = &format!("{}/config.json", &dir);
     if file_is(config_path){
-        let mut config_string: String = match read_file(&config_path){
+        let config_string: String = match read_file(&config_path){
             Ok(config_string) => config_string,
             Err(e) => {
                 return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
             }
         };
-        let mut config_data = match deserialize_config(
+        let config_data = match deserialize_config(
             &config_string) {
             Ok(config_data) => config_data,
             Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
@@ -90,26 +90,26 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
            config_data.contains_key(&String::from("tlDomain")) &&
            config_data.contains_key(&String::from("updateFreq")){
 
-            let mut baseurl: &String = &String::from("");
-            let mut comp_env: Environment = match detect_env() {
+            let baseurl;
+            let comp_env: Environment = match detect_env() {
                 Ok(comp_env) => comp_env,
                 Err(e) =>{return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));}
             };
             if comp_env == Environment::Development {baseurl = &config_data["dev_url"];}
             else {baseurl = &config_data["prod_url"];}
-            let mut page_contexts: Vec<MandyMDDocument> = match get_page_contexts(dir){
+            let page_contexts: Vec<MandyMDDocument> = match get_page_contexts(dir){
                 Ok(page_contexts) => page_contexts,
                 Err(e) => {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
                 }
             };
-            let mut fetched_data = match get_data(dir){
+            let fetched_data = match get_data(dir){
                 Ok(fetched_data) => fetched_data,
                 Err(e) => {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
                 }
             };
-            let mut partials: Option<HashMap<String, String>> = match get_partials(dir) {
+            let partials: Option<HashMap<String, String>> = match get_partials(dir) {
                 Ok(partials) => partials,
                 Err(e) => {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
@@ -123,7 +123,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
 
                     if config_data.contains_key("loopContentDirs"){
                         let dirs: &String = &config_data["loopContentDirs"];
-                        let mut loop_contexts = match get_loop_content(
+                        let loop_contexts = match get_loop_content(
                             dirs,
                             dir
                         ){

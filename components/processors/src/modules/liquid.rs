@@ -40,18 +40,17 @@ pub fn render_template_no_partials(
     liquid_string: &String,
     context: &SiteContext
 ) -> Result<String, MandyError> {
-    let mut result: String = String::from("");
-    let mut liquid_parser = match ParserBuilder::with_stdlib().build() {
+    let liquid_parser = match ParserBuilder::with_stdlib().build() {
         Ok(liquid_parser) => liquid_parser,
         Err(e) => {return Err::<String, MandyError>(MandyError::new(&e.to_string()));}
     };
-    let mut liquid_template = match liquid_parser.parse(&liquid_string){
+    let liquid_template = match liquid_parser.parse(&liquid_string){
         Ok(liquid_template) => liquid_template,
         Err(e) => {
         return Err::<String, MandyError>(MandyError::new(&e.to_string()));}
     };
     let globals = object!(context);
-    let mut output: String = match liquid_template.render(&globals){
+    let output: String = match liquid_template.render(&globals){
         Ok(output) => output,
         Err(render_error) => {return Err::<String, MandyError>(MandyError::new(&render_error.to_string()));}
     };
@@ -70,16 +69,16 @@ pub fn render_template_partials(
     for (k,v) in partials.into_iter() {
         partial_source.add(k,v);
     }
-    let mut liquid_parser = match ParserBuilder::with_stdlib().partials(partial_source).build() {
+    let liquid_parser = match ParserBuilder::with_stdlib().partials(partial_source).build() {
         Ok(liquid_parser) => liquid_parser,
         Err(e) => {return Err::<String, MandyError>(MandyError::new(&e.to_string()));}
     };
-    let mut liquid_template = match liquid_parser.parse(&liquid_string){
+    let liquid_template = match liquid_parser.parse(&liquid_string){
         Ok(liquid_template) => liquid_template,
         Err(e) => {return Err::<String, MandyError>(MandyError::new(&e.to_string()));}
     };
     let globals = object!(context);
-    let mut output: String = match liquid_template.render(&globals){
+    let output: String = match liquid_template.render(&globals){
         Ok(output) => output,
         Err(render_error) => {return Err::<String, MandyError>(MandyError::new(&render_error.to_string()));}
     };
@@ -93,17 +92,17 @@ pub fn render_template(
     context: &SiteContext,
     partials: &Option<HashMap<String, String>>
 ) -> Result<String, MandyError> {
-    let mut result: String = String::from("");
+    let result;
     match partials {
         Some(map) => {  
-            let mut output: String = match render_template_partials(liquid_string, context, map){
+            let output: String = match render_template_partials(liquid_string, context, map){
                 Ok(output) => output,
                 Err(render_error) => {return Err::<String, MandyError>(MandyError::new(&render_error.to_string()));}
             };  
             result = output;        
         },
         None => {
-            let mut output: String = match render_template_no_partials(liquid_string, context){
+            let output: String = match render_template_no_partials(liquid_string, context){
                 Ok(output) => output,
                 Err(render_error) => {return Err::<String, MandyError>(MandyError::new(&render_error.to_string()));}
             };
