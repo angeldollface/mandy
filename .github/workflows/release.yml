@@ -47,13 +47,13 @@ jobs:
             
             - name: "Rename binary Windows."
               if: ${{ matrix.os == 'windows-latest' }}
-              run: dir .
+              run: move target/release/mandy.exe target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.exe
             
-            - name: "Rename binary Windows."
+            - name: "Rename binary Nix."
               if: ${{ matrix.os != 'windows-latest' }}
-              run: mv target/release/mandy target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.bin
+              run: mv target/release/mandy target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}
             
             - uses: actions/upload-artifact@v3
               with:
                 name: mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}
-                path: target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.bin
+                path: target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}*
