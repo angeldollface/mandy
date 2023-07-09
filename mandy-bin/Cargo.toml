@@ -19,3 +19,7 @@ utils = { path = "../components/utils" }
 merrors = { path = "../components/merrors" }
 compiler = { path = "../components/compiler" }
 variables = { path = "../components/variables" }
+
+[[bin]]
+name = "mandy"
+path = "src/main.rs"

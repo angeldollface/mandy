@@ -6,7 +6,7 @@ Licensed under the MIT license.
 /// We import the "Options"
 /// structure from the "grass"
 /// crate.
-use grass::Options;
+use grass_compiler::Options;
 
 /// Importing the "dir_is"
 /// method from the "coutils"
@@ -22,12 +22,12 @@ use coutils::Entity;
 /// Importing the enum to set
 /// the output style of the compiled
 /// SASS.
-use grass::OutputStyle;
+use grass_compiler::OutputStyle;
 
 /// Importing the method
 /// to compile SASS files
 /// from the "grass" crate.
-use grass::from_path;
+use grass_compiler::from_path;
 
 /// We import the "FileEntry"
 /// structure to store information

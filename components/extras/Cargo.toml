@@ -11,9 +11,9 @@ documentation = "https://github.com/angeldollface/mandy"
 readme = "../README.markdown"
 
 [dependencies]
-grass = "0.12.4"
 coutils =  "1.4.0"
 serde_json = "1.0.96"
-merrors = { path = "../merrors" }
+grass_compiler = "0.12.4"
 utils = { path = "../utils" }
+merrors = { path = "../merrors" }
 variables = { path = "../variables" }

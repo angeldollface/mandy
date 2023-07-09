@@ -22,15 +22,36 @@ jobs:
                 target: x86_64-apple-darwin
               - os: macos-latest
                 target: aarch64-apple-darwin
+
         steps:
 
             - uses: actions/checkout@v2
             - uses: actions-rs/toolchain@v1
               with:
                 toolchain: stable
+
+            - name: "Get current version."
+              id: get_version
+              uses: SebRollen/toml-action@v1.0.2
+              with:
+                file: Cargo.toml
+                field: package.version
                         
             - name: "Build Mandy."
               uses: actions-rs/cargo@v1
               with:
                 command: build
                 args: -p mandy-bin --release
+            
+            - name: "Rename binary Windows."
+              if: ${{ matrix.os == 'windows-latest' }}
+              run: move target/release/mandy target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.bin
+            
+            - name: "Rename binary Windows."
+              if: ${{ matrix.os != 'windows-latest' }}
+              run: mv target/release/mandy target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.bin
+            
+            - uses: actions/upload-artifact@v3
+              with:
+                name: mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}
+                path: target/release/mandy-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.bin
