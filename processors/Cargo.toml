@@ -1,0 +1,20 @@
+[package]
+name = "processors"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Angel Dollface <youreccentricity@outlook.com>"]
+description= "Processing functions for the Mandy static-site generator."
+homepage = "https://github.com/angeldollface/mandy"
+repository = "https://github.com/angeldollface/mandy"
+documentation = "https://github.com/angeldollface/mandy"
+readme = "../README.markdown"
+
+[dependencies]
+liquid = "0.26.4"
+coutils =  "1.4.0"
+markdown = "0.3.0"
+serde_json = "1.0.96"
+yaml-front-matter = "0.1.0"
+merrors = { path = "../merrors" }
+context = { path = "../context" }

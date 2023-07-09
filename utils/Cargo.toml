@@ -1,0 +1,20 @@
+[package]
+name = "utils"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Angel Dollface <youreccentricity@outlook.com>"]
+description= "Utilities for the Mandy static-site generator."
+homepage = "https://github.com/angeldollface/mandy"
+repository = "https://github.com/angeldollface/mandy"
+documentation = "https://github.com/angeldollface/mandy"
+readme = "../README.markdown"
+
+[dependencies]
+git2 = "0.17.2"
+emojis = "0.6.0"
+chrono = "0.4.26"
+colorize = "0.1.0"
+coutils =  "1.4.0"
+file-serve = "0.2.4"
+merrors = { path = "../merrors" }

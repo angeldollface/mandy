@@ -1,0 +1,14 @@
+[package]
+name = "context"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Angel Dollface <youreccentricity@outlook.com>"]
+description= "Variable settings for the Mandy static-site generator."
+homepage = "https://github.com/angeldollface/mandy"
+repository = "https://github.com/angeldollface/mandy"
+documentation = "https://github.com/angeldollface/mandy"
+readme = "../README.markdown"
+
+[dependencies]
+liquid = "0.26.4"
