@@ -1,5 +1,5 @@
 /*
-MANDY ERROR by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY ERRORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 

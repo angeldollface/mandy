@@ -7,13 +7,12 @@ authors = ["Angel Dollface <youreccentricity@outlook.com>"]
 description= "Extras for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://github.com/angeldollface/mandy"
+documentation = "https://docs.rs/mandy/0.3.0"
 readme = "../README.markdown"
 
 [dependencies]
 coutils =  "1.4.0"
 serde_json = "1.0.96"
-grass_compiler = "0.12.4"
+grass_compiler = "0.13.0"
 utils = { path = "../utils" }
 merrors = { path = "../merrors" }
-variables = { path = "../variables" }

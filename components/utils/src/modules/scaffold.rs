@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY UTILS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -14,14 +14,14 @@ use coutils::dir_is;
 /// repositories.
 use git2::Repository;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 /// Importing the "create_directory"
 /// method from the "coutils"
 /// crate to create a directory.
 use coutils::create_directory;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// Scaffolds a new Mandy site by attempting to clone a
 /// GitHub repository with a Mandy project inside it.

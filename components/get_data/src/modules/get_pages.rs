@@ -1,17 +1,17 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
-
-/// Importing the method from
-/// the "coutils" crate to read a text
-/// file into a string.
-use coutils::read_file;
 
 /// Importing a data structure
 /// to represent metadata of a Markdown
 /// file in a Mandy site.
 use utils::MDFile;
+
+/// Importing the method from
+/// the "coutils" crate to read a text
+/// file into a string.
+use coutils::read_file;
 
 /// Importing Mandy's error
 /// struct.

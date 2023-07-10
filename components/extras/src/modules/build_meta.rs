@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY EXTRAS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -9,32 +9,27 @@ Licensed under the MIT license.
 /// directory exists.
 use coutils::dir_is;
 
+/// Importing the method to get
+/// the current time.
+use utils::get_time;
+
 /// Importing the method from
 /// the "coutils" crate to check
 /// whether a file exists.
 use coutils::file_is;
+
+/// Importing Mandy's error
+/// structure.
+use merrors::MandyError;
 
 /// We import the method to create
 /// empty text files from the "coutils"
 /// crate.
 use coutils::create_file;
 
-/// Importing the method to get
-/// the current time.
-use utils::get_time;
-
 /// We import the method to write
 /// to created files.
 use coutils::write_to_file;
-
-/// Getting the function to
-/// retrieve variables about
-/// Mandy herself.
-use variables::mandy_vars;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// Importing Rust's standard
 /// "HashMap" API.
@@ -49,8 +44,8 @@ use serde_json::to_string_pretty;
 /// Generates the file that contains info on the build
 /// of a Mandy site.
 pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
-    let version: String = mandy_vars()["version"].clone();
-    let dist_folder: &String = &mandy_vars()["dist_folder"];
+    let version: String = "0.3.0".to_string();
+    let dist_folder: &String = &"dist".to_string();
     let dist_dir: &String = &format!("{}/{}", dir, dist_folder);
     let build_info_file: &String = &format!("{}/meta.json", dist_dir);
     let mut build_meta_data: HashMap<String, String> = HashMap::new();

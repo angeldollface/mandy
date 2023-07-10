@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY EXTRAS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 

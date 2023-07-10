@@ -5,7 +5,7 @@
 # MANDY :rocket: :pill: :fire:
 
 ![Mandy CI](https://github.com/angeldollface/mandy/actions/workflows/rust.yml/badge.svg)
-![Mandy CI](https://github.com/angeldollface/mandy/actions/workflows/release.yml/badge.svg)
+![Mandy Release CI](https://github.com/angeldollface/mandy/actions/workflows/release.yml/badge.svg)
 
 ***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
 
@@ -49,35 +49,21 @@ mandy -s mysite
 
 ## INSTALLATION :inbox_tray:
 
-Installing ***Mandy*** is simple! Run one of the commands below for your platform to download a script that will install ***Mandy***.
-
-- Run this command in a Powershell session with administrator privileges if you are running on a Windows 32-bit system:
-
-```Powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://angeldollface.art/mandys-house/installers/win_32.ps1'))
-```
-
-- Run this command in a Powershell session with administrator privileges if you are running on a Windows 64-bit system:
-
-```Powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://angeldollface.art/mandys-house/installers/win_64.ps1'))
-```
-
-For non-Windows platforms, run this command. You may have to put `sudo` in front of this command:
-
-```bash
-curl -s https://angeldollface.art/mandys-house/installers/nix.sh | bash -s
-```
+To view all installation options for ***Mandy*** please view the project's official [installation page](https://angeldollface.art/mandys-house/documentation/installation/).
 
 ## MANDY TEMPLATE SITES :art:
 
 - [Mandy's Default Site Template](https://github.com/angeldollface/mandy-template-site): The default template site for creating new Mandy-powered sites. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-template-site`.
+
 - [Mandy's main website](https://github.com/angeldollface/mandys-house): The Mandy site for the project page of the Mandy project. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandys-house`.
+
 - [Mandy's fancy template site with in-browser 3D graphics](https://github.com/angeldollface/mandy-threejs-site): A single-page site template using three.js for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-threejs-site`.
+
+- [Mandy's minimalist elegant blog theme](https://github.com/angeldollface/mandy-dark-material): A simple, beautiful, dark-themed, material-themed template site for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-dark-material`.
 
 ## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
 
-Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action).
+Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action). Other deployment services are also supported.
 
 ## CHANGELOG :black_nib:
 

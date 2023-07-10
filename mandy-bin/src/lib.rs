@@ -1,11 +1,11 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY-BIN by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
 /// Importing the
 /// "App" structure
-/// from the "cleasy"
+/// from the "cliply"
 /// crate to make a new
 /// CLI app.
 use cliply::App;
@@ -25,15 +25,6 @@ use colorize::AnsiColor;
 /// from the "cleasy" crate.
 use cliply::CliplyError;
 
-/// Getting the function to
-/// retrieve variables about
-/// Mandy herself.
-use variables::mandy_vars;
-
-/// Importing the method to
-/// look up emojis by shortcode.
-use emojis::get_by_shortcode;
-
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
@@ -44,11 +35,6 @@ use merrors::MandyError;
 use utils::clean_project;
 
 /// Importing the method
-/// to compile a Mandy site
-/// from "./compile.rs".
-use compiler::compile_site;
-
-/// Importing the method
 /// to serve a Mandy site
 /// from "$project/dist".
 use utils::serve_project;
@@ -57,12 +43,20 @@ use utils::serve_project;
 /// to scaffold a new Mandy site.
 use utils::scaffold_site;
 
+/// Importing the method
+/// to compile a Mandy site.
+use compiler::compile_site;
+
+/// Importing the method to
+/// look up emojis by shortcode.
+use emojis::get_by_shortcode;
+
 /// Mandy's CLI.
 pub fn cli() -> () {
     let mut mandy: App = App::new(
-        &mandy_vars()["name"],
-        &&mandy_vars()["version"],
-        &&mandy_vars()["author"]
+        &"Mandy",
+        &"0.3.0",
+        &"Angel Dollface"
     );
     mandy.add_arg(
         &"comps",
@@ -89,14 +83,19 @@ pub fn cli() -> () {
         &"  Which template site to use from Git.",
         &"true"
     );
+
     let rocket_emoji: String = get_by_shortcode("rocket").unwrap().to_string();
     let x_emoji: String = get_by_shortcode("skull").unwrap().to_string();
+
     if mandy.version_is() == true {
         println!("{}", mandy.version_info().green().to_string());
     }
+
     else if mandy.help_is() == true {
         println!("{}", mandy.help_info().green().to_string());
     }
+
+    
     else if mandy.arg_was_used(&"comps") {
         let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"comps"
@@ -137,6 +136,7 @@ pub fn cli() -> () {
             }
         };
     }
+
     else if mandy.arg_was_used(&"servs") {
         let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"servs"
@@ -178,6 +178,7 @@ pub fn cli() -> () {
             }
         };
     }
+
     else if mandy.arg_was_used(&"inits") &&
         mandy.arg_was_used(&"wtmpl") {
             match mandy.get_arg_data(&"inits"){
@@ -211,6 +212,7 @@ pub fn cli() -> () {
                 }
             };
     }
+
     else if mandy.arg_was_used(&"reset") {
         let project_dir: Result<String, CliplyError> = mandy.get_arg_data(
             &"reset"
@@ -235,7 +237,9 @@ pub fn cli() -> () {
             }
         };
     }
+
     else {
         println!("{}", mandy.help_info().red().to_string());
     }
+    
 }

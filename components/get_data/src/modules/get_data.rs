@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -8,13 +8,13 @@ Licensed under the MIT license.
 /// whether a directory exists.
 use coutils::dir_is;
 
-/// Importing Rust's standard
-/// "HashMap" API.
-use std::collections::HashMap;
-
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
+
+/// Importing Rust's standard
+/// "HashMap" API.
+use std::collections::HashMap;
 
 /// Importing the method to find
 /// and detect JSON data files in

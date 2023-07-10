@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY UTILS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -14,8 +14,12 @@ use coutils::dir_is;
 /// the "coutils" crate.
 use coutils::del_dir;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 /// Importing the method
-/// to split strings into
+/// to split strings into a
 /// vector of strings from
 /// the "coutils" crate.
 use coutils::clean_split;
@@ -25,10 +29,6 @@ use coutils::clean_split;
 /// crate to retrieve the current 
 /// time.
 use chrono::offset::Local;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// Gets the file name of a file in a path string plus the
 /// file name's base.

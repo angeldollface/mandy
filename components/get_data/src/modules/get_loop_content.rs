@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -9,23 +9,23 @@ Licensed under the MIT license.
 /// directory exists.
 use coutils::dir_is;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 /// Importing the "clean_split"
 /// method from the "coutils"
 /// method to split strings.
 use coutils::clean_split;
 
-/// Importing Rust's standard
-/// "HashMap" data structure.
-use std::collections::HashMap;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
-
 /// Importing the method to get
 /// the base name of a file in a
 /// file path.
 use utils::get_name_base;
+
+/// Importing Rust's standard
+/// "HashMap" data structure.
+use std::collections::HashMap;
 
 /// Importing the data structure to
 /// represent all information about

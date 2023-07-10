@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY COMPILER by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -23,22 +23,17 @@ use merrors::MandyError;
 /// a Mandy site's context.
 use context::SiteContext;
 
+/// Importing the method to generate the
+/// build meta data file.
+use extras::generate_meta;
+
 /// Importing the function to generate
 /// a server file for Deno Deploy.
 use extras::generate_server;
 
 /// Importing the method to compile
-/// SASS files into a CSS file from
-/// "./sass.rs".
+/// SASS files into a CSS file.
 use extras::compile_sass_files;
-
-/// Importing the method to generate the
-/// build meta data file.
-use extras::generate_meta;
-
-/// Importing the function to build a single
-/// site context from "./build_context.rs".
-use super::build_context::build_context;
 
 /// A function to retrieve site contexts from
 /// a Mandy site project.
@@ -47,6 +42,10 @@ use get_data::get_site_contexts;
 /// Importing the method to create files for
 /// SEO and search engine crawlers.
 use extras::create_crawler_files;
+
+/// Importing the function to build a single
+/// site context from "./build_context.rs".
+use super::build_context::build_context;
 
 /// Creates files and renders them from all
 /// "SiteContext" instances.

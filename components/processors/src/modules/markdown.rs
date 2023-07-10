@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -9,13 +9,13 @@ Licensed under the MIT license.
 /// crate.
 use markdown::to_html;
 
-/// Importing Rust's standard
-/// "HashMap" data structure.
-use std::collections::HashMap;
-
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
+
+/// Importing Rust's standard
+/// "HashMap" data structure.
+use std::collections::HashMap;
 
 /// Importing the "YamlFrontMatter"
 /// data structure for reading front matter.

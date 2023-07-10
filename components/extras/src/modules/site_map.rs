@@ -1,11 +1,11 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY EXTRAS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
 /// A data structure
 /// to hold relevant information
-/// for each "url" in
+/// for each "Url" in
 /// site's map.
 #[derive(Clone)]
 pub struct Url {
@@ -14,7 +14,7 @@ pub struct Url {
 }
 
 /// Implementing
-/// methods for the "url"
+/// methods for the "Url"
 /// data structure.
 impl Url {
 

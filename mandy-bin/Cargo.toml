@@ -7,7 +7,7 @@ authors = ["Angel Dollface <youreccentricity@outlook.com>"]
 description= "The main binary for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://github.com/angeldollface/mandy"
+documentation = "https://docs.rs/mandy/0.3.0"
 readme = "../README.markdown"
 
 [dependencies]
@@ -18,7 +18,6 @@ coutils =  "1.4.0"
 utils = { path = "../components/utils" }
 merrors = { path = "../components/merrors" }
 compiler = { path = "../components/compiler" }
-variables = { path = "../components/variables" }
 
 [[bin]]
 name = "mandy"

@@ -4,20 +4,17 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 authors = ["Angel Dollface <youreccentricity@outlook.com>"]
-description= "Data retrieval for the Mandy static-site generator."
+description= "Site data retrieval for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://github.com/angeldollface/mandy"
+documentation = "https://docs.rs/mandy/0.3.0"
 readme = "../README.markdown"
 
 [dependencies]
-
-# present
 liquid = "0.26.4"
 coutils =  "1.4.0"
 utils = { path = "../utils" }
 extras = { path = "../extras" }
 merrors = { path = "../merrors" }
 context = { path = "../context" }
-variables = { path = "../variables" }
 processors = { path = "../processors"}

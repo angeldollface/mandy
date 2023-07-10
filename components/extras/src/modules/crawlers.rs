@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY EXTRAS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -15,6 +15,10 @@ use coutils::dir_is;
 /// file exists.
 use coutils::file_is;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 /// We import the method to create
 /// empty text files from the "coutils"
 /// crate.
@@ -23,10 +27,6 @@ use coutils::create_file;
 /// We import the method to write
 /// to created files.
 use coutils::write_to_file;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// Importing the method to create the
 /// string for "sitemap.xml".

@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY COMPILER by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -31,6 +31,24 @@ use coutils::file_copy;
 /// file into a string.
 use coutils::read_file;
 
+/// Importing Mandy's error
+/// structure.
+use merrors::MandyError;
+
+/// Importing the method to get
+/// the last directory in a file path.
+use utils::get_last_dir;
+
+/// Importing the structure representing
+/// a Mandy site's context.
+use context::SiteContext;
+
+/// Importing a data structure
+/// to describe and handle files
+/// to copy to the compiled Mandy
+/// project.
+use processors::ArrowSet;
+
 /// Importing the method from
 /// the "coutils" crate to copy
 /// a folder from source to
@@ -42,6 +60,11 @@ use coutils::folder_copy;
 /// crate.
 use coutils::create_file;
 
+/// Importing the method to get
+/// the base name of a file in a
+/// file path.
+use utils::get_name_base;
+
 /// We import the method to write
 /// to created files.
 use coutils::write_to_file;
@@ -50,25 +73,6 @@ use coutils::write_to_file;
 /// method from the "coutils"
 /// crate to create a directory.
 use coutils::create_directory;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
-
-/// Importing a data structure
-/// to describe and handle files
-/// to copy to the compiled Mandy
-/// project.
-use processors::ArrowSet;
-
-/// Importing the method to get
-/// the last directory in a file path.
-use utils::get_last_dir;
-
-/// Importing the method to get
-/// the base name of a file in a
-/// file path.
-use utils::get_name_base;
 
 /// Importing the method to apply a data
 /// context to a Liquid template and
@@ -79,10 +83,6 @@ use processors::render_template;
 /// an arrow set string into the "ArrowSet"
 /// data structure.
 use processors::parse_arrow_set;
-
-/// Importing the structure representing
-/// a Mandy site's context.
-use context::SiteContext;
 
 /// Creates a file and renders it from a single
 /// "SiteContext" instance.

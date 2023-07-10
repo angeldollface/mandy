@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -18,24 +18,24 @@ use coutils::read_file;
 /// struct to work with files easier.
 use coutils::FileEntry;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 /// Importing the "from_str"
-/// from the "serde_json"
+/// method from the "serde_json"
 /// crate to store JSON
 /// into Rust data structures.
 use serde_json::from_str;
 
 /// Importing the "clean_split"
 /// method from the "coutils"
-/// method to split strings.
+/// crate to split strings.
 use coutils::clean_split;
 
 /// Importing Rust's standard
 /// "HashMap" data structure.
 use std::collections::HashMap;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// Importing the method store
 /// information about a directory's

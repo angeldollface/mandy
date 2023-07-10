@@ -1,7 +1,11 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
+
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
 
 /// Importing the function
 /// to parse JSON into
@@ -13,10 +17,6 @@ use serde_json::from_str;
 /// Importing Rust's standard
 /// "HashMap" API.
 use std::collections::HashMap;
-
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
 
 /// A function to parse the configuration file in JSON
 /// format of a Mandy site. Returns a result of a "HashMap"

@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -19,34 +19,29 @@ use coutils::FileEntry;
 /// into strings.
 use coutils::read_file;
 
-/// Getting the function to
-/// retrieve variables about
-/// Mandy herself.
-use variables::mandy_vars;
-
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
-
-/// Importing Rust's standard
-/// "HashMap" API.
-use std::collections::HashMap;
-
-/// Importing the method store
-/// information about a directory's
-/// contents.
-use coutils::list_dir_contents;
 
 /// Importing the method to get
 /// the base name of a file in a
 /// file path.
 use utils::get_name_base;
 
+/// Importing Rust's standard
+/// "HashMap" API.
+use std::collections::HashMap;
+
+/// Importing the method to store
+/// information about a directory's
+/// contents.
+use coutils::list_dir_contents;
+
 /// Attempts to retrieve a list of all Liquid partial templates in the "includes"
 /// directory. Returns an error if the directory exists but is empty.
 pub fn get_partials(dir: &String) -> Result<Option<HashMap<String, String>>, MandyError> {
     let mut result: HashMap<String, String> = HashMap::new();
-    let partials_dir: &String = &mandy_vars()["partials_dir"];
+    let partials_dir: &String = &String::from("partials");
     let includes_dir: &String = &format!("{}/{}", dir, partials_dir);
     if dir_is(includes_dir){
         let file_list: Vec<FileEntry> = match list_dir_contents(&includes_dir){

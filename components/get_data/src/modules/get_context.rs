@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -8,14 +8,30 @@ Licensed under the MIT license.
 /// whether a file exists.
 use coutils::file_is;
 
+/// Importing the method to check
+/// the environment in which a Mandy
+/// site is being compiled.
+use utils::detect_env;
+
 /// Importing the method from
 /// the "coutils" crate to read a text
 /// file into a string.
 use coutils::read_file;
 
+/// Importing the "Environment"
+/// to quantify the different
+/// types of Mandy compilation
+/// environments.
+use utils::Environment;
+
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
+
+/// Importing the data structure to
+/// represent a data context of a 
+/// Mandy site.
+use context::SiteContext;
 
 /// Importing the method
 /// to retrieve data objects
@@ -27,36 +43,20 @@ use super::get_data::get_data;
 /// "HashMap" API.
 use std::collections::HashMap;
 
-/// Importing the method to check
-/// the environment in which a Mandy
-/// site is being compiled.
-use utils::detect_env;
-
-/// Importing the "Environment"
-/// to quantify the different
-/// types of Mandy compilation
-/// environments.
-use utils::Environment;
-
-/// Importing the data structure to
-/// represent a data context of a 
-/// Mandy site.
-use context::SiteContext;
-
 /// Importing the data structure to
 /// represent all information about
 /// a Markdown document in a Mandy site.
 use processors::MandyMDDocument;
 
-/// Importing the method to get information
-/// on Liquid partial templates to parse and render
-/// Liquid templates in a Mandy site.
-use super::get_partials::get_partials;
-
 /// Importing the method to deserialize and
 /// read the configuration file 
 /// of a Mandy site.
 use processors::deserialize_config;
+
+/// Importing the method to get information
+/// on Liquid partial templates to parse and render
+/// Liquid templates in a Mandy site.
+use super::get_partials::get_partials;
 
 /// Importing the method to retrieve the data
 /// contexts of Markdown documents in a Mandy site.

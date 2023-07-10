@@ -1,12 +1,7 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY EXTRAS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
-
-/// We import the "Options"
-/// structure from the "grass"
-/// crate.
-use grass_compiler::Options;
 
 /// Importing the "dir_is"
 /// method from the "coutils"
@@ -19,21 +14,15 @@ use coutils::dir_is;
 /// from the "coutils" crate.
 use coutils::Entity;
 
-/// Importing the enum to set
-/// the output style of the compiled
-/// SASS.
-use grass_compiler::OutputStyle;
-
-/// Importing the method
-/// to compile SASS files
-/// from the "grass" crate.
-use grass_compiler::from_path;
-
 /// We import the "FileEntry"
 /// structure to store information
 /// about files from the "coutils"
 /// crate.
 use coutils::FileEntry;
+
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
 
 /// We import the method to create
 /// empty text files from the "coutils"
@@ -44,9 +33,15 @@ use coutils::create_file;
 /// to created files.
 use coutils::write_to_file;
 
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
+/// We import the "Options"
+/// structure from the "grass"
+/// crate.
+use grass_compiler::Options;
+
+/// Importing the method
+/// to compile SASS files
+/// from the "grass" crate.
+use grass_compiler::from_path;
 
 /// Importing the "create_directory"
 /// method from the "coutils"
@@ -57,6 +52,11 @@ use coutils::create_directory;
 /// to list the contents of a 
 /// directory.
 use coutils::list_dir_contents;
+
+/// Importing the enum to set
+/// the output style of the compiled
+/// SASS.
+use grass_compiler::OutputStyle;
 
 /// Compiles all SASS files in the "sass" directory in a Mandy site.
 pub fn compile_sass_files(dir: &String) -> Result<(), MandyError> {

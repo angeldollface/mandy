@@ -1,5 +1,5 @@
 /*
-MANDY by Alexander Abraham a.k.a. "Angel Dollface".
+MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
@@ -9,22 +9,22 @@ Licensed under the MIT license.
 /// crate.
 use liquid::object;
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
+/// Importing the structure representing
+/// a Mandy site's context.
+use context::SiteContext;
+
 /// Importing Liquid's
 /// standard "ParserBuilder"
 /// entity.
 use liquid::ParserBuilder;
 
-/// Importing Mandy's error
-/// struct.
-use merrors::MandyError;
-
 /// Importing Rust's standard
 /// "HashMap" API.
 use std::collections::HashMap;
-
-/// Importing the structure representing
-/// a Mandy site's context.
-use context::SiteContext;
 
 /// Importing the "EagerCompiler"
 /// structure from the "liquid" crate.
