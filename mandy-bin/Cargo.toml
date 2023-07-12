@@ -1,13 +1,13 @@
 [package]
 name = "mandy-bin"
-version = "0.3.0"
+version = "0.3.1"
 edition = "2021"
 license = "MIT"
 authors = ["Angel Dollface <youreccentricity@outlook.com>"]
 description= "The main binary for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://docs.rs/mandy/0.3.0"
+documentation = "https://github.com/angeldollface/mandy"
 readme = "../README.markdown"
 
 [dependencies]
