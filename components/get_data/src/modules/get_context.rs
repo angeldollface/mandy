@@ -19,7 +19,7 @@ use utils::detect_env;
 use coutils::read_file;
 
 /// Importing the "Environment"
-/// to quantify the different
+/// enum to quantify the different
 /// types of Mandy compilation
 /// environments.
 use utils::Environment;

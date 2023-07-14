@@ -25,7 +25,7 @@ pub enum Environment {
 /// Attempts to determine the environment in which a Mandy
 /// site is being compiled. Depending on whether the "$MANDY_ENV"
 /// environment variable is either set to "production" or "development",
-/// the functions returns a variant of the "Environment" enum.
+/// the function returns a variant of the "Environment" enum.
 pub fn detect_env() -> Result<Environment, MandyError> {
     let var_op = var("MANDY_ENV");
     match var_op {

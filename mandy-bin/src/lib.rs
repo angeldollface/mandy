@@ -21,8 +21,8 @@ use coutils::dir_is;
 use colorize::AnsiColor;
 
 /// Importing the error
-/// structure for "cleasy"
-/// from the "cleasy" crate.
+/// structure for "cliply"
+/// from the "cliply" crate.
 use cliply::CliplyError;
 
 /// Importing Mandy's error

@@ -11,6 +11,6 @@ pub mod modules;
 /// module.
 pub use modules::compile::*;
 
-/// Re-xporting Mandy's context
+/// Re-exporting Mandy's context
 /// builder module.
 pub use modules::build_context::*;

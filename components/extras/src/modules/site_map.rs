@@ -6,7 +6,7 @@ Licensed under the MIT license.
 /// A data structure
 /// to hold relevant information
 /// for each "Url" in
-/// site's map.
+/// site's URLs.
 #[derive(Clone)]
 pub struct Url {
     loc: String,
@@ -47,7 +47,7 @@ impl Url {
 
 /// A data structure
 /// to hold a set of
-/// urls.
+/// URLs.
 #[derive(Clone)]
 pub struct UrlSet {
     urls: Vec<Url>

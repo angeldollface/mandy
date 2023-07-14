@@ -16,7 +16,7 @@ use coutils::dir_is;
 use utils::clean_url;
 
 /// Importing Mandy's error
-/// struct.
+/// structure.
 use merrors::MandyError;
 
 /// Importing the structure representing
@@ -44,7 +44,7 @@ use get_data::get_site_contexts;
 use extras::create_crawler_files;
 
 /// Importing the function to build a single
-/// site context from "./build_context.rs".
+/// site context.
 use super::build_context::build_context;
 
 /// Creates files and renders them from all

@@ -17,7 +17,7 @@ use coutils::FileEntry;
 /// struct.
 use merrors::MandyError;
 
-/// Importing the method store
+/// Importing the method to store
 /// information about a directory's
 /// contents.
 use coutils::list_dir_contents;
@@ -30,7 +30,7 @@ pub struct MDFile {
     pub file: String
 }
 
-/// Implementing standard structures for
+/// Implementing standard methods for
 /// the "MDFile" structure.
 impl MDFile {
 

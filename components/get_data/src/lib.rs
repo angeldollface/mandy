@@ -3,7 +3,7 @@ MANDY DATA by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-/// Declaring the "module"
+/// Declaring the "modules"
 /// directory as a 
 /// module.
 pub mod modules;
