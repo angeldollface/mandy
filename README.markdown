@@ -61,13 +61,17 @@ To view all installation options for ***Mandy*** please view the project's offic
 
 - [Mandy's minimalist elegant blog theme](https://github.com/angeldollface/mandy-dark-material): A simple, beautiful, dark-themed, material-themed template site for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-dark-material`.
 
+- [Mandy's Deno Deploy template site](https://github.com/angeldollface/mandy-deno-deploy): A small site template optimized for deployment on Deno Deploy. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-deno-deploy`.
+
+- [Mandy's Netlify template site](https://github.com/angeldollface/mandy-netlify): A small site template optimized for deployment on Netlify. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-netlify`.
+
 ## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
 
-Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://github.com/angeldollface/mandy-github-action). Other deployment services are also supported.
+Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.art/mandys-house/documentation/deployment/). Other deployment services are also supported.
 
 ## CHANGELOG :black_nib:
 
-There is a detailed log of current features, past ones, and future ones [here](https://angeldollface.art/mandys-house/content/releases/).
+There is a detailed log of current features and past ones [here](https://angeldollface.art/mandys-house/content/releases/).
 
 ## HELP AND COMMUNITY :people_hugging:
 

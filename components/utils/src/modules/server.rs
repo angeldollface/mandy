@@ -32,7 +32,7 @@ pub fn serve_project(project_dir: &String) -> () {
     if dir_is(dir_to_serve){
         let server = Server::new(&dir_to_serve);
         let msg: String = format!(
-            "{} Serving your site on \"http://localhost:{}\".\n{} Press Ctrl+C to exit.", 
+            "{} Serving your site on \"http://{}\".\n{} Press Ctrl+C to exit.", 
             rocket_emoji, 
             server.addr(),
             rocket_emoji
