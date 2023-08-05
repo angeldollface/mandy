@@ -22,15 +22,15 @@
  <img src="https://raw.githubusercontent.com/angeldollface/mandy/main/assets/showcase/showcase.gif"/>
 </p>
 
-### Installation via Cargo
+### Get a binary!
 
-If you already have Cargo, Rust's package manager, installed, you can install Mandy with this command on your machine:
+You can download a compiled binary for 64-bit desktop systems from this repository's [Releases](https://github.com/angeldollface/mandy/releases) section.
+
+Alternatively, if you have the Rust toolchain installed, you can install Mandy via Cargo using this command:
 
 ```bash
-cargo install mandy-bin
+cargo install --git https://github.com/angeldollface/mandy.git mandy-bin --tag v.0.3.3
 ```
-
-Alternatively, you can download a compiled binary for 64-bit desktop systems from this repository's [Releases](https://github.com/angeldollface/mandy/releases) section.
 
 ### Get up and running!
 
