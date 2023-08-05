@@ -7,7 +7,7 @@ authors = ["Angel Dollface <angelbbe@proton.me>"]
 description= "Extras for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://docs.rs/mandy-bin/0.3.3"
+documentation = "https://angeldollface.art/mandys-house/content/documentation/"
 readme = "../../README.markdown"
 
 [dependencies]

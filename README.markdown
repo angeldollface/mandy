@@ -2,19 +2,19 @@
  <img src="https://raw.githubusercontent.com/angeldollface/mandy/main/assets/banner/banner.png"/>
 </p>
 
-# MANDY
+# MANDY :rocket: :pill: :fire:
 
 ![Mandy CI](https://github.com/angeldollface/mandy/actions/workflows/rust.yml/badge.svg)
 ![Mandy Release CI](https://github.com/angeldollface/mandy/actions/workflows/release.yml/badge.svg)
 
-***A hypersonic static-site generator written in Rust.***
+***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
 
-## ABOUT
+## ABOUT :books:
 
 ***Mandy is fast, easy to use, easy to deploy, and very flexible! Get her today!***
 ***[Visit Mandy's website!](https://angeldollface.art/mandys-house)***
 
-## GETTING STARTED
+## GETTING STARTED :books:
 
 ### Showcase
 
@@ -57,28 +57,28 @@ mandy -r mysite
 mandy -s mysite
 ```
 
-## INSTALLATION
+## INSTALLATION :inbox_tray:
 
 To view all installation options for ***Mandy*** please view the project's official [installation page](https://angeldollface.art/mandys-house/documentation/installation/).
 
-## MANDY TEMPLATE SITES
+## MANDY TEMPLATE SITES :art:
 
 You can find all available template sites for starting a new Mandy-powered site [here](https://angeldollface.art/mandys-house/content/templates/).
 
-## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES
+## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
 
 Mandy has her own GitHub Action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.art/mandys-house/documentation/deployment/). Other deployment services are also supported.
 
-## CHANGELOG
+## CHANGELOG :black_nib:
 
 There is a detailed log of current features and past ones [here](https://angeldollface.art/mandys-house/content/releases/).
 
-## HELP AND COMMUNITY
+## HELP AND COMMUNITY :people_hugging:
 
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
 
-## NOTE
+## NOTE :scroll:
 
-- *Mandy* by Alexander Abraham a.k.a. *"Angel Dollface"*
+- *Mandy :rocket: :pill: :fire:* by Alexander Abraham :black_heart: a.k.a. *"Angel Dollface" :dolls: :ribbon:*
 - Licensed under the MIT license.
