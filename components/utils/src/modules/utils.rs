@@ -79,7 +79,6 @@ pub fn clean_project(dir: &String) -> Result<(), MandyError> {
 pub fn clean_url(file_path: &String, dir: &String, file_dir: &String) -> String {
     let file_name: String = get_name_base(&file_path, &String::from(".markdown"))[0].clone();
     let mut url: String = file_dir.clone();
-
     url = url.replace(dir, &"");
     let mut final_url = format!("{}/{}", url, file_name );
     if url == String::from("") {

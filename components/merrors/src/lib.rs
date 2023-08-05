@@ -45,14 +45,14 @@ impl MandyError {
     }
 }
 
-/// Implements the error trait.
+/// Implements the "Error" trait.
 impl Error for MandyError {
     fn description(&self) -> &str {
         &self.details
     }
 }
 
-/// Implements the Display trait.
+/// Implements the "Display" trait.
 /// Can't derive this, apparently.
 impl Display for MandyError {
     fn fmt(&self, f: &mut Formatter) -> Result {

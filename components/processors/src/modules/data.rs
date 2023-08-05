@@ -37,7 +37,7 @@ use coutils::clean_split;
 /// "HashMap" data structure.
 use std::collections::HashMap;
 
-/// Importing the method store
+/// Importing the method to store
 /// information about a directory's
 /// contents.
 use coutils::list_dir_contents;

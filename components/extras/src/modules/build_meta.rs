@@ -44,7 +44,7 @@ use serde_json::to_string_pretty;
 /// Generates the file that contains info on the build
 /// of a Mandy site.
 pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
-    let version: String = "0.3.2".to_string();
+    let version: String = "0.3.3".to_string();
     let dist_folder: &String = &"dist".to_string();
     let dist_dir: &String = &format!("{}/{}", dir, dist_folder);
     let build_info_file: &String = &format!("{}/meta.json", dist_dir);

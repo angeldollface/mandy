@@ -5,7 +5,7 @@ Licensed under the MIT license.
 
 /// A data structure
 /// to hold relevant information
-/// for each "Url" in
+/// for each "Url" in a
 /// site's URLs.
 #[derive(Clone)]
 pub struct Url {

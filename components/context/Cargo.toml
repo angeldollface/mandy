@@ -3,12 +3,12 @@ name = "context"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-authors = ["Angel Dollface <youreccentricity@outlook.com>"]
-description= "Site render context for the Mandy static-site generator."
+authors = ["Angel Dollface <angelbbe@proton.me>"]
+description= "The data structure for the site render context for the Mandy static-site generator."
 homepage = "https://github.com/angeldollface/mandy"
 repository = "https://github.com/angeldollface/mandy"
-documentation = "https://angeldollface.art/mandys-house/documentation/apis/"
-readme = "../README.markdown"
+documentation = "https://docs.rs/mandy-bin/0.3.3"
+readme = "../../README.markdown"
 
 [dependencies]
 liquid = "0.26.4"

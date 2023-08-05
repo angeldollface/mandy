@@ -55,7 +55,7 @@ use emojis::get_by_shortcode;
 pub fn cli() -> () {
     let mut mandy: App = App::new(
         &"Mandy",
-        &"0.3.2",
+        &"0.3.3",
         &"Angel Dollface"
     );
     mandy.add_arg(

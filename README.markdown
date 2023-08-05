@@ -1,26 +1,36 @@
 <p align="center">
- <img src="/assets/banner/banner.png"/>
+ <img src="https://raw.githubusercontent.com/angeldollface/mandy/main/assets/banner/banner.png"/>
 </p>
 
-# MANDY :rocket: :pill: :fire:
+# MANDY
 
 ![Mandy CI](https://github.com/angeldollface/mandy/actions/workflows/rust.yml/badge.svg)
 ![Mandy Release CI](https://github.com/angeldollface/mandy/actions/workflows/release.yml/badge.svg)
 
-***A hypersonic static-site generator written in Rust. :rocket: :pill: :fire:***
+***A hypersonic static-site generator written in Rust.***
 
-## ABOUT :books:
+## ABOUT
 
 ***Mandy is fast, easy to use, easy to deploy, and very flexible! Get her today!***
 ***[Visit Mandy's website!](https://angeldollface.art/mandys-house)***
 
-## GETTING STARTED :books:
+## GETTING STARTED
 
 ### Showcase
 
 <p align="center">
- <img src="/assets/showcase/showcase.gif"/>
+ <img src="https://raw.githubusercontent.com/angeldollface/mandy/main/assets/showcase/showcase.gif"/>
 </p>
+
+### Installation via Cargo
+
+If you already have Cargo, Rust's package manager, installed, you can install Mandy with this command on your machine:
+
+```bash
+cargo install mandy-bin
+```
+
+Alternatively, you can download a compiled binary for 64-bit desktop systems from this repository's [Releases](https://github.com/angeldollface/mandy/releases) section.
 
 ### Get up and running!
 
@@ -47,39 +57,28 @@ mandy -r mysite
 mandy -s mysite
 ```
 
-## INSTALLATION :inbox_tray:
+## INSTALLATION
 
 To view all installation options for ***Mandy*** please view the project's official [installation page](https://angeldollface.art/mandys-house/documentation/installation/).
 
-## MANDY TEMPLATE SITES :art:
+## MANDY TEMPLATE SITES
 
-- [Mandy's Default Site Template](https://github.com/angeldollface/mandy-template-site): The default template site for creating new Mandy-powered sites. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-template-site`.
+You can find all available template sites for starting a new Mandy-powered site [here](https://angeldollface.art/mandys-house/content/templates/).
 
-- [Mandy's main website](https://github.com/angeldollface/mandys-house): The Mandy site for the project page of the Mandy project. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandys-house`.
+## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES
 
-- [Mandy's fancy template site with in-browser 3D graphics](https://github.com/angeldollface/mandy-threejs-site): A single-page site template using three.js for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-threejs-site`.
+Mandy has her own GitHub Action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.art/mandys-house/documentation/deployment/). Other deployment services are also supported.
 
-- [Mandy's minimalist elegant blog theme](https://github.com/angeldollface/mandy-dark-material): A simple, beautiful, dark-themed, material-themed template site for the Mandy static-site generator. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-dark-material`.
-
-- [Mandy's Deno Deploy template site](https://github.com/angeldollface/mandy-deno-deploy): A small site template optimized for deployment on Deno Deploy. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-deno-deploy`.
-
-- [Mandy's Netlify template site](https://github.com/angeldollface/mandy-netlify): A small site template optimized for deployment on Netlify. Start a new Mandy site with this site template like this: `mandy -i mysite -w angeldollface/mandy-netlify`.
-
-## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
-
-Mandy has her own GitHub action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.art/mandys-house/documentation/deployment/). Other deployment services are also supported.
-
-## CHANGELOG :black_nib:
+## CHANGELOG
 
 There is a detailed log of current features and past ones [here](https://angeldollface.art/mandys-house/content/releases/).
 
-## HELP AND COMMUNITY :people_hugging:
+## HELP AND COMMUNITY
 
-- [Discord Server](https://discord.gg/VR7eZFrf)
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
 
-## NOTE :scroll:
+## NOTE
 
-- *Mandy :rocket: :pill: :fire:* by Alexander Abraham :black_heart: a.k.a. *"Angel Dollface" :dolls: :ribbon:*
+- *Mandy* by Alexander Abraham a.k.a. *"Angel Dollface"*
 - Licensed under the MIT license.
