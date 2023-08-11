@@ -8,6 +8,12 @@ Licensed under the MIT license.
 pub mod modules;
 
 /// Re-exporting the module
+/// that handles the generation
+/// of an XML file for an RSS
+/// feed of iterative content.
+pub use modules::rss::*;
+
+/// Re-exporting the module
 /// that creates files for
 /// Deno Deploy.
 pub use modules::deno::*;

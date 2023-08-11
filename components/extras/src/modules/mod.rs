@@ -4,6 +4,12 @@ Licensed under the MIT license.
 */
 
 /// Exporting the module
+/// that handles the generation
+/// of an XML file for an RSS
+/// feed of iterative content.
+pub mod rss;
+
+/// Exporting the module
 /// that creates files for
 /// Deno Deploy.
 pub mod deno;
