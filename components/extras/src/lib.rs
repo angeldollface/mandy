@@ -28,6 +28,12 @@ pub use modules::sass::*;
 pub use modules::robots::*;
 
 /// Re-exporting the module
+/// that helps to log
+/// the build of a Mandy
+/// project.
+pub use modules::logging::*;
+
+/// Re-exporting the module
 /// that creates files for
 /// SEO crawlers.
 pub use modules::crawlers::*;

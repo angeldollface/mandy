@@ -24,6 +24,12 @@ pub mod sass;
 pub mod robots;
 
 /// Exporting the module
+/// that helps to log
+/// the build of a Mandy
+/// project.
+pub mod logging;
+
+/// Exporting the module
 /// that creates files for
 /// SEO crawlers.
 pub mod crawlers;
