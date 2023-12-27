@@ -1,0 +1,14 @@
+[package]
+name = "dollmarkup"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Angel Dollface <angelbbe@proton.me>"]
+description= "A data-storage language for (dramatic) dolls."
+homepage = "https://github.com/angeldollface/mandy"
+repository = "https://github.com/angeldollface/mandy"
+documentation = "https://angeldollface.art/mandys-house/content/documentation/"
+readme = "../../README.markdown"
+
+[dependencies]
+merrors = { path = "../merrors", version = "0.1.0" }
