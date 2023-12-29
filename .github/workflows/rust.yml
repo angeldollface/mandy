@@ -74,3 +74,9 @@ jobs:
         with:
           command: run
           args: -p mandy-bin -- reset mysite
+      
+      - name: "Run Vento Oxide tests."
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: -p vento-oxide

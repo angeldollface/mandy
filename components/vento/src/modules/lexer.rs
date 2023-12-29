@@ -9,16 +9,17 @@ Licensed under the MIT license.
 /// to group the different
 /// variants of possible
 /// tokens.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug,PartialEq)]
 pub enum TokenType {
     UserString,
     Comment,
-    Tag
+    Tag,
+    Filter
 }
 
 /// A structure to capture
 /// a lexed token.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Token {
     pub value: String,
     pub token_type: TokenType,
@@ -34,12 +35,12 @@ impl Token {
     /// to create a new "instance"
     /// of this structure.
     pub fn new(
-        value: &String,
+        value: &str,
         token_type: &TokenType,
         column: &usize
     ) -> Token {
         Token {
-            value: value.to_owned(),
+            value: value.to_string(),
             token_type: token_type.to_owned(),
             column: column.to_owned()
         }
@@ -52,7 +53,8 @@ impl Token {
         match &self.token_type{
             TokenType::UserString => token_type_string = "user_string".to_string(),
             TokenType::Comment => token_type_string = "comment".to_string(),
-            TokenType::Tag => token_type_string = "tag".to_string()
+            TokenType::Tag => token_type_string = "tag".to_string(),
+            TokenType::Filter => token_type_string = "filter".to_string()
         }
         format!("Value: {}\nType: {}\nColumn: {}", &self.value, token_type_string, &self.column)
     }
@@ -74,16 +76,20 @@ pub fn raw_tokenize(
     while counter < input_length{
         char_pool.push(chars[counter]);
         let joined: String = char_pool.clone().into_iter().collect();
+        if is_tag(&joined){
+            result.push(Token::new(&joined, &TokenType::Tag, &counter));
+            char_pool = Vec::new();
+        }
+        if is_string(&joined){
+            result.push(Token::new(&joined, &TokenType::UserString, &counter));
+            char_pool = Vec::new();
+        }
         if is_comment(&joined){
             result.push(Token::new(&joined, &TokenType::Comment, &counter));
             char_pool = Vec::new();
         }
-        else if is_string(&joined){
-            result.push(Token::new(&joined, &TokenType::UserString, &counter));
-            char_pool = Vec::new();
-        }
-        else if is_tag(&joined){
-            result.push(Token::new(&joined, &TokenType::Tag, &counter));
+        if is_filter(&joined){
+            result.push(Token::new(&joined, &TokenType::Filter, &counter));
             char_pool = Vec::new();
         }
         else {}
@@ -95,9 +101,11 @@ pub fn raw_tokenize(
 pub fn is_tag(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
-    let last: char = subject_chars[subject_chars.len() - 1];
-    if subject_chars[0] == '<' && last == '>'{
-        result = true;
+    if subject_chars.len() > 2 {
+        if subject_chars[0] == '<' && subject_chars[subject_chars.len() - 1] == '>'{
+            result = true;
+        }
+        else {}
     }
     else {}
     result
@@ -106,14 +114,17 @@ pub fn is_tag(subject: &String) -> bool {
 pub fn is_string(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
-    let last: char = subject_chars[subject_chars.len() - 1];
-    let penultimate: char = subject_chars[subject_chars.len() - 2];
-    if subject_chars[0] == '{' &&
+    if subject_chars.len() > 4 {
+        if subject_chars[0] == '{' &&
         subject_chars[1] == '{' && 
-        last == '}' &&
-        penultimate == '}'
-    {
-        result = true;
+        subject_chars[2] == ' ' &&
+        subject_chars[subject_chars.len() - 1] == '}' &&
+        subject_chars[subject_chars.len() - 2] == '}' &&
+        subject_chars[subject_chars.len() - 3] == ' '
+        {
+            result = true;
+        }
+        else {}
     }
     else {}
     result
@@ -121,13 +132,36 @@ pub fn is_string(subject: &String) -> bool {
 
 pub fn is_comment(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
-    let last: char = subject_chars[subject_chars.len() - 1];
     let mut result: bool = false;
-    if subject_chars[0] == '#' &&
-       last == '#'
-    {
-        result = true;
+    if subject_chars.len() > 6 {
+        if subject_chars[0] == '{' &&
+            subject_chars[1] == '{' &&
+            subject_chars[2] == '#' &&
+            subject_chars[subject_chars.len()-1] == '}' &&
+            subject_chars[subject_chars.len()-2] == '}' &&
+            subject_chars[subject_chars.len()-3] == '#'
+        {
+            result = true;
+        }
+        else {}
     }
     else {}
     result
 }
+
+pub fn is_filter(subject: &String) -> bool {
+    let subject_chars: Vec<char> = subject.chars().collect();
+    let mut result: bool = false;
+    if subject_chars.len() > 3 {
+        if subject_chars[0] == '|' &&
+            subject_chars[1] == '>' &&
+            subject_chars[subject_chars.len() - 1] == ' '
+        {
+            result = true;
+        }
+        else {}
+    }
+    else {}
+    result
+}
+
