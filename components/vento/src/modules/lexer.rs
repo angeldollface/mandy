@@ -4,6 +4,10 @@ a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
 
 /// Defining an enum
 /// to group the different
@@ -62,12 +66,12 @@ impl Token {
 }
 
 /// A method to attempt
-/// to tokenize a passed in
+/// to tokenize a passed-in
 /// string. Returns an error
 /// if this fails.
-pub fn raw_tokenize(
+pub fn tokenize(
     subject: &String
-) -> Vec<Token>{
+) -> Result<Vec<Token>, MandyError>{
     let mut result: Vec<Token> = Vec::new();
     let chars: Vec<char> = subject.chars().collect();
     let input_length: usize = chars.len();
@@ -95,9 +99,18 @@ pub fn raw_tokenize(
         else {}
         counter = counter + 1;
     }
-    result
+    if result.is_empty(){
+        let e: String = format!("No valid tokens could be lexed from column 0 to {}", input_length);
+        return Err::<Vec<Token>, MandyError>(
+            MandyError::new(&e.to_string())
+        );
+    }
+    else {}
+    Ok(result)
 }
 
+/// Checks whether "subject" contains a valid character
+/// sequence for a Vento tag.
 pub fn is_tag(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
@@ -111,6 +124,8 @@ pub fn is_tag(subject: &String) -> bool {
     result
 }
 
+/// Checks whether "subject" contains a valid character
+/// sequence for a Vento user string.
 pub fn is_string(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
@@ -130,6 +145,8 @@ pub fn is_string(subject: &String) -> bool {
     result
 }
 
+/// Checks whether "subject" contains a valid character
+/// sequence for a Vento comment.
 pub fn is_comment(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
