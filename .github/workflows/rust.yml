@@ -80,3 +80,9 @@ jobs:
         with:
           command: test
           args: -p vento-oxide
+
+      - name: "Run Dollmarkup tests."
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: -p dollmarkup
