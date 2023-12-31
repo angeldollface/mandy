@@ -91,7 +91,7 @@ pub fn test_section_id() {
     let res: Vec<Token> = tokenize(&code).unwrap();
     let mut res_vec: Vec<Token> = Vec::new();
     res_vec.push(
-        Token::new(&":section ",&TokenType::Section,&8)
+        Token::new(&":section ",&TokenType::SectionDef,&8)
     );
     res_vec.push(
         Token::new(&"\"name\"",&TokenType::UserString,&14)

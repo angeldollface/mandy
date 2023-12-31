@@ -21,7 +21,7 @@ pub enum TokenType {
     Assign,
     BooleanTrue,
     BooleanFalse,
-    Section
+    SectionDef
 }
 
 /// A structure to capture
@@ -64,7 +64,7 @@ impl Token {
             TokenType::BooleanTrue => token_type_string = "true".to_string(),
             TokenType::BooleanFalse => token_type_string = "false".to_string(),
             TokenType::Assign => token_type_string = "assign".to_string(),
-            TokenType::Section => token_type_string = "section".to_string()
+            TokenType::SectionDef => token_type_string = "section".to_string()
         }
         format!("Value: {}\nType: {}\nColumn: {}", &self.value, token_type_string, &self.column)
     }
@@ -111,7 +111,7 @@ pub fn tokenize(
             char_pool = Vec::new();
         }
         if is_section_id(&joined){
-            result.push(Token::new(&joined, &TokenType::Section, &counter));
+            result.push(Token::new(&joined, &TokenType::SectionDef, &counter));
             char_pool = Vec::new();
         }
         else {}

@@ -5,6 +5,10 @@ Licensed under the MIT license.
 */
 
 /// Exporting the
+/// AST module.
+pub mod ast;
+
+/// Exporting the
 /// lexer module.
 pub mod lexer;
 
