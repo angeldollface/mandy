@@ -9,5 +9,13 @@ Licensed under the MIT license.
 pub mod modules;
 
 /// Re-exporting all APIs from
+/// the AST module.
+pub use modules::ast::*;
+
+/// Re-exporting all APIs from
 /// the lexer.
 pub use modules::lexer::*;
+
+/// Re-exporting all APIs from
+/// the processor module.
+pub use modules::processor::*;

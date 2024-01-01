@@ -12,3 +12,4 @@ readme = "../../README.markdown"
 
 [dependencies]
 merrors = { path = "../merrors", version = "0.1.0" }
+serde = { version = "1.0.193", features = ["derive"] }

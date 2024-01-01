@@ -4,10 +4,19 @@ a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
+/// Imports the "Deserialize"
+/// trait to use in tests.
+use serde::Deserialize;
+
 /// Importing the "Token"
 /// structure to capture info
 /// about tokens.
 use super::lexer::Token;
+
+/// Importing the enum
+/// that describes statement
+/// types.
+use super::ast::StmtType;
 
 /// Importing the "Token"
 /// structure to tokenize input.
@@ -17,6 +26,20 @@ use super::lexer::tokenize;
 /// structure to capture info
 /// about the type of a token.
 use super::lexer::TokenType;
+
+/// Importing the method parse tokens
+/// into statements.
+use super::ast::parse_tokens;
+
+/// Importing the structure to store info
+/// about parsed tokens.
+use super::ast::DollMarkupEntity;
+
+/// Importing the "from_str"
+/// structure to capture info
+/// from Dollmarkup into a Rust
+/// data structure.
+//use super::processor::from_str;
 
 /// Tests input with a string
 /// assigned to a string.
@@ -122,3 +145,26 @@ pub fn test_invalid_input() {
     let code: String = "\"name".to_string();
     assert_eq!(tokenize(&code).is_ok(), false);
 }
+
+#[test]
+pub fn test_ast(){
+    let code: String = "\"name\"=>(564)".to_string();
+    let tokenized: Vec<Token> = tokenize(&code).unwrap();
+    let parsed: Vec<DollMarkupEntity> = parse_tokens(&tokenized).unwrap();
+    let expected: Vec<DollMarkupEntity> = vec![DollMarkupEntity::new(&StmtType::StringNumberStmt, "\"name\"", "(564)")];
+    assert_eq!(parsed, expected);
+}
+
+#[derive(Deserialize)]
+pub struct Person {
+    pub name: String,
+    pub age: u32
+}
+
+/*#[test]
+pub fn test_from_str(){
+    let dmu_string: String = ":section \"Person\"\n\"name\"=>\"Mandy\"\n\"age\"=>(3)";
+    let person_instance: Person = Person::new("Mandy", &3);
+    let tested: Person = from_str(&dmu_string);
+    assert_eq!(tested, person_instance);
+}*/

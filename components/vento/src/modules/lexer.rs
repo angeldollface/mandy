@@ -80,12 +80,9 @@ pub fn tokenize(
     while counter < input_length{
         char_pool.push(chars[counter]);
         let joined: String = char_pool.clone().into_iter().collect();
+        println!("{}", joined);
         if is_tag(&joined){
             result.push(Token::new(&joined, &TokenType::Tag, &counter));
-            char_pool = Vec::new();
-        }
-        if is_string(&joined){
-            result.push(Token::new(&joined, &TokenType::UserString, &counter));
             char_pool = Vec::new();
         }
         if is_comment(&joined){
@@ -114,28 +111,13 @@ pub fn tokenize(
 pub fn is_tag(subject: &String) -> bool {
     let subject_chars: Vec<char> = subject.chars().collect();
     let mut result: bool = false;
-    if subject_chars.len() > 2 {
-        if subject_chars[0] == '<' && subject_chars[subject_chars.len() - 1] == '>'{
-            result = true;
-        }
-        else {}
-    }
-    else {}
-    result
-}
-
-/// Checks whether "subject" contains a valid character
-/// sequence for a Vento user string.
-pub fn is_string(subject: &String) -> bool {
-    let subject_chars: Vec<char> = subject.chars().collect();
-    let mut result: bool = false;
-    if subject_chars.len() > 4 {
-        if subject_chars[0] == '{' &&
-        subject_chars[1] == '{' && 
-        subject_chars[2] == ' ' &&
-        subject_chars[subject_chars.len() - 1] == '}' &&
-        subject_chars[subject_chars.len() - 2] == '}' &&
-        subject_chars[subject_chars.len() - 3] == ' '
+    if subject_chars.len() > 6 {
+        if subject_chars[0] == '{' && 
+            subject_chars[1] == '{' && 
+            subject_chars[2] == ' ' && 
+            subject_chars[subject_chars.len() - 1] == ' ' &&
+            subject_chars[subject_chars.len() - 2] == '}' &&
+            subject_chars[subject_chars.len() - 3] == '}'
         {
             result = true;
         }
@@ -181,4 +163,3 @@ pub fn is_filter(subject: &String) -> bool {
     else {}
     result
 }
-

@@ -12,6 +12,10 @@ pub mod ast;
 /// lexer module.
 pub mod lexer;
 
+/// Exporting the processor
+/// module.
+pub mod processor;
+
 /// Defining the
 /// crate's test module.
 #[cfg(test)]
