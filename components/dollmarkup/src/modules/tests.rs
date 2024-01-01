@@ -154,17 +154,3 @@ pub fn test_ast(){
     let expected: Vec<DollMarkupEntity> = vec![DollMarkupEntity::new(&StmtType::StringNumberStmt, "\"name\"", "(564)")];
     assert_eq!(parsed, expected);
 }
-
-#[derive(Deserialize)]
-pub struct Person {
-    pub name: String,
-    pub age: u32
-}
-
-/*#[test]
-pub fn test_from_str(){
-    let dmu_string: String = ":section \"Person\"\n\"name\"=>\"Mandy\"\n\"age\"=>(3)";
-    let person_instance: Person = Person::new("Mandy", &3);
-    let tested: Person = from_str(&dmu_string);
-    assert_eq!(tested, person_instance);
-}*/
