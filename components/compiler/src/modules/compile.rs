@@ -15,6 +15,18 @@ use coutils::dir_is;
 /// for sitemap generation.
 use utils::clean_url;
 
+/// Gets the current time
+/// as a string.
+use coutils::get_time;
+
+/// Imports the data structure
+/// to hold log message information.
+use extras::LogMessage;
+
+/// Imports the data structure
+/// to hold create a build log.
+use extras::create_log;
+
 /// Importing Mandy's error
 /// structure.
 use merrors::MandyError;
@@ -61,6 +73,7 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
     }
     else {
         if dir_is(dir) {
+            let mut logging_items: Vec<LogMessage> = Vec::new();
             let site_contexts: Vec<SiteContext> = match get_site_contexts(dir) {
                 Ok(site_contexts) => site_contexts,
                 Err(e) => {
@@ -76,13 +89,22 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
             let mut baseurl: String = String::from("");
             let mut freq: String = String::from("");
             for ctx in site_contexts {
-                urls.push(clean_url(&ctx.clone().file, dir, &ctx.clone().dir));
+                let path: &String = &clean_url(&ctx.clone().file, dir, &ctx.clone().dir);
+                urls.push(path.to_owned());
                 tl_domain = ctx.clone().site["tlDomain"].clone();
                 baseurl = ctx.clone().site["baseurl"].clone();
                 freq = ctx.clone().site["updateFreq"].clone();
                 let build_op: Result<(), MandyError> = build_context(&ctx, dir);
                 match build_op {
-                    Ok(_x) => {},
+                    Ok(_x) => {
+                        logging_items.push(
+                            LogMessage::new(
+                                &format!("Building file \"{}\"...", &path),
+                                &get_time(),
+                                &dir
+                            )
+                        );
+                    },
                     Err(e) => {
                         return Err::<(), MandyError>(
                             MandyError::new(
@@ -93,7 +115,15 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 };
             }
             match compile_sass_files(dir) {
-                Ok(_x) => {},
+                Ok(_x) => {
+                    logging_items.push(
+                        LogMessage::new(
+                            &format!("Building SASS!"),
+                            &get_time(),
+                            &dir
+                        )
+                    );
+                },
                 Err(e) => {
                     return Err::<(), MandyError>(
                         MandyError::new(
@@ -103,7 +133,15 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 }
             };
             match create_crawler_files(&urls, &freq, &baseurl, &tl_domain, dir) {
-                Ok(_x) => {},
+                Ok(_x) => {
+                    logging_items.push(
+                        LogMessage::new(
+                            &"Creating crawler files.",
+                            &get_time(),
+                            &dir
+                        )
+                    );
+                },
                 Err(e) => {
                     return Err::<(), MandyError>(
                         MandyError::new(
@@ -113,7 +151,15 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 }
             }
             match generate_meta(dir){
-                Ok(_x) => {},
+                Ok(_x) => {
+                    logging_items.push(
+                        LogMessage::new(
+                            &"Generating metadata.",
+                            &get_time(),
+                            &dir
+                        )
+                    );
+                },
                 Err(e) => {
                     return Err::<(), MandyError>(
                         MandyError::new(
@@ -123,6 +169,24 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                 }
             };
             match generate_server(dir){
+                Ok(_x) => {
+                    logging_items.push(
+                        LogMessage::new(
+                            &"Generating Typescript server file.",
+                            &get_time(),
+                            &dir
+                        )
+                    );
+                },
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            }
+            match create_log(&logging_items, dir){
                 Ok(_x) => {},
                 Err(e) => {
                     return Err::<(), MandyError>(
