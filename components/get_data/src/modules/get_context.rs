@@ -49,9 +49,14 @@ use std::collections::HashMap;
 use processors::MandyMDDocument;
 
 /// Importing the method to deserialize and
-/// read the configuration file 
+/// read the configuration file in JSON format
 /// of a Mandy site.
-use processors::deserialize_config;
+use processors::deserialize_config_json;
+
+/// Importing the method to deserialize and
+/// read the configuration file in TOML format
+/// of a Mandy site.
+use processors::deserialize_config_toml;
 
 /// Importing the method to get information
 /// on Liquid partial templates to parse and render
@@ -78,7 +83,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                 return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
             }
         };
-        let config_data = match deserialize_config(
+        let config_data = match deserialize_config_json(
             &config_string) {
             Ok(config_data) => config_data,
             Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
