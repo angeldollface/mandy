@@ -2,14 +2,12 @@
 resolver = "2"
 members = [
   "mandy-bin",
-  "components/vento",
   "components/utils",
   "components/extras",
   "components/merrors",
   "components/compiler",
   "components/get_data",
-  "components/processors",
-  "components/dollmarkup"
+  "components/processors"
 ]
 
 [profile.release]
