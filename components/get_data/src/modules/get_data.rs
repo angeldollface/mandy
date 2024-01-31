@@ -25,7 +25,19 @@ use processors::find_data_files;
 /// deserialize JSON files into
 /// data structures Mandy's compiler
 /// can use.
-use processors::deserialize_data;
+use processors::deserialize_data_json;
+
+/// Importing the method to 
+/// deserialize YAML files into
+/// data structures Mandy's compiler
+/// can use.
+use processors::deserialize_data_yaml;
+
+/// Importing the method to 
+/// deserialize TOML files into
+/// data structures Mandy's compiler
+/// can use.
+use processors::deserialize_data_toml;
 
 /// Attempts to retrieve the data objects of a 
 /// Mandy site if they exist.
@@ -49,17 +61,57 @@ pub fn get_data(
             );
         }
         else {
-            let data = match deserialize_data(data_strings) {
-                Ok(data) => data,
-                Err(e) => {
+            match data_strings.data_file_type{
+                JSON => {
+                    let data = match deserialize_data_json(data_strings) {
+                        Ok(data) => data,
+                        Err(e) => {
+                            return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
+                                MandyError::new(
+                                    &e.to_string()
+                                )
+                            );
+                        }
+                    };
+                    return Ok(Some(data));
+                },
+                YAML => {
+                    let data = match deserialize_data_yaml(data_strings) {
+                        Ok(data) => data,
+                        Err(e) => {
+                            return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
+                                MandyError::new(
+                                    &e.to_string()
+                                )
+                            );
+                        }
+                    };
+                    return Ok(Some(data));
+                },
+                TOML => {
+                    let data = match deserialize_data_toml(data_strings) {
+                        Ok(data) => data,
+                        Err(e) => {
+                            return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
+                                MandyError::new(
+                                    &e.to_string()
+                                )
+                            );
+                        }
+                    };
+                    return Ok(Some(data));
+                },
+                _ => {
+                    let e: String = String::from("An error occurred with parsing data files!");
                     return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
                         MandyError::new(
                             &e.to_string()
                         )
                     );
+
                 }
             };
-            return Ok(Some(data));
+            
         }
     }
     else {return Ok(None);}

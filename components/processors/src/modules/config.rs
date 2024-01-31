@@ -4,8 +4,12 @@ Licensed under the MIT license.
 */
 
 /// Importing the "toml"
-/// crate to deserialize it.
+/// crate to deserialize TOML.
 use toml;
+
+/// Importing the "serde_yaml"
+/// crate to deserialize YAML.
+use serde_yaml;
 
 /// Importing Mandy's error
 /// struct.
@@ -46,6 +50,23 @@ pub fn deserialize_config_toml(
     toml_string: &String
 ) -> Result<HashMap<String, String>, MandyError> {
     let result: HashMap<String, String> = match toml::from_str(toml_string) {
+        Ok(result) => result,
+        Err(e) => {
+            return Err::<HashMap<String,String>, MandyError>(
+                MandyError::new(&e.to_string())
+            );
+        }
+    };
+    Ok(result)
+}
+
+/// A function to parse the configuration file in  YAML
+/// format of a Mandy site. Returns a result of a "HashMap"
+/// or an error.
+pub fn deserialize_config_yaml(
+    yaml_string: &String
+) -> Result<HashMap<String, String>, MandyError> {
+    let result: HashMap<String, String> = match serde_yaml::from_str(yaml_string) {
         Ok(result) => result,
         Err(e) => {
             return Err::<HashMap<String,String>, MandyError>(

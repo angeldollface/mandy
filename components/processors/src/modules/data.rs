@@ -3,6 +3,15 @@ MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
+use coutils::file_type;
+/// Importing the "toml"
+/// crate to deserialize TOML.
+use toml;
+
+/// Importing the "serde_yaml"
+/// crate to deserialize YAML.
+use serde_yaml;
+
 /// Importing the "Entity"
 /// enum from the "coutils"
 /// crate to determine the type
@@ -42,9 +51,9 @@ use std::collections::HashMap;
 /// contents.
 use coutils::list_dir_contents;
 
-/// Deserializing data from the "data"
+/// Deserializing JSON data from the "data"
 /// directory and further processing this.
-pub fn deserialize_data(
+pub fn deserialize_data_json(
     data_strings: Vec<HashMap<String, String>>
 ) -> Result<
 HashMap<String, Vec<HashMap<String, String>>>, 
@@ -54,26 +63,74 @@ MandyError
     for item in data_strings.into_iter() {
         for (k,v) in item.into_iter() {
             let file_name: &String = &k;
-            let json_op: Result<Vec<HashMap<String, String>>, serde_json::Error> = from_str(&v);
-            match json_op {
-                Ok(map) => {
-                    result.insert(file_name.to_owned(), map);
-                },
+            let map: Vec<HashMap<String, String>> = match from_str(&v) {
+                Ok(map) => map,
                 Err(e) => {
                     let msg: String = format!("Error in file \"{}.json\":\n{}", file_name, e);
                     return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(MandyError::new(&msg.to_string()));
                 }
-            }
+            };
+            result.insert(file_name.to_owned(), map);
+        }
+    }
+    Ok(result)
+}
+
+/// Deserializing YAML data from the "data"
+/// directory and further processing this.
+pub fn deserialize_data_yaml(
+    data_strings: Vec<HashMap<String, String>>
+) -> Result<
+HashMap<String, Vec<HashMap<String, String>>>, 
+MandyError
+> {
+    let mut result: HashMap<String, Vec<HashMap<String, String>>> = HashMap::new();
+    for item in data_strings.into_iter() {
+        for (k,v) in item.into_iter() {
+            let file_name: &String = &k;
+            let map: Vec<HashMap<String, String>> = match serde_yaml::from_str(&v) {
+                Ok(map) => map,
+                Err(e) => {
+                    let msg: String = format!("Error in file \"{}.yaml\":\n{}", file_name, e);
+                    return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(MandyError::new(&msg.to_string()));
+                }
+            };
+            result.insert(file_name.to_owned(), map);
+        }
+    }
+    Ok(result)
+}
+
+/// Deserializing YAML data from the "data"
+/// directory and further processing this.
+pub fn deserialize_data_toml(
+    data_strings: Vec<HashMap<String, String>>
+) -> Result<
+HashMap<String, Vec<HashMap<String, String>>>, 
+MandyError
+> {
+    let mut result: HashMap<String, Vec<HashMap<String, String>>> = HashMap::new();
+    for item in data_strings.into_iter() {
+        for (k,v) in item.into_iter() {
+            let file_name: &String = &k;
+            let map: Vec<HashMap<String, String>> = match toml::from_str(&v) {
+                Ok(map) => map,
+                Err(e) => {
+                    let msg: String = format!("Error in file \"{}.toml\":\n{}", file_name, e);
+                    return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(MandyError::new(&msg.to_string()));
+                }
+            };
+            result.insert(file_name.to_owned(), map);
         }
     }
     return Ok(result);
 }
 
 /// Storing the file contents
-/// from JSON data files into
+/// from data files into
 /// a list of maps.
 pub fn find_data_files(
-    dir: &String
+    dir: &String, ending: &str
 ) -> Result<Vec<HashMap<String, String>>, MandyError> {
     let mut result: Vec<HashMap<String, String>> = Vec::new();
     let dir_items: Vec<FileEntry> = match list_dir_contents(dir){
@@ -84,7 +141,7 @@ pub fn find_data_files(
     };
     for item in dir_items {
         if &item.file_type == &Entity::File
-            && item.name.contains(".json") {
+            && item.name.contains(ending) {
             let mut map: HashMap<String, String> = HashMap::new();
             let file_contents: &String = &match read_file(&item.name){
                 Ok(file_contents) => file_contents,
@@ -97,12 +154,12 @@ pub fn find_data_files(
                     &item.name,
                     &String::from("/")
                 );
-            let json_file: &String = &path_list[path_list.len()-1];
-            let json_file_name_components: &Vec<String> = &clean_split(
-                &json_file,
-                &String::from(".json")
+            let data_file: &String = &path_list[path_list.len()-1];
+            let data_file_name_components: &Vec<String> = &clean_split(
+                &data_file,
+                &String::from(ending)
             );
-            let template_key: &String = &json_file_name_components[0];
+            let template_key: &String = &data_file_name_components[0];
             map.insert(template_key.to_owned(), file_contents.to_owned());
             result.push(map);
         }

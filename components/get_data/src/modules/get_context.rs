@@ -58,6 +58,11 @@ use processors::deserialize_config_json;
 /// of a Mandy site.
 use processors::deserialize_config_toml;
 
+/// Importing the method to deserialize and
+/// read the configuration file in YAML format
+/// of a Mandy site.
+use processors::deserialize_config_yaml;
+
 /// Importing the method to get information
 /// on Liquid partial templates to parse and render
 /// Liquid templates in a Mandy site.
@@ -74,20 +79,55 @@ use super::get_loop_content::get_loop_content;
 /// Attempts to retrieve the site context for each ".markdown"
 /// file in a Mandy site.
 pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
-    let mut result: Vec<SiteContext> = Vec::new();
-    let config_path: &String = &format!("{}/config.json", &dir);
-    if file_is(config_path){
-        let config_string: String = match read_file(&config_path){
-            Ok(config_string) => config_string,
-            Err(e) => {
-                return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
-            }
-        };
-        let config_data = match deserialize_config_json(
-            &config_string) {
-            Ok(config_data) => config_data,
-            Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
-        };
+    let mut result: Vec<SiteContext> = Vec::new(); 
+    if file_is(&format!("{}/config.yaml", &dir)) || 
+        file_is(&format!("{}/config.toml", &dir)) ||
+        file_is(&format!("{}/config.json", &dir))
+    {
+        let config_data: HashMap<String,String>;
+        if file_is(&format!("{}/config.yaml", &dir)){
+            let config_string: String = match read_file(&format!("{}/config.yaml", &dir)){
+                Ok(config_string) => config_string,
+                Err(e) => {
+                    return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+                }
+            };
+            config_data = match deserialize_config_yaml(
+                &config_string) {
+                Ok(config_data) => config_data,
+                Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
+            };
+        }
+        else if file_is(&format!("{}/config.toml", &dir)){
+            let config_string: String = match read_file(&format!("{}/config.toml", &dir)){
+                Ok(config_string) => config_string,
+                Err(e) => {
+                    return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+                }
+            };
+            config_data = match deserialize_config_toml(
+                &config_string) {
+                Ok(config_data) => config_data,
+                Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
+            };
+        }
+        else if file_is(&format!("{}/config.json", &dir)){
+            let config_string: String = match read_file(&format!("{}/config.yaml", &dir)){
+                Ok(config_string) => config_string,
+                Err(e) => {
+                    return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+                }
+            };
+            config_data = match deserialize_config_json(
+                &config_string) {
+                Ok(config_data) => config_data,
+                Err(e) => {let err_msg: String = format!("Error in config:\n{}", e);return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&err_msg.to_string()));}
+            };
+        }
+        else {
+            let e: String = "A config file could not be found or could not be parsed.".to_string();
+            return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));
+        }
         if config_data.contains_key(&String::from("prod_url")) &&
            config_data.contains_key(&String::from("dev_url")) &&
            config_data.contains_key(&String::from("hasLoopContent")) &&

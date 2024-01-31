@@ -5,6 +5,9 @@ Licensed under the MIT license.
 */
 
 use merrors::MandyError;
+use coutils::write_to_file;
+use coutils::create_file;
+use coutils::file_is;
 
 #[derive(Clone, Debug)]
 pub struct Channel {
@@ -82,6 +85,8 @@ impl Item {
 
 }
 
-pub fn create_feed() -> Result<(), MandyError>{
+pub fn create_feed(dir: &String) -> Result<(), MandyError>{
+    let rss_path: String = format!("{}/rss.xml", &dir);
+    
     Ok(())
 }

@@ -37,6 +37,7 @@ pub struct SiteContext {
     pub dir: String,
     pub loop_content: Option<HashMap<String, Vec<HashMap<String, String>>>>,
     pub data: Option<HashMap<String, Vec<HashMap<String, String>>>>,
+    pub categories: Option<HashMap<String, Vec<HashMap<String, String>>>>,
 }
 
 /// Implementing generic methods
@@ -56,7 +57,8 @@ impl SiteContext {
         file: &String,
         dir: &String,
         loop_content: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
-        data: &Option<HashMap<String, Vec<HashMap<String, String>>>>
+        data: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
+        categories: &Option<HashMap<String, Vec<HashMap<String, String>>>>,
     ) -> SiteContext {
         return SiteContext { 
             copy_files: copy_files.to_owned(),
@@ -67,7 +69,8 @@ impl SiteContext {
             file: file.to_owned(), 
             dir: dir.to_owned(), 
             loop_content: loop_content.to_owned(),
-            data: data.to_owned()
+            data: data.to_owned(),
+            categories: categories.to_owned()
         };
     }
 }
