@@ -27,6 +27,10 @@ use extras::LogMessage;
 /// to hold create a build log.
 use extras::create_log;
 
+/// Importing the function to make an RSS Feed
+/// XML file.
+use extras::create_feed;
+
 /// Importing Mandy's error
 /// structure.
 use merrors::MandyError;
@@ -88,7 +92,7 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
             let mut tl_domain: String = String::from("");
             let mut baseurl: String = String::from("");
             let mut freq: String = String::from("");
-            for ctx in site_contexts {
+            for ctx in &site_contexts {
                 let path: &String = &clean_url(&ctx.clone().file, dir, &ctx.clone().dir);
                 urls.push(path.to_owned());
                 tl_domain = ctx.clone().site["tlDomain"].clone();
@@ -149,7 +153,7 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                         )
                     );
                 }
-            }
+            };
             match generate_meta(dir){
                 Ok(_x) => {
                     logging_items.push(
@@ -185,8 +189,18 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                         )
                     );
                 }
-            }
+            };
             match create_log(&logging_items, dir){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
+            match create_feed(dir, &site_contexts.clone()){
                 Ok(_x) => {},
                 Err(e) => {
                     return Err::<(), MandyError>(

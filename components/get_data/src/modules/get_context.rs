@@ -112,7 +112,7 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
             };
         }
         else if file_is(&format!("{}/config.json", &dir)){
-            let config_string: String = match read_file(&format!("{}/config.yaml", &dir)){
+            let config_string: String = match read_file(&format!("{}/config.json", &dir)){
                 Ok(config_string) => config_string,
                 Err(e) => {
                     return Err::<Vec<SiteContext>, MandyError>(MandyError::new(&e.to_string()));

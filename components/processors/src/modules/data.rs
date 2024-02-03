@@ -45,6 +45,7 @@ use coutils::clean_split;
 /// Importing Rust's standard
 /// "HashMap" data structure.
 use std::collections::HashMap;
+use std::hash::Hash;
 
 /// Importing the method to store
 /// information about a directory's
@@ -129,24 +130,20 @@ MandyError
 /// Storing the file contents
 /// from data files into
 /// a list of maps.
-pub fn find_data_files(
-    dir: &String, ending: &str
-) -> Result<Vec<HashMap<String, String>>, MandyError> {
-    let mut result: Vec<HashMap<String, String>> = Vec::new();
+pub fn find_data_files(dir: &String) -> Result<Vec<DataFile>, MandyError> {
+    let mut result: Vec<DataFile> = Vec::new();
     let dir_items: Vec<FileEntry> = match list_dir_contents(dir){
         Ok(dir_items) => dir_items,
         Err(e) => {
-            return Err::<Vec<HashMap<String, String>>, MandyError>(MandyError::new(&e.to_string()));
+            return Err::<Vec<DataFile>, MandyError>(MandyError::new(&e.to_string()));
         }
     };
     for item in dir_items {
-        if &item.file_type == &Entity::File
-            && item.name.contains(ending) {
-            let mut map: HashMap<String, String> = HashMap::new();
+        if &item.file_type == &Entity::File {
             let file_contents: &String = &match read_file(&item.name){
                 Ok(file_contents) => file_contents,
                 Err(e) => {
-                    return Err::<Vec<HashMap<String, String>>, MandyError>(MandyError::new(&e.to_string()));
+                    return Err::<Vec<DataFile>, MandyError>(MandyError::new(&e.to_string()));
                 }
             };
             let path_list: &Vec<String> = 
@@ -155,15 +152,110 @@ pub fn find_data_files(
                     &String::from("/")
                 );
             let data_file: &String = &path_list[path_list.len()-1];
-            let data_file_name_components: &Vec<String> = &clean_split(
-                &data_file,
-                &String::from(ending)
-            );
-            let template_key: &String = &data_file_name_components[0];
-            map.insert(template_key.to_owned(), file_contents.to_owned());
-            result.push(map);
+            if data_file.contains(".json"){
+                let data_file_name_components: &Vec<String> = &clean_split(
+                    &data_file,
+                    &String::from(".json")
+                );
+                let template_key: &String = &data_file_name_components[0];
+                let df_inst: DataFile = DataFile::new(file_contents, &DataFileType::JsonData, &template_key);
+                result.push(df_inst);
+            }
+            else if data_file.contains(".toml"){
+                let data_file_name_components: &Vec<String> = &clean_split(
+                    &data_file,
+                    &String::from(".toml")
+                );
+                let template_key: &String = &data_file_name_components[0];
+                let df_inst: DataFile = DataFile::new(file_contents, &DataFileType::TomlData, &template_key);
+                result.push(df_inst);
+            }
+            else if data_file.contains(".yaml"){
+                let data_file_name_components: &Vec<String> = &clean_split(
+                    &data_file,
+                    &String::from(".yaml")
+                );
+                let template_key: &String = &data_file_name_components[0];
+                let df_inst: DataFile = DataFile::new(file_contents, &DataFileType::YamlData, &template_key);
+                result.push(df_inst);
+            }
+            else {
+                return Err::<Vec<DataFile>, MandyError>(
+                    MandyError::new(
+                        &format!("Unknown file type: {}\n", &item.name)
+                    )
+                );
+            }
         }
         else {}
     }
     return Ok(result);
+}
+
+#[derive(Debug, Clone)]
+pub enum DataFileType {
+    JsonData,
+    TomlData,
+    YamlData
+}
+
+#[derive(Debug, Clone)]
+pub struct DataFile {
+    pub contents: String,
+    pub file_type: DataFileType,
+    pub file_prefix: String
+}
+
+impl DataFile {
+    pub fn new(
+        contents: &String,
+        file_type: &DataFileType,
+        file_prefix: &String
+    ) -> DataFile {
+        DataFile {
+            contents: contents.to_owned(), 
+            file_type: file_type.to_owned(), 
+            file_prefix: file_prefix.to_owned()
+        }
+    }
+}
+
+pub fn hashmaps_from_files(
+    subject: &Vec<DataFile>
+) -> Vec<HashMap<String, String>> {
+    let mut res_vec: Vec<HashMap<String, String>> = Vec::new();
+    for item in subject {
+        let mut map: HashMap<String, String> = HashMap::new();
+        map.insert(
+            item.file_prefix.clone(), 
+            item.contents.clone()
+        );
+        res_vec.push(map);
+    }
+    res_vec
+}
+
+#[derive(Debug, Clone)]
+pub struct DataDir {
+    pub files: Vec<HashMap<String, String>>,
+    pub file_type: DataFileType
+}
+impl DataDir{
+    pub fn new(
+        files: &Vec<HashMap<String, String>>, 
+        file_type: &DataFileType
+    ) -> DataDir {
+        DataDir {
+            files: files.to_owned(),
+            file_type: file_type.to_owned()
+        }
+    }
+}
+
+pub fn data_dir_from_files(subject: &Vec<DataFile>) -> DataDir {
+    let data_file_type: DataFileType = subject[0].clone().file_type;
+    return DataDir::new(
+        &hashmaps_from_files(subject),
+        &data_file_type
+    );
 }

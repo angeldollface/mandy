@@ -11,6 +11,9 @@ use coutils::dir_is;
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
+use processors::data_dir_from_files;
+use processors::DataDir;
+use processors::DataFile;
 
 /// Importing Rust's standard
 /// "HashMap" API.
@@ -46,7 +49,7 @@ pub fn get_data(
 ) -> Result<Option<HashMap<String, Vec<HashMap<String, String>>>>,MandyError> {
     let data_dir_path: String = format!("{}/data", dir);
     if dir_is(&data_dir_path) {
-        let data_strings: Vec<HashMap<String, String>> = match find_data_files(&data_dir_path){
+        let data_strings: Vec<DataFile> = match find_data_files(&data_dir_path){
             Ok(data_strings) => data_strings,
             Err(e) => {
                 return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
@@ -61,9 +64,10 @@ pub fn get_data(
             );
         }
         else {
-            match data_strings.data_file_type{
-                JSON => {
-                    let data = match deserialize_data_json(data_strings) {
+            let data_dir_conv: DataDir = data_dir_from_files(&data_strings);
+            match data_dir_conv.file_type{
+                processors::DataFileType::JsonData => {
+                    let data = match deserialize_data_json(data_dir_conv.files) {
                         Ok(data) => data,
                         Err(e) => {
                             return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
@@ -75,8 +79,8 @@ pub fn get_data(
                     };
                     return Ok(Some(data));
                 },
-                YAML => {
-                    let data = match deserialize_data_yaml(data_strings) {
+                processors::DataFileType::TomlData => {
+                    let data = match deserialize_data_yaml(data_dir_conv.files) {
                         Ok(data) => data,
                         Err(e) => {
                             return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(
@@ -88,8 +92,8 @@ pub fn get_data(
                     };
                     return Ok(Some(data));
                 },
-                TOML => {
-                    let data = match deserialize_data_toml(data_strings) {
+                processors::DataFileType::YamlData => {
+                    let data = match deserialize_data_toml(data_dir_conv.files) {
                         Ok(data) => data,
                         Err(e) => {
                             return Err::<Option<HashMap<String, Vec<HashMap<String, String>>>>, MandyError>(

@@ -15,4 +15,5 @@ coutils =  "1.5.0"
 serde_json = "1.0.96"
 grass_compiler = "0.13.0"
 utils = { path = "../utils" }
+context = { path = "../context" }
 merrors = { path = "../merrors", version = "0.1.0" }

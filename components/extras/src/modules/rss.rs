@@ -8,6 +8,9 @@ use merrors::MandyError;
 use coutils::write_to_file;
 use coutils::create_file;
 use coutils::file_is;
+use context::SiteContext;
+use std::collections::HashMap;
+use serde_json::to_string_pretty;
 
 #[derive(Clone, Debug)]
 pub struct Channel {
@@ -85,8 +88,30 @@ impl Item {
 
 }
 
-pub fn create_feed(dir: &String) -> Result<(), MandyError>{
+pub fn create_feed(
+    dir: &String,
+    site_contexts: &Vec<SiteContext>
+) -> Result<(), MandyError>{
     let rss_path: String = format!("{}/rss.xml", &dir);
-    
+    let mut loop_content_items: Vec<HashMap<String, Vec<HashMap<String, String>>>> = Vec::new();
+    for ctx in site_contexts {
+        match ctx.clone().loop_content{
+            None => {},
+            Some(content) => {
+               loop_content_items.push(content);
+            }
+        }
+    }
+    get_channel_names(&loop_content_items);
     Ok(())
+}
+
+pub fn get_channel_names(subject: &Vec<HashMap<String, Vec<HashMap<String, String>>>>) -> Vec<String> {
+    let mut result: Vec<String> = Vec::new();
+    let mut im_result: Vec<String> = Vec::new();
+    for item in subject{
+            let json_string: String = to_string_pretty(&item).unwrap();
+            println!("{}", json_string);
+    }
+    return result;
 }

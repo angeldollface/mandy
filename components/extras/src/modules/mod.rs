@@ -43,3 +43,5 @@ pub mod site_map;
 /// that generates 
 /// a build info file.
 pub mod build_meta;
+
+pub mod categories;

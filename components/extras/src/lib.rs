@@ -47,3 +47,5 @@ pub use modules::site_map::*;
 /// that generates 
 /// a build info file.
 pub use modules::build_meta::*;
+
+pub use modules::categories::*;
