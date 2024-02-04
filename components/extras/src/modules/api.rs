@@ -14,6 +14,10 @@ use coutils::file_is;
 /// struct.
 use merrors::MandyError;
 
+/// Importing the structure representing
+/// a Mandy site's context.
+use context::SiteContext;
+
 /// Importing the function
 /// from the "coutils" crate
 /// to create a file.
@@ -24,10 +28,20 @@ use coutils::create_file;
 /// to write text to a file.
 use coutils::write_to_file;
 
-use context::SiteContext;
+/// Importing the method from the
+/// "serde_json" crate to serialize
+/// a Rust data structure into JSON
+/// code.
 use serde_json::to_string_pretty;
+
+/// Importing the method to eliminate
+/// duplicates from a vector of site data.
 use super::rss::loop_content_is_same;
 
+/// This method creates a JSON API
+/// of iterative content and puts this
+/// into a JSON file. Returns an error
+/// if this operation fails.
 pub fn create_api(
     dir: &String,
     site_contexts: &Vec<SiteContext>

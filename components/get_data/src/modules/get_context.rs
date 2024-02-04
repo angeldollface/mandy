@@ -8,6 +8,7 @@ Licensed under the MIT license.
 /// whether a file exists.
 use coutils::file_is;
 
+use extras::build_categories;
 /// Importing the method to check
 /// the environment in which a Mandy
 /// site is being compiled.
@@ -133,7 +134,9 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
            config_data.contains_key(&String::from("hasLoopContent")) &&
            config_data.contains_key(&String::from("copyFiles")) &&
            config_data.contains_key(&String::from("tlDomain")) &&
-           config_data.contains_key(&String::from("updateFreq")){
+           config_data.contains_key(&String::from("updateFreq")) &&
+           config_data.contains_key(&String::from("description")) &&
+           config_data.contains_key(&String::from("build_log")){
 
             let baseurl;
             let comp_env: Environment = match detect_env() {
@@ -172,17 +175,24 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                             dirs,
                             dir
                         ){
-                        Ok(loop_contexts) => loop_contexts,
-                        Err(e) => {
-                            return Err::<Vec<SiteContext>, MandyError>(
-                                MandyError::new(
-                                    &e.to_string()
-                                )
-                            );
-                        }
+                            Ok(loop_contexts) => loop_contexts,
+                            Err(e) => {
+                                return Err::<Vec<SiteContext>, MandyError>(
+                                    MandyError::new(
+                                        &e.to_string()
+                                    )
+                                );
+                            }
                         };
-                        let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data);
-                        result.push(ctx);
+                        let post_cats = build_categories(&loop_contexts);
+                        if post_cats.is_empty(){
+                            let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data, &None);
+                            result.push(ctx);
+                        }
+                        else {
+                            let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&Some(loop_contexts), &fetched_data, &Some(post_cats));
+                            result.push(ctx);
+                        }
                     }
                     else {
                         let err_msg: &String = &format!("\"hasLoopContent\" set to \"true\" but no directories specified.");
@@ -194,13 +204,13 @@ pub fn get_site_contexts(dir: &String) -> Result<Vec<SiteContext>, MandyError> {
                     }
                 }
                 else {
-                    let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data);
+                    let ctx: SiteContext = SiteContext::new(&config_data["copyFiles"], &partials, &baseurl, &config_clone, &page_context.ctx, &page_context.file, &page_context.dir,&None, &fetched_data, &None);
                     result.push(ctx);
                 }
             }
         }
         else {
-            let err_msg: &String = &format!("One or all of the following config flags not found:\n\"prod_url\", \"dev_url\", \"copyFiles\", \"hasLoopContent\", \"tlDomain\"!");
+            let err_msg: &String = &format!("One or all of the following config flags not found:\n\"prod_url\"\n-\"dev_url\"\n-\"copyFiles\"\n-\"hasLoopContent\"\n-\"tlDomain\"\n-\"updateFreq\"\n-\"description\"\n-\"build_log\"!");
             return Err::<Vec<SiteContext>, MandyError>(
                 MandyError::new(
                     &err_msg.to_string()

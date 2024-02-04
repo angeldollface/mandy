@@ -95,7 +95,10 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
             Err(e) => {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
         };
     }
-    if ctx.page.contains_key("layout") {
+    if ctx.page.contains_key("layout") &&
+        ctx.page.contains_key("title") &&
+        ctx.page.contains_key("date") &&
+        ctx.page.contains_key("description") {
         let layout_path: &String = &format!("{}/{}", dir, ctx.page["layout"]);
         if file_is(&layout_path) {
             let liquid_string: &String = &match read_file(&layout_path) {
@@ -195,7 +198,7 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
         }
     }
     else {
-        let err_msg: String = format!("No layout supplied for \"{}\"!", ctx.file);
+        let err_msg: String = format!("No layout supplied for \"{}\"!\nOne or all of the following may have also not been specified:\n-\"title\"\n-\"date\"\n-\"description\"", ctx.file);
         return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
     }
     return Ok(());

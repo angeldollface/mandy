@@ -4,13 +4,38 @@ a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-use merrors::MandyError;
-use coutils::write_to_file;
-use coutils::create_file;
+/// Importing the function
+/// from the "coutils" crate
+/// to check whether a file
+/// exists.
 use coutils::file_is;
+
+/// Importing Mandy's error
+/// struct.
+use merrors::MandyError;
+
+/// Importing the structure representing
+/// a Mandy site's context.
 use context::SiteContext;
+
+/// Importing the function
+/// from the "coutils" crate
+/// to create a file.
+use coutils::create_file;
+
+/// Importing the function
+/// from the "coutils" crate
+/// to write text to a file.
+use coutils::write_to_file;
+
+/// Importing the "HashMap" data
+/// structure for explicit type
+/// declarations.
 use std::collections::HashMap;
 
+/// A data structure
+/// that mimics the structure
+/// of an RSS channel.
 #[derive(Clone, Debug)]
 pub struct Channel {
     pub title: String,
@@ -19,8 +44,14 @@ pub struct Channel {
     pub items: Vec<Item>
 }
 
+/// Implementing generic
+/// methods for the "Channel"
+/// data structure.
 impl Channel {
 
+    /// A generic method
+    /// to create a new instance
+    /// of the "Channel" data structure.
     pub fn new(
         title: &String,
         description: &String,
@@ -35,6 +66,8 @@ impl Channel {
         }
     }
 
+    /// A method to create a representation of
+    /// the "Channel" data structure in XML format.
     pub fn to_string(&self) -> String {
         let mut joined_items: Vec<String> = Vec::new();
         for item in &self.items {
@@ -51,6 +84,9 @@ impl Channel {
     }
 }
 
+/// A data structure
+/// that mimics the way
+/// an RSS item works.
 #[derive(Clone, Debug)]
 pub struct Item {
     pub title: String,
@@ -59,8 +95,14 @@ pub struct Item {
     pub link: String,
 }
 
+/// Implementing generic
+/// methods for the "Item"
+/// data structure.
 impl Item {
 
+    /// A generic method
+    /// to create a new instance
+    /// of the "Item" data structure.
     pub fn new(
         title: &String,
         description: &String,
@@ -75,6 +117,8 @@ impl Item {
         }
     }
 
+    /// A method to create a representation of
+    /// the "Item" data structure in XML format.
     pub fn to_string(&self) -> String {
         format!(
             "<item>\n<title>{}</title>\n<description>{}</description>\n<pubDate>{}</pubDate>\n<link>{}</link>\n</item>",
@@ -87,14 +131,28 @@ impl Item {
 
 }
 
+/// A data structure
+/// that holds a list
+/// of all data channels
+/// of an RSS feed.
 pub struct RSSFeed{
     channels: Vec<Channel>,
 }
 
+/// Implementing generic
+/// methods for the "RSSFeed"
+/// data structure.
 impl RSSFeed{
+
+    /// A generic method
+    /// to create a new instance
+    /// of the "RSSFeed" data structure.
     pub fn new(channels: &Vec<Channel>) -> RSSFeed{
         RSSFeed{channels: channels.to_owned()}
     }
+
+    /// A method to create a representation of
+    /// the "RSSFeed" data structure in XML format.
     pub fn to_string(&self) -> String {
         let mut joined_channels: Vec<String> = Vec::new();
         for channel in &self.channels{
@@ -106,6 +164,8 @@ impl RSSFeed{
     }
 }
 
+/// This function creates a file called "rss.xml" at the root
+/// of the built site and returns an error if this fails.
 pub fn create_feed(
     dir: &String,
     site_contexts: &Vec<SiteContext>
@@ -172,6 +232,10 @@ pub fn create_feed(
     Ok(())
 }
 
+/// This function checks all gathered pieces of site
+/// data, checks the iterative content, removes any duplicates and
+/// returns the iterative content in a format ready for generation of
+/// an RSS feed.
 pub fn loop_content_is_same(subject: &Vec<SiteContext>) -> bool {
     let mut result: bool = false;
     let mut loop_content_vec: Vec<Option<HashMap<String, Vec<HashMap<String, String>>>>> = Vec::new();

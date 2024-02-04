@@ -9,6 +9,11 @@ Licensed under the MIT license.
 /// feed of iterative content.
 pub mod rss;
 
+/// Exporting the module
+/// that handles the generation
+/// of a JSON API containing
+/// all iterative content
+/// users have made.
 pub mod api;
 
 /// Exporting the module
@@ -46,4 +51,8 @@ pub mod site_map;
 /// a build info file.
 pub mod build_meta;
 
+/// Exporting the module
+/// that handles the ordering
+/// of iterative content
+/// into categories.
 pub mod categories;

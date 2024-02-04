@@ -190,6 +190,11 @@ pub fn find_data_files(dir: &String) -> Result<Vec<DataFile>, MandyError> {
     return Ok(result);
 }
 
+/// An enum that
+/// describes all
+/// different
+/// data formats that
+/// Mandy accepts.
 #[derive(Debug, Clone)]
 pub enum DataFileType {
     JsonData,
@@ -198,6 +203,9 @@ pub enum DataFileType {
     NoData
 }
 
+/// A data structure to
+/// hold information about
+/// a found data file.
 #[derive(Debug, Clone)]
 pub struct DataFile {
     pub contents: String,
@@ -205,7 +213,14 @@ pub struct DataFile {
     pub file_prefix: String
 }
 
+/// Implementing generic
+/// methods for the "DataFile"
+/// data structure.
 impl DataFile {
+
+    /// A generic method
+    /// to create a new instance
+    /// of this data structure.
     pub fn new(
         contents: &String,
         file_type: &DataFileType,
@@ -219,6 +234,10 @@ impl DataFile {
     }
 }
 
+/// This method accepts a list
+/// of "DataFile" data structures
+/// and creates a vector of
+/// "HashMap" data structures.
 pub fn hashmaps_from_files(
     subject: &Vec<DataFile>
 ) -> Vec<HashMap<String, String>> {
@@ -234,12 +253,23 @@ pub fn hashmaps_from_files(
     res_vec
 }
 
+/// A data structure to
+/// hold information about
+/// a found data directory.
 #[derive(Debug, Clone)]
 pub struct DataDir {
     pub files: Vec<HashMap<String, String>>,
     pub file_type: DataFileType
 }
+
+/// Implementing generic
+/// methods for the "DataDir"
+/// data structure.
 impl DataDir{
+
+    /// A generic method
+    /// to create a new instance
+    /// of this data structure.
     pub fn new(
         files: &Vec<HashMap<String, String>>, 
         file_type: &DataFileType
@@ -251,6 +281,8 @@ impl DataDir{
     }
 }
 
+/// This method converts a series of "DataFile" data structures
+/// into a single "DataDir" data structure instance.
 pub fn data_dir_from_files(subject: &Vec<DataFile>) -> DataDir {
     let data_file_type: DataFileType = subject[0].clone().file_type;
     return DataDir::new(

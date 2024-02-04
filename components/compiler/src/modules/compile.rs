@@ -97,12 +97,22 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
             let mut tl_domain: String = String::from("");
             let mut baseurl: String = String::from("");
             let mut freq: String = String::from("");
+            let mut build_log_on: bool = false;
+            let mut iter_content_on: bool = false;
             for ctx in &site_contexts {
                 let path: &String = &clean_url(&ctx.clone().file, dir, &ctx.clone().dir);
                 urls.push(path.to_owned());
                 tl_domain = ctx.clone().site["tlDomain"].clone();
                 baseurl = ctx.clone().site["baseurl"].clone();
                 freq = ctx.clone().site["updateFreq"].clone();
+                if ctx.clone().site["build_log"].clone() == String::from("true"){
+                    build_log_on = true;
+                }
+                else {}
+                if ctx.clone().site["hasLoopContent"].clone() == String::from("true") {
+                    iter_content_on = true;
+                }
+                else {}
                 let build_op: Result<(), MandyError> = build_context(&ctx, dir);
                 match build_op {
                     Ok(_x) => {
@@ -195,36 +205,58 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             };
-            match create_log(&logging_items, dir){
-                Ok(_x) => {},
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(
-                            &e.to_string()
-                        )
-                    );
-                }
-            };
-            match create_feed(dir, &site_contexts){
-                Ok(_x) => {},
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(
-                            &e.to_string()
-                        )
-                    );
-                }
-            };
-            match create_api(dir, &site_contexts){
-                Ok(_x) => {},
-                Err(e) => {
-                    return Err::<(), MandyError>(
-                        MandyError::new(
-                            &e.to_string()
-                        )
-                    );
-                }
-            };
+            if iter_content_on {
+                match create_feed(dir, &site_contexts){
+                    Ok(_x) => {
+                        logging_items.push(
+                            LogMessage::new(
+                                &"Generating RSS feed.",
+                                &get_time(),
+                                &dir
+                            )
+                        );
+                    },
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(
+                                &e.to_string()
+                            )
+                        );
+                    }
+                };
+                match create_api(dir, &site_contexts){
+                    Ok(_x) => {
+                        logging_items.push(
+                            LogMessage::new(
+                                &"Generating JSON API.",
+                                &get_time(),
+                                &dir
+                            )
+                        );
+                    },
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(
+                                &e.to_string()
+                            )
+                        );
+                    }
+                };
+            }
+            else {}
+            if build_log_on {
+                match create_log(&logging_items, dir){
+                    Ok(_x) => {},
+                    Err(e) => {
+                        return Err::<(), MandyError>(
+                            MandyError::new(
+                                &e.to_string()
+                            )
+                        );
+                    }
+                };
+            }
+            else {}
         }
         else {
             let err_msg: String = format!("\"{}\" not found.", dir);

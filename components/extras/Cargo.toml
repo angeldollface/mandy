@@ -12,6 +12,7 @@ readme = "../../README.markdown"
 
 [dependencies]
 coutils =  "1.5.0"
+itertools = "0.12.1"
 serde_json = "1.0.96"
 grass_compiler = "0.13.0"
 utils = { path = "../utils" }

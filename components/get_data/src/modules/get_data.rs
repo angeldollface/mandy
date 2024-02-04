@@ -11,8 +11,15 @@ use coutils::dir_is;
 /// Importing Mandy's error
 /// struct.
 use merrors::MandyError;
-use processors::data_dir_from_files;
+
+/// Importing a data structure
+/// that holds information
+/// on a data directory.
 use processors::DataDir;
+
+/// Importing a data structure
+/// that holds information
+/// on a data file.
 use processors::DataFile;
 
 /// Importing Rust's standard
@@ -23,6 +30,12 @@ use std::collections::HashMap;
 /// and detect JSON data files in
 /// a Mandy site's "data" directory.
 use processors::find_data_files;
+
+/// Importing the method to create
+/// a "DataDir" data structure
+/// from a series of "DataFile"
+/// data structures.
+use processors::data_dir_from_files;
 
 /// Importing the method to 
 /// deserialize JSON files into
