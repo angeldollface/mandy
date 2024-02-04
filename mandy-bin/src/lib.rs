@@ -80,7 +80,7 @@ pub fn cli() -> () {
     );
     mandy.add_arg(
         &"wtmpl",
-        &"  Which template site to use from Git.",
+        &"  Which template site to use from GitHub.",
         &"true"
     );
 

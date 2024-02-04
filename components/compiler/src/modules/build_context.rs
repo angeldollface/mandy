@@ -198,7 +198,7 @@ pub fn build_context(ctx: &SiteContext, dir: &String) -> Result<(), MandyError> 
         }
     }
     else {
-        let err_msg: String = format!("No layout supplied for \"{}\"!\nOne or all of the following may have also not been specified:\n-\"title\"\n-\"date\"\n-\"description\"", ctx.file);
+        let err_msg: String = format!("No layout supplied for \"{}\"!\nOne or all of the following may have also not been specified:\n- \"title\"\n- \"date\"\n- \"description\"", ctx.file);
         return Err::<(), MandyError>(MandyError::new(&err_msg.to_string()));
     }
     return Ok(());

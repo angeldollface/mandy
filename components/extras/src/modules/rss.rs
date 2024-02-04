@@ -4,11 +4,25 @@ a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
+
+
+/// Importing the function
+/// from the "coutils" crate
+/// to check whether a directory
+/// exists.
+use coutils::dir_is;
+
 /// Importing the function
 /// from the "coutils" crate
 /// to check whether a file
 /// exists.
 use coutils::file_is;
+
+/// Importing the derive-macro
+/// to serialize Rust
+/// data structures into
+/// different data formats.
+use serde::Serialize;
 
 /// Importing Mandy's error
 /// struct.
@@ -36,7 +50,7 @@ use std::collections::HashMap;
 /// A data structure
 /// that mimics the structure
 /// of an RSS channel.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Channel {
     pub title: String,
     pub description: String,
@@ -87,7 +101,7 @@ impl Channel {
 /// A data structure
 /// that mimics the way
 /// an RSS item works.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Item {
     pub title: String,
     pub description: String,
@@ -135,6 +149,7 @@ impl Item {
 /// that holds a list
 /// of all data channels
 /// of an RSS feed.
+#[derive(Clone, Debug, Serialize)]
 pub struct RSSFeed{
     channels: Vec<Channel>,
 }
@@ -170,12 +185,14 @@ pub fn create_feed(
     dir: &String,
     site_contexts: &Vec<SiteContext>
 ) -> Result<(), MandyError>{
-    let rss_path: String = format!("{}/dist/rss.xml", &dir);
-    let mut channels: Vec<Channel> = Vec::new(); 
-    if loop_content_is_same(site_contexts) && !(site_contexts.is_empty()){
-        let site_context = &site_contexts[0].clone();
-        match &site_context.loop_content{
-            Some(content) => {
+    let dist_dir_path: String = format!("{}/dist", dir);
+    if dir_is(&dist_dir_path){
+        let rss_path: String = format!("{}/dist/rss.xml", &dir);
+        let mut channels: Vec<Channel> = Vec::new(); 
+        if loop_content_is_same(site_contexts) && !(site_contexts.is_empty()){
+            let site_context = &site_contexts[0].clone();
+            match &site_context.loop_content{
+                Some(content) => {
                     for (channel, items) in content {
                         let mut rss_items: Vec<Item> = Vec::new();
                         for item in items {
@@ -200,23 +217,23 @@ pub fn create_feed(
                                 &rss_items
                             )
                         );
-                }
-            },
-            None => {}
-        };
-    }
-    else {
-        let e: String = format!("Could not gather site data.\n");
-        return Err::<(), MandyError>(MandyError::new(&e.to_string()));        
-    }
-    if channels.is_empty(){}
-    else {
-        if file_is(&rss_path){
-            let e: String = format!("File already exists at: \"{}\"!", &rss_path);
-            {return Err::<(), MandyError>(MandyError::new(&e.to_string()));}
+                    }
+                },
+                None => {}
+            };
         }
         else {
-            match create_file(&rss_path){
+            let e: String = format!("Could not gather site data.\n");
+            return Err::<(), MandyError>(MandyError::new(&e.to_string()));        
+        }
+        if channels.is_empty(){}
+        else {
+            if file_is(&rss_path){
+                let e: String = format!("File already exists at: \"{}\"!", &rss_path);
+                return Err::<(), MandyError>(MandyError::new(&e.to_string()));
+            }
+            else {
+                match create_file(&rss_path){
                 Ok(_y) => {
                     match write_to_file(
                         &rss_path,
@@ -233,16 +250,20 @@ pub fn create_feed(
                 }
             }
         }
+    }}
+    else {
+        let e: String = format!("The path \"{}\" does not exist!", &dist_dir_path);
+        return Err::<(), MandyError>(MandyError::new(&e.to_string()));
     }
     Ok(())
 }
 
 /// This function checks all gathered pieces of site
-/// data, checks the iterative content, removes any duplicates and
+/// data, checks the iterative content, removes any duplicates, and
 /// returns the iterative content in a format ready for generation of
 /// an RSS feed.
 pub fn loop_content_is_same(subject: &Vec<SiteContext>) -> bool {
-    let mut result: bool = false;
+    let result: bool;
     let mut loop_content_vec: Vec<Option<HashMap<String, Vec<HashMap<String, String>>>>> = Vec::new();
     for context in subject {
         loop_content_vec.push(context.clone().loop_content);

@@ -29,7 +29,7 @@ You can download a compiled binary for 64-bit desktop systems from this reposito
 Alternatively, if you have the Rust toolchain installed, you can install Mandy via Cargo using this command:
 
 ```bash
-cargo install --git https://github.com/angeldollface/mandy.git mandy-bin --tag v.0.3.3
+cargo install --git https://github.com/angeldollface/mandy.git mandy-bin --tag v.0.3.4
 ```
 
 ### Get up and running!

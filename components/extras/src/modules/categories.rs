@@ -33,7 +33,7 @@ pub fn clean_raw_cats(raw_cats: &Vec<String>) -> Vec<String> {
     return cats;
 }
 
-/// Retrieves of categories from user-generated posts.
+/// Retrieves categories from user-generated posts.
 pub fn get_raw_cats(loop_ctxs: &HashMap<String, Vec<HashMap<String, String>>>) -> Vec<String> {
     let mut raw_cats: Vec<String> = Vec::new();
     for (_dir, posts) in loop_ctxs{

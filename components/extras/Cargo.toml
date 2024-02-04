@@ -18,3 +18,4 @@ grass_compiler = "0.13.0"
 utils = { path = "../utils" }
 context = { path = "../context" }
 merrors = { path = "../merrors", version = "0.1.0" }
+serde = { version = "1.0.196", features = ["derive"] }

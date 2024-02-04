@@ -32,7 +32,8 @@ use extras::create_log;
 /// of iterative content.
 use extras::create_api;
 
-/// Importing the function to make an RSS Feed
+/// Importing the function to 
+/// make an RSS feed
 /// XML file.
 use extras::create_feed;
 

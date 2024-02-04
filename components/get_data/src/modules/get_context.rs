@@ -8,7 +8,6 @@ Licensed under the MIT license.
 /// whether a file exists.
 use coutils::file_is;
 
-use extras::build_categories;
 /// Importing the method to check
 /// the environment in which a Mandy
 /// site is being compiled.
@@ -33,6 +32,11 @@ use merrors::MandyError;
 /// represent a data context of a 
 /// Mandy site.
 use context::SiteContext;
+
+/// Importing the method that
+/// sorts iterative user-generated
+/// content by categories.
+use extras::build_categories;
 
 /// Importing the method
 /// to retrieve data objects

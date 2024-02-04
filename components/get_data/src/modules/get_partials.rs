@@ -37,7 +37,7 @@ use std::collections::HashMap;
 /// contents.
 use coutils::list_dir_contents;
 
-/// Attempts to retrieve a list of all Liquid partial templates in the "includes"
+/// Attempts to retrieve a list of all Liquid partial templates in the "partials"
 /// directory. Returns an error if the directory exists but is empty.
 pub fn get_partials(dir: &String) -> Result<Option<HashMap<String, String>>, MandyError> {
     let mut result: HashMap<String, String> = HashMap::new();
@@ -76,7 +76,7 @@ pub fn get_partials(dir: &String) -> Result<Option<HashMap<String, String>>, Man
         return Ok(None);
     }
     if result.is_empty(){
-        let e: String = format!("{} exists but is empty.", includes_dir);
+        let e: String = format!("\"{}\" exists but is empty.", includes_dir);
         return Err::<Option<HashMap<String, String>>, MandyError>(
             MandyError::new(
                 &e.to_string()

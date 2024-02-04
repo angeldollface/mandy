@@ -47,7 +47,7 @@ pub use modules::crawlers::*;
 
 /// Re-exporting the module
 /// that generates 
-/// a "robots.txt" file.
+/// a "sitemap.xml" file.
 pub use modules::site_map::*;
 
 /// Re-exporting the module

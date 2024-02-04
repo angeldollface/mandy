@@ -76,7 +76,7 @@ pub fn get_page_contexts(
                 Ok(md_document) => md_document,
                 Err(e) => {
                     let err: String = format!(
-                        "Error found in file \"{}\"\n{}", md_file_path, e
+                        "Error found in file \"{}\"\n{}.", md_file_path, e
                     );
                     return Err::<Vec<MandyMDDocument>, MandyError>(
                         MandyError::new(

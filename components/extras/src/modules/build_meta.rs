@@ -57,7 +57,7 @@ pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
     };
     if dir_is(dist_dir){
         if file_is(build_info_file){
-            let e: String = format!("{} already exists.", build_info_file);
+            let e: String = format!("\"{}\" already exists.", build_info_file);
             return Err::<(), MandyError>(MandyError::new(&e.to_string()));
         }
         else {
@@ -72,7 +72,7 @@ pub fn generate_meta(dir: &String) -> Result<(), MandyError>{
         }
     }
     else {
-        let e: String = format!("{} does not exist.", dist_dir);
+        let e: String = format!("\"{}\" does not exist.", dist_dir);
         return Err::<(), MandyError>(MandyError::new(&e.to_string()));
     }
     return Ok(())
