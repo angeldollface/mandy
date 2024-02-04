@@ -1,1 +1,3 @@
-pub fn get_categories(){}
+pub fn get_categories(){
+    
+}

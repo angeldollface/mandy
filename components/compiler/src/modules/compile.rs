@@ -23,9 +23,14 @@ use coutils::get_time;
 /// to hold log message information.
 use extras::LogMessage;
 
-/// Imports the data structure
-/// to hold create a build log.
+/// Imports the function
+/// to create a build log.
 use extras::create_log;
+
+/// Imports the function
+/// to create a JSON API
+/// of iterative content.
+use extras::create_api;
 
 /// Importing the function to make an RSS Feed
 /// XML file.
@@ -209,7 +214,17 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                         )
                     );
                 }
-            }
+            };
+            match create_api(dir, &site_contexts){
+                Ok(_x) => {},
+                Err(e) => {
+                    return Err::<(), MandyError>(
+                        MandyError::new(
+                            &e.to_string()
+                        )
+                    );
+                }
+            };
         }
         else {
             let err_msg: String = format!("\"{}\" not found.", dir);

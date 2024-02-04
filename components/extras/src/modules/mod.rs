@@ -9,6 +9,8 @@ Licensed under the MIT license.
 /// feed of iterative content.
 pub mod rss;
 
+pub mod api;
+
 /// Exporting the module
 /// that creates files for
 /// Deno Deploy.

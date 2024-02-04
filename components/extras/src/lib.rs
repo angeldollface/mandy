@@ -14,6 +14,13 @@ pub mod modules;
 pub use modules::rss::*;
 
 /// Re-exporting the module
+/// that handles the generation
+/// of a JSON API containing
+/// all iterative content
+/// users have made.
+pub use modules::api::*;
+
+/// Re-exporting the module
 /// that creates files for
 /// Deno Deploy.
 pub use modules::deno::*;
@@ -48,4 +55,8 @@ pub use modules::site_map::*;
 /// a build info file.
 pub use modules::build_meta::*;
 
+/// Re-exporting the module
+/// that handles the ordering
+/// of iterative content
+/// into categories.
 pub use modules::categories::*;
