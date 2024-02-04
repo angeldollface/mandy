@@ -179,11 +179,16 @@ pub fn create_feed(
                     for (channel, items) in content {
                         let mut rss_items: Vec<Item> = Vec::new();
                         for item in items {
+                            if !(&site_context.site.contains_key("tlDomain")){
+                                let e: String = String::from("The \"tlDomain\" flag was not specified!");
+                                return Err::<(), MandyError>(MandyError::new(&e.to_string()));
+                            }
+                            let tl_domain: &String = &site_context.site["tlDomain"];
                             let rss_item: Item = Item::new(
                                 &item["title"],
                                 &item["description"],
                                 &item["date"],
-                                &format!("{}{}", &site_context.baseurl, item["url"])
+                                &format!("{}{}{}", tl_domain, &site_context.baseurl, item["url"])
                             );
                             rss_items.push(rss_item);
                         }
