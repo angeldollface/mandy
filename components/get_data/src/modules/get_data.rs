@@ -92,7 +92,7 @@ pub fn get_data(
                     };
                     return Ok(Some(data));
                 },
-                processors::DataFileType::TomlData => {
+                processors::DataFileType::YamlData => {
                     let data = match deserialize_data_yaml(data_dir_conv.files) {
                         Ok(data) => data,
                         Err(e) => {
@@ -105,7 +105,7 @@ pub fn get_data(
                     };
                     return Ok(Some(data));
                 },
-                processors::DataFileType::YamlData => {
+                processors::DataFileType::TomlData => {
                     let data = match deserialize_data_toml(data_dir_conv.files) {
                         Ok(data) => data,
                         Err(e) => {

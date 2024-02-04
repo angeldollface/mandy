@@ -23,7 +23,7 @@ pub fn clean_raw_cats(raw_cats: &Vec<String>) -> Vec<String> {
     else {
         let mut singled: Vec<String> = Vec::new();
         for raw_cat in raw_cats {
-            let split: Vec<&str> = raw_cat.split("").collect();
+            let split: Vec<&str> = raw_cat.split(" ").collect();
             for split_string in split {
                 singled.push(split_string.to_string());
             }
