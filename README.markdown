@@ -77,6 +77,7 @@ There is a detailed log of current features and past ones [here](https://angeldo
 
 - [Mandy's Website](https://angeldollface.art/mandys-house)
 - [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
+- [Mandy's Discord Server](https://discord.gg/Wv3NpfBDk6)
 
 ## NOTE :scroll:
 

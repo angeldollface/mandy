@@ -3,10 +3,6 @@ MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-/// Importing the "toml"
-/// crate to deserialize TOML.
-use toml;
-
 /// Importing the "serde_yaml"
 /// crate to deserialize YAML.
 use serde_yaml;
@@ -100,31 +96,6 @@ MandyError
     Ok(result)
 }
 
-/// Deserializing YAML data from the "data"
-/// directory and further processing this.
-pub fn deserialize_data_toml(
-    data_strings: Vec<HashMap<String, String>>
-) -> Result<
-HashMap<String, Vec<HashMap<String, String>>>, 
-MandyError
-> {
-    let mut result: HashMap<String, Vec<HashMap<String, String>>> = HashMap::new();
-    for item in data_strings.into_iter() {
-        for (k,v) in item.into_iter() {
-            let file_name: &String = &k;
-            let map: Vec<HashMap<String, String>> = match toml::from_str(&v) {
-                Ok(map) => map,
-                Err(e) => {
-                    let msg: String = format!("Error in file \"{}.toml\":\n{}", file_name, e);
-                    return Err::<HashMap<String, Vec<HashMap<String, String>>>, MandyError>(MandyError::new(&msg.to_string()));
-                }
-            };
-            result.insert(file_name.to_owned(), map);
-        }
-    }
-    return Ok(result);
-}
-
 /// Storing the file contents
 /// from data files into
 /// a list of maps.
@@ -159,15 +130,6 @@ pub fn find_data_files(dir: &String) -> Result<Vec<DataFile>, MandyError> {
                 let df_inst: DataFile = DataFile::new(file_contents, &DataFileType::JsonData, &template_key);
                 result.push(df_inst);
             }
-            else if data_file.contains(".toml"){
-                let data_file_name_components: &Vec<String> = &clean_split(
-                    &data_file,
-                    &String::from(".toml")
-                );
-                let template_key: &String = &data_file_name_components[0];
-                let df_inst: DataFile = DataFile::new(file_contents, &DataFileType::TomlData, &template_key);
-                result.push(df_inst);
-            }
             else if data_file.contains(".yaml"){
                 let data_file_name_components: &Vec<String> = &clean_split(
                     &data_file,
@@ -198,7 +160,6 @@ pub fn find_data_files(dir: &String) -> Result<Vec<DataFile>, MandyError> {
 #[derive(Debug, Clone)]
 pub enum DataFileType {
     JsonData,
-    TomlData,
     YamlData,
     NoData
 }

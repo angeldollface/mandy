@@ -61,7 +61,7 @@ pub fn build_categories(
             let mut post_vec: Vec<HashMap<String, String>> = Vec::new();
             for (_dir, posts) in loop_ctxs{
                 for post in posts {
-                    if post.contains_key("categores"){
+                    if post.contains_key("categories"){
                         let post_cats: String = post["categories"].clone();
                         if post_cats.contains(cat.as_str()){
                             post_vec.push(post.clone());

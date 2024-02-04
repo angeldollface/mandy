@@ -183,7 +183,7 @@ pub fn create_feed(
                                 &item["title"],
                                 &item["description"],
                                 &item["date"],
-                                &format!("{}/{}", &site_context.baseurl, item["url"])
+                                &format!("{}{}", &site_context.baseurl, item["url"])
                             );
                             rss_items.push(rss_item);
                         }
