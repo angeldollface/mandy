@@ -3,7 +3,6 @@ MANDY PROCESSORS by Alexander Abraham a.k.a. "Angel Dollface".
 Licensed under the MIT license.
 */
 
-use coutils::file_type;
 /// Importing the "toml"
 /// crate to deserialize TOML.
 use toml;
@@ -45,7 +44,6 @@ use coutils::clean_split;
 /// Importing Rust's standard
 /// "HashMap" data structure.
 use std::collections::HashMap;
-use std::hash::Hash;
 
 /// Importing the method to store
 /// information about a directory's
@@ -196,7 +194,8 @@ pub fn find_data_files(dir: &String) -> Result<Vec<DataFile>, MandyError> {
 pub enum DataFileType {
     JsonData,
     TomlData,
-    YamlData
+    YamlData,
+    NoData
 }
 
 #[derive(Debug, Clone)]

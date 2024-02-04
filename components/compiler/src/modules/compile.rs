@@ -200,7 +200,7 @@ pub fn compile_site(dir: &String) -> Result<(), MandyError> {
                     );
                 }
             };
-            match create_feed(dir, &site_contexts.clone()){
+            match create_feed(dir, &site_contexts){
                 Ok(_x) => {},
                 Err(e) => {
                     return Err::<(), MandyError>(
