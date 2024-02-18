@@ -12,7 +12,7 @@
 ## ABOUT :books:
 
 ***Mandy is fast, easy to use, easy to deploy, and very flexible! Get her today!***
-***[Visit Mandy's website!](https://angeldollface.art/mandys-house)***
+***[Visit Mandy's website!](https://angeldollface.boo/mandys-house)***
 
 ## GETTING STARTED :books:
 
@@ -59,24 +59,24 @@ mandy -s mysite
 
 ## INSTALLATION :inbox_tray:
 
-To view all installation options for ***Mandy*** please view the project's official [installation page](https://angeldollface.art/mandys-house/documentation/installation/).
+To view all installation options for ***Mandy*** please view the project's official [installation page](https://angeldollface.boo/mandys-house/documentation/installation/).
 
 ## MANDY TEMPLATE SITES :art:
 
-You can find all available template sites for starting a new Mandy-powered site [here](https://angeldollface.art/mandys-house/content/templates/).
+You can find all available template sites for starting a new Mandy-powered site [here](https://angeldollface.boo/mandys-house/content/templates/).
 
 ## DEPLOYING A MANDY-POWERED SITE ON GITHUB PAGES :rocket:
 
-Mandy has her own GitHub Action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.art/mandys-house/documentation/deployment/). Other deployment services are also supported.
+Mandy has her own GitHub Action to deploy your Mandy-powered site on GitHub Pages. You can find out more about that [here](https://angeldollface.boo/mandys-house/documentation/deployment/). Other deployment services are also supported.
 
 ## CHANGELOG :black_nib:
 
-There is a detailed log of current features and past ones [here](https://angeldollface.art/mandys-house/content/releases/).
+There is a detailed log of current features and past ones [here](https://angeldollface.boo/mandys-house/content/releases/).
 
 ## HELP AND COMMUNITY :people_hugging:
 
-- [Mandy's Website](https://angeldollface.art/mandys-house)
-- [Mandy's Documentation](https://angeldollface.art/mandys-house/content/documentation/)
+- [Mandy's Website](https://angeldollface.boo/mandys-house)
+- [Mandy's Documentation](https://angeldollface.boo/mandys-house/content/documentation/)
 - [Mandy's Discord Server](https://discord.gg/Wv3NpfBDk6)
 
 ## NOTE :scroll:
