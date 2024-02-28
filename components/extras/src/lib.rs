@@ -14,6 +14,11 @@ pub mod modules;
 pub use modules::rss::*;
 
 /// Re-exporting the module
+/// that handles the masking
+/// of user-set variables.
+pub use modules::mask::*;
+
+/// Re-exporting the module
 /// that handles the generation
 /// of a JSON API containing
 /// all iterative content

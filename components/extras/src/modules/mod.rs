@@ -10,6 +10,11 @@ Licensed under the MIT license.
 pub mod rss;
 
 /// Exporting the module
+/// that handles the masking
+/// of user-set variables.
+pub mod mask;
+
+/// Exporting the module
 /// that handles the generation
 /// of a JSON API containing
 /// all iterative content
