@@ -7,7 +7,8 @@ members = [
   "components/merrors",
   "components/compiler",
   "components/get_data",
-  "components/processors"
+  "components/processors",
+  "components/vento-oxide"
 ]
 
 [profile.release]
